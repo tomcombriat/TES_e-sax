@@ -42,12 +42,6 @@ class arpegio_mono
 
 
 
- 
-
-
-
-
-
 const int arp0_N = 4;
 float arp0_times[arp0_N] = {0.0,0.25,0.5,0.75};
 int arp0_notes[arp0_N] = {0,7,19,12};
@@ -90,6 +84,8 @@ float arp7_times[arp7_N] = {0.0,1./6,1./3,0.5,2./3,5./6};
 int arp7_notes[arp7_N] = {0,-255,0,-255,0,-255};
 char arp7_name = '3';
 
+
+// Really need to find another to do this, while being statically allocated...
 
 float * arp_times[N_ARP] = {arp0_times, arp1_times,arp2_times,arp3_times,arp4_times,arp5_times,arp7_times,arp6_times};
 int * arp_notes[N_ARP] = {arp0_notes, arp1_notes,arp2_notes,arp3_notes,arp4_notes,arp5_notes,arp7_notes,arp6_notes};
