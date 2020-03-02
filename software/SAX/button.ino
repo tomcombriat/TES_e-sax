@@ -140,7 +140,6 @@ bool button::has_been_long_pressed()
 {
   if (been_long_pressed)
   {
-    //been_long_pressed = false;
     return true;
   }
   return false;

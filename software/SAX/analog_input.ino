@@ -82,6 +82,8 @@ void analog_input::set_min_max(int min, int max)
   max_value = max;
 }
 
+
+
 int analog_input::up_down()
 {
   int prev_up = up;

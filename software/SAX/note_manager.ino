@@ -203,13 +203,3 @@ bool note_manager::update()
 }
 
 
-int note_manager::get_up_down()
-{
-  return up_down;
-}
-
-int note_manager::get_right_left()
-{
-  return right_left;
-}
-
