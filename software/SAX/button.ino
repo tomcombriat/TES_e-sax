@@ -2,7 +2,20 @@
 
 
 
-/***
+/*
+      Combriat 2018, 2019, 2020
+      This file is part of the OS embedded in the e-sax - TES
+      This code is under GPL3
+
+      
+      This is the cluss file for the class managing buttons (modifiers and joystick)
+*/
+
+
+
+
+
+/*
 
        LOGIC : 0 = PRESSED
 

@@ -1,5 +1,18 @@
 #include "midi_cc.h"
 
+
+/*
+      Combriat 2018, 2019, 2020
+      This file is part of the OS embedded in the e-sax - TES
+      This code is under GPL3
+
+      
+      This is the class file for the class MIDI control changes
+*/
+
+
+
+
 midi_cc::midi_cc() {};
 
 midi_cc::midi_cc(byte _control, int _biais) {

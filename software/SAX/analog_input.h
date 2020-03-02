@@ -1,6 +1,16 @@
 #ifndef _analog_
 #define _analog_
 
+/*
+      Combriat 2018, 2019, 2020
+      This file is part of the OS embedded in the e-sax - TES
+      This code is under GPL3
+
+      
+      This is the include file for the class managing analog_inputs
+*/
+
+
 
 class analog_input
 {

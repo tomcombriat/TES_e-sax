@@ -1,6 +1,18 @@
  #ifndef _button_
 #define _button_
 
+
+/*
+      Combriat 2018, 2019, 2020
+      This file is part of the OS embedded in the e-sax - TES
+      This code is under GPL3
+
+      
+      This is the include file for the class managing buttons (modifiers and joystick)
+*/
+
+
+
 class button
 {
   public:

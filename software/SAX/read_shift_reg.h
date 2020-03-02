@@ -1,6 +1,20 @@
 #ifndef _read_shift_
 #define _read_shift_
 
+
+
+/*
+      Combriat 2018, 2019, 2020
+      This file is part of the OS embedded in the e-sax - TES
+      This code is under GPL3
+
+      
+      This is the include file for the the shift registers
+*/
+
+
+
+
 #define NUMBER_OF_SHIFT_CHIPS   3
 
 #define DATA_WIDTH   NUMBER_OF_SHIFT_CHIPS * 8

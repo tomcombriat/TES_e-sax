@@ -1,8 +1,10 @@
 /*
-      Combriat 2018, 2019
-      OS for the e-sax
-      Serial 1
-      (To be uploaded in machine)
+      Combriat 2018, 2019, 2020
+      This file is part of the OS embedded in the e-sax - TES
+      This code is under GPL3
+
+      
+      This is the main program
 */
 
 

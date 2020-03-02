@@ -1,6 +1,17 @@
 #include "read_shift_reg.h"
 
 
+/*
+      Combriat 2018, 2019, 2020
+      This file is part of the OS embedded in the e-sax - TES
+      This code is under GPL3
+
+      
+      This is the file for the the shift registers
+*/
+
+
+
 unsigned int read_shift_regs()
 {
   long bitVal;

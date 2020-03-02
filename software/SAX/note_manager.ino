@@ -2,6 +2,18 @@
 #include "read_shift_reg.h"
 #include "button.h"
 
+
+/*
+      Combriat 2018, 2019, 2020
+      This file is part of the OS embedded in the e-sax - TES
+      This code is under GPL3
+
+      
+      This is the class file for the class managing the mapping between keys and notes, and managing the shift registers
+*/
+
+
+
 byte note[POLYPHONY] = {0};
 byte previous_note[POLYPHONY] = {0};
 

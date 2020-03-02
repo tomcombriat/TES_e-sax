@@ -1,5 +1,18 @@
 #include "arpegio_mono.h"
 
+
+
+/*
+      Combriat 2018, 2019, 2020
+      This file is part of the OS embedded in the e-sax - TES
+      This code is under GPL3
+
+      
+      This is the class file for the class managing arpegiators
+*/
+
+
+
 arpegio_mono::arpegio_mono() {}
 
 arpegio_mono::arpegio_mono(unsigned int N, float * times, int * notes)

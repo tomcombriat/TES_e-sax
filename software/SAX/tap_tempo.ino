@@ -1,6 +1,16 @@
 #include "tap_tempo.h"
 
 
+
+/*
+      Combriat 2018, 2019, 2020
+      This file is part of the OS embedded in the e-sax - TES
+      This code is under GPL3
+
+      
+      This is the class file for the class managing the tap_tempo
+*/
+
 tap_tempo::tap_tempo()
 {
   for (int i = 0; i < N_tap_max; i++) taps[i] = 0;

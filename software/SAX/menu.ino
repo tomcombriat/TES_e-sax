@@ -1,9 +1,27 @@
 #include "menu.h"
 
+
+/*
+      Combriat 2018, 2019, 2020
+      This file is part of the OS embedded in the e-sax - TES
+      This code is under GPL3
+
+      
+      This is the file for the class managing the menu
+*/
+
+
+
+
+
 const int N_entry = 15;
 int current_entry = 0;
 String transpose_notes[12] = {":C", ":C#", ":D", ":D#", ":E", ":F", ":F#", ":G", ":G#", ":A", ":A#", ":B"};
 String arp_mode[3] = {"N", "A", "C"};
+
+
+
+
 
 
 
