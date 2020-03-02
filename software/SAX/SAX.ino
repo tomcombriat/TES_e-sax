@@ -112,7 +112,7 @@ int midi_octave = 0;
 /****************************/
 /******* STATE **************/
 /****************************/
-bool delta_mode = false;
+bool delta_mode = true;
 byte arpegio_mode = MODE_NORMAL;
 bool played = false;
 int breath_sensitivity = 0;
