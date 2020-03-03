@@ -52,7 +52,7 @@ class arpegio_mono
 
 
 
-#define N_ARP 8
+#define N_ARP 9
 
 
 
@@ -98,13 +98,18 @@ float arp7_times[arp7_N] = {0.0,1./6,1./3,0.5,2./3,5./6};
 int arp7_notes[arp7_N] = {0,-255,0,-255,0,-255};
 char arp7_name = '3';
 
+const int arp8_N = 4;
+float arp8_times[arp8_N] = {0.0,0.25,0.5,0.75};
+int arp8_notes[arp8_N] = {0,3,-5,-2};
+char arp8_name = 'R';
+
 
 // Really need to find another to do this, while being statically allocated...
 
-float * arp_times[N_ARP] = {arp0_times, arp1_times,arp2_times,arp3_times,arp4_times,arp5_times,arp7_times,arp6_times};
-int * arp_notes[N_ARP] = {arp0_notes, arp1_notes,arp2_notes,arp3_notes,arp4_notes,arp5_notes,arp7_notes,arp6_notes};
-char arp_name[N_ARP] = {arp0_name,arp1_name,arp2_name,arp3_name,arp4_name,arp5_name,arp7_name,arp6_name};
-int arp_N[N_ARP] = {arp0_N,arp1_N,arp2_N,arp3_N,arp4_N,arp5_N,arp7_N,arp6_N};
+float * arp_times[N_ARP] = {arp0_times, arp1_times,arp2_times,arp3_times,arp4_times,arp7_times,arp5_times,arp6_times,arp8_times};
+int * arp_notes[N_ARP] = {arp0_notes, arp1_notes,arp2_notes,arp3_notes,arp4_notes,arp7_notes,arp5_notes,arp6_notes,arp8_notes};
+char arp_name[N_ARP] = {arp0_name,arp1_name,arp2_name,arp3_name,arp4_name,arp7_name,arp5_name,arp6_name,arp8_name};
+int arp_N[N_ARP] = {arp0_N,arp1_N,arp2_N,arp3_N,arp4_N,arp7_N,arp5_N,arp6_N,arp8_N};
 
 
 
