@@ -3,7 +3,7 @@
       This file is part of the OS embedded in the e-sax - TES
       This code is under GPL3
 
-      
+
       This is the main program
 */
 
@@ -139,7 +139,7 @@ tap_tempo tap;
 /******** ARPS **********/
 /************************/
 arpegio_mono arp[N_ARP];
-int selected_arp[3] = {0, 1, 2};
+byte selected_arp[3] = {0, 1, 2};
 
 
 
@@ -147,7 +147,7 @@ int selected_arp[3] = {0, 1, 2};
 /****** CHORD ***********/
 /************************/
 chord chords[N_ARP];
-
+byte selected_chord[3] = {0, 1, 2};
 
 
 /************************/
@@ -178,14 +178,8 @@ void setup() {
   display.setCursor(35, 50);
 
   for (int i = 0; i < N_ARP; i++) arp[i].set_notes(arp_N[i], arp_times[i], arp_notes[i], arp_name[i]);
-  /*
-    arp[0].set_notes(4, arp0_times, arp0_notes);
-    arp[1].set_notes(4, arp1_times, arp1_notes);
-    arp[2].set_notes(4, arp2_times, arp2_notes);
-  */
-  chords[0].set_notes(chord_N0, chord_notes0);
-  chords[1].set_notes(chord_N1, chord_notes1);
-  chords[2].set_notes(chord_N2, chord_notes2);
+  for (int i = 0; i < N_CHORD; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i]);
+
 
 
   display.setTextSize(2);
@@ -223,12 +217,12 @@ void loop() {
 
   if (!played && millis() - stop_played_time > SCREEN_IDLE_WAITING_TIME)
   {
-    ssd.draw_standby_screen(midi_octave, midi_transpose, arpegio_mode, delta_mode, X_CC.get_value(),Y_CC.get_value(), tap.get_tempo());
+    ssd.draw_standby_screen(midi_octave, midi_transpose, arpegio_mode, delta_mode, X_CC.get_value(), Y_CC.get_value(), tap.get_tempo());
     ssd.update();
   }
 
 
-  
+
 
 
 
@@ -245,7 +239,7 @@ void loop() {
     {
       for (byte i = 0; i < POLYPHONY; i++)
       {
-        if (manager.get_previous_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i]) 
+        if (manager.get_previous_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i])
         {
           MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel);
         }
@@ -260,11 +254,11 @@ void loop() {
       played = true;
       for (byte i = 0; i < POLYPHONY; i++)
       {
-        if (manager.get_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i]) 
+        if (manager.get_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i])
         {
           MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel);
         }
-       
+
       }
     }
   }  // end of   «if (manager.update())»

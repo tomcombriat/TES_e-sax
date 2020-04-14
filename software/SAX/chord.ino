@@ -14,11 +14,23 @@ void chord::set_notes(unsigned int N, int * _notes)
   notes = _notes;
 }
 
+void chord::set_notes(unsigned int N, int * _notes, char _name)
+{
+  N_notes = N;
+  notes = _notes;
+  chord_name = _name;
+}
+
 void chord::apply(byte * note)
 {
-  for (unsigned int i=0;i<N_notes;i++)
+  for (unsigned int i=1;i<N_notes;i++)
   {
     note[i]=note[0]+notes[i];
   }
+}
+
+char chord::get_name()
+{
+  return chord_name;
 }
 

@@ -6,7 +6,7 @@
       This file is part of the OS embedded in the e-sax - TES
       This code is under GPL3
 
-      
+
       This is the class file for the class managing the screen
 */
 
@@ -156,6 +156,7 @@ void screen::draw_standby_screen(int& _octave, int& _transpose, byte _global_mod
       display.setCursor(60, 36);
       display.print(arp[2].get_name());
     }
+
     else if (global_mode == MODE_NORMAL)
     {
       display.setTextSize(1);
@@ -165,6 +166,17 @@ void screen::draw_standby_screen(int& _octave, int& _transpose, byte _global_mod
       display.print(normal_mid_modifier);
       display.setCursor(60, 36);
       display.print(normal_down_modifier);
+    }
+
+    else if (global_mode == MODE_CHORD)
+    {
+      display.setTextSize(2);
+      display.setCursor(60, 20);
+      display.print(chords[0].get_name());  // getting out of my logic… bah.
+      display.setCursor(75, 28);
+      display.print(chords[1].get_name());
+      display.setCursor(60, 36);
+      display.print(chords[2].get_name());
     }
 
 

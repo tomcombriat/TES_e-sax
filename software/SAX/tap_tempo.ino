@@ -76,8 +76,9 @@ unsigned long tap_tempo::get_tempo()
   return tempo;
 }
 
-void tap_tempo::set_tempo(unsigned long tempo)
+void tap_tempo::set_tempo(unsigned long _tempo)
 {
+  tempo = _tempo;
   tap_time = 60000 / tempo;
 }
 

@@ -8,7 +8,7 @@
       This file is part of the OS embedded in the e-sax - TES
       This code is under GPL3
 
-      
+
       This is the class file for the class managing the mapping between keys and notes, and managing the shift registers
 */
 
@@ -187,9 +187,9 @@ bool note_manager::update()
   /********* CHORDS **/
   if (arpegio_mode == MODE_CHORD)
   {
-    if (modifier_up.is_pressed()) chords[0].apply(note);
-    if (modifier_mid.is_pressed()) chords[1].apply(note);
-    if (modifier_down.is_pressed()) chords[2].apply(note);
+    if (modifier_up.is_pressed()) chords[selected_chord[0]].apply(note);
+    if (modifier_mid.is_pressed()) chords[selected_chord[1]].apply(note);
+    if (modifier_down.is_pressed()) chords[selected_chord[2]].apply(note);
     if (modifier_up.has_been_pressed() || modifier_mid.has_been_pressed() || modifier_down.has_been_pressed()) return true;
     if (modifier_up.has_been_released() || modifier_mid.has_been_released() || modifier_down.has_been_released()) return true;
   }
