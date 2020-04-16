@@ -169,31 +169,31 @@ bool note_manager::update()
       if (modifier_mid.is_pressed()) note[0] += normal_mid_modifier;
       if (modifier_down.is_pressed()) note[0] += normal_down_modifier;
     }
-  }
 
-  /****** ARPEGIO */
-  if (arpegio_mode == MODE_ARPEGIO)
-  {
-    for (byte i = 0; i < 3; i++)
+
+    /****** ARPEGIO */
+    if (arpegio_mode == MODE_ARPEGIO)
     {
-      if (arp[i].is_started())
+      for (byte i = 0; i < 3; i++)
       {
-        arp[i].change(note[0]);
-        note[0] = arp[i].next();
+        if (arp[i].is_started())
+        {
+          arp[i].change(note[0]);
+          note[0] = arp[i].next();
+        }
       }
     }
-  }
 
-  /********* CHORDS **/
-  if (arpegio_mode == MODE_CHORD)
-  {
-    if (modifier_up.is_pressed()) chords[0].apply(note);
-    if (modifier_mid.is_pressed()) chords[1].apply(note);
-    if (modifier_down.is_pressed()) chords[2].apply(note);
-    if (modifier_up.has_been_pressed() || modifier_mid.has_been_pressed() || modifier_down.has_been_pressed()) return true;
-    if (modifier_up.has_been_released() || modifier_mid.has_been_released() || modifier_down.has_been_released()) return true;
+    /********* CHORDS **/
+    if (arpegio_mode == MODE_CHORD)
+    {
+      if (modifier_up.is_pressed()) chords[0].apply(note);
+      if (modifier_mid.is_pressed()) chords[1].apply(note);
+      if (modifier_down.is_pressed()) chords[2].apply(note);
+      if (modifier_up.has_been_pressed() || modifier_mid.has_been_pressed() || modifier_down.has_been_pressed()) return true;
+      if (modifier_up.has_been_released() || modifier_mid.has_been_released() || modifier_down.has_been_released()) return true;
+    }
   }
-
   //if (previous_note[0] != note[0] && note[0]!= 0)
   if (previous_note[0] != note[0])
   {
