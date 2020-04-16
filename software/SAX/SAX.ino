@@ -138,16 +138,16 @@ tap_tempo tap;
 /************************/
 /******** ARPS **********/
 /************************/
-arpegio_mono arp[N_ARP];
-byte selected_arp[3] = {0, 1, 2};
+arpegio_mono arp[3];
+int selected_arp[3] = {0, 1, 2};
 
 
 
 /************************/
 /****** CHORD ***********/
 /************************/
-chord chords[N_ARP];
-byte selected_chord[3] = {0, 1, 2};
+chord chords[3];
+int selected_chord[3] = {0, 1, 2};
 
 
 /************************/
@@ -167,7 +167,8 @@ int normal_down_modifier = +7;
 
 void setup() {
 
-  //Serial.begin(115200);
+  Serial.begin(115200);
+  Serial.println("Start setup");
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
   display.clearDisplay();
@@ -177,8 +178,8 @@ void setup() {
   display.print("TES");
   display.setCursor(35, 50);
 
-  for (int i = 0; i < N_ARP; i++) arp[i].set_notes(arp_N[i], arp_times[i], arp_notes[i], arp_name[i]);
-  for (int i = 0; i < N_CHORD; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i]);
+  for (int i = 0; i < 3; i++) arp[i].set_notes(arp_N[i], arp_times[i], arp_notes[i], arp_name[i]);
+  for (int i = 0; i < 3; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i]);
 
 
 
@@ -272,10 +273,12 @@ void loop() {
       else break;
     }
     played = true;
-
-    if (modifier_up.is_pressed()) arp[0].start();
-    if (modifier_mid.is_pressed()) arp[1].start();
-    if (modifier_down.is_pressed()) arp[2].start();
+    if (arpegio_mode == MODE_ARPEGIO)
+    {
+      if (modifier_up.is_pressed()) arp[0].start();
+      if (modifier_mid.is_pressed()) arp[1].start();
+      if (modifier_down.is_pressed()) arp[2].start();
+    }
   }
 
 
@@ -290,7 +293,7 @@ void loop() {
     stop_played_time = millis();
     if (arpegio_mode == MODE_ARPEGIO)
     {
-      for (byte i = 0; i < N_ARP; i++) arp[i].stop();
+      for (byte i = 0; i < 3; i++) arp[i].stop();
     }
   }
 

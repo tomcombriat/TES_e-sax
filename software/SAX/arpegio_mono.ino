@@ -7,7 +7,7 @@
       This file is part of the OS embedded in the e-sax - TES
       This code is under GPL3
 
-      
+
       This is the class file for the class managing arpegiators
 */
 
@@ -20,6 +20,7 @@ arpegio_mono::arpegio_mono(unsigned int N, float * times, int * notes)
   N_note_arp = N;
   times_arp = times;
   notes_arp = notes;
+  duration_scaling = int (times[N - 1] + 1);
 }
 
 arpegio_mono::arpegio_mono(unsigned int N, float * times, int * notes, char _name)
@@ -28,6 +29,7 @@ arpegio_mono::arpegio_mono(unsigned int N, float * times, int * notes, char _nam
   times_arp = times;
   notes_arp = notes;
   arp_name = _name;
+  duration_scaling = int (times[N - 1] + 1);
 }
 
 void arpegio_mono::set_notes(unsigned int N, float * times, int * notes)
@@ -35,6 +37,7 @@ void arpegio_mono::set_notes(unsigned int N, float * times, int * notes)
   N_note_arp = N;
   times_arp = times;
   notes_arp = notes;
+  duration_scaling = int (times[N - 1] + 1);
 }
 
 void arpegio_mono::set_notes(unsigned int N, float * times, int * notes, char _name)
@@ -43,6 +46,7 @@ void arpegio_mono::set_notes(unsigned int N, float * times, int * notes, char _n
   times_arp = times;
   notes_arp = notes;
   arp_name = _name;
+  duration_scaling = int (times[N - 1] + 1);
 }
 
 
@@ -60,7 +64,7 @@ bool arpegio_mono::change(byte current_note)
       previous_note = current_note;
       start();
     }
-    float time_in_arp = ((millis() - start_time) % duration) / (duration * 1.0); // compute fraction of time into loop (maybe better not to use floats ?)
+    float time_in_arp = ((millis() - start_time) % (duration * duration_scaling)) / (duration * 1.0); // compute fraction of time into loop (maybe better not to use floats ?)
     for (unsigned int i = 0; i < N_note_arp - 1; i++)
     {
       if (time_in_arp > times_arp[i] && time_in_arp < times_arp[i + 1] && notes_arp[i] != next_note - current_note )
@@ -140,5 +144,10 @@ void arpegio_mono::pause()
 bool arpegio_mono::is_paused()
 {
   return paused;
+}
+
+int arpegio_mono::get_duration_scaling()
+{
+  return duration_scaling;
 }
 

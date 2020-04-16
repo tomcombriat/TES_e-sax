@@ -106,7 +106,8 @@ void menu()
         switch (arpegio_mode)
         {
           case MODE_ARPEGIO:
-            ssd.draw_title_value("ARP 0", arp[0].get_name());
+            ssd.draw_title_value("ARP 0", arp[0].get_name(), arp[0].get_duration_scaling());
+            
             selected_arp[0] += up;
             if (selected_arp[0] >= N_ARP) selected_arp[0] = 0;
             if (selected_arp[0] < 0) selected_arp[0] = N_ARP - 1;
@@ -130,7 +131,7 @@ void menu()
         switch (arpegio_mode)
         {
           case MODE_ARPEGIO:
-            ssd.draw_title_value("ARP 1", arp[1].get_name());
+            ssd.draw_title_value("ARP 1", arp[1].get_name(),arp[1].get_duration_scaling());
             selected_arp[1] += up;
             if (selected_arp[1] >= N_ARP) selected_arp[1] = 0;
             if (selected_arp[1] < 0) selected_arp[1] = N_ARP - 1;
@@ -156,7 +157,8 @@ void menu()
         switch (arpegio_mode)
         {
           case MODE_ARPEGIO:
-            ssd.draw_title_value("ARP 2", arp[2].get_name());
+            ssd.draw_title_value("ARP 2", arp[2].get_name(),arp[2].get_duration_scaling());
+            //ssd.draw_title_value("ARP 2", arp[selected_arp[2]].get_name(),arp[selected_arp[2]].get_duration_scaling());
             selected_arp[2] += up;
             if (selected_arp[2] >= N_ARP) selected_arp[2] = 0;
             if (selected_arp[2] < 0) selected_arp[2] = N_ARP - 1;

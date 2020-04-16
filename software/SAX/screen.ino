@@ -38,9 +38,9 @@ void screen::draw_title_value(String _title, int _value)
 }
 
 
-void screen::draw_title_value(String _title, String _value)
+void screen::draw_title_value(String _title, String _value, int sub_value)
 {
-  int keyprint = _title.length() + 2 * _value.length();
+  int keyprint = _title.length() + 2 * _value.length() + 3 * sub_value;
 
   if (keyprint != previous_keyprint || _value != previous_value)
   {
@@ -57,12 +57,18 @@ void screen::draw_title_value(String _title, String _value)
     display.setTextColor(1);
     display.setCursor((128 - (_value.length()) * 24) / 2, 34);
     display.print(_value);
+    if (sub_value != 0)
+    {
+      display.setCursor(80, 40);
+      display.setTextSize(2);
+      display.print(sub_value);
+    }
   }
 }
 
-void screen::draw_title_value(String _title, char _value)
+void screen::draw_title_value(String _title, char _value, int sub_value)
 {
-  draw_title_value(_title, (String) _value);
+  draw_title_value(_title, (String) _value,sub_value);
 }
 
 
