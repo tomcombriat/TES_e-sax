@@ -40,6 +40,7 @@ bool note_manager::update()
 {
   unsigned int current_touch = read_shift_regs();
   unsigned int current_touch_no_mod = current_touch & (0b111111100101111110010001);  //haha (removing modifiers)
+
   for (byte i = 0; i < POLYPHONY; i++)
   {
     previous_note[i] = note[i];
@@ -190,8 +191,10 @@ bool note_manager::update()
       if (modifier_up.is_pressed()) chords[0].apply(note);
       if (modifier_mid.is_pressed()) chords[1].apply(note);
       if (modifier_down.is_pressed()) chords[2].apply(note);
-      if (modifier_up.has_been_pressed() || modifier_mid.has_been_pressed() || modifier_down.has_been_pressed()) return true;
-      if (modifier_up.has_been_released() || modifier_mid.has_been_released() || modifier_down.has_been_released()) return true;
+
+
+      if (modifier_up.has_been_pressed() || modifier_mid.has_been_pressed() || modifier_down.has_been_pressed())         return true;
+      if (modifier_up.has_been_released() || modifier_mid.has_been_released() || modifier_down.has_been_released())        return true;
     }
   }
   //if (previous_note[0] != note[0] && note[0]!= 0)

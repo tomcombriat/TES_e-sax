@@ -39,7 +39,8 @@
 
 #define OLED_RESET 4
 Adafruit_SSD1306 display(OLED_RESET);
-#define MODIFIER_RESPONSE_TIME 15
+#define SUB_MODIFIER_RESPONSE_TIME 20
+#define MODIFIER_RESPONSE_TIME 0
 #define JOYSTICK_RESPONSE_TIME 10
 #define BREATH_RESPONSE_TIME 1
 #define CC_DELTA_TIME 40
@@ -47,7 +48,6 @@ Adafruit_SSD1306 display(OLED_RESET);
 #define PITCHBEND_MIN_TIME 10
 #define SCREEN_UPDATE_TIME 20
 #define SCREEN_IDLE_WAITING_TIME 400
-#define MIDI_NOTE_MIN_TIME 1
 #define MODE_NORMAL 0
 #define MODE_ARPEGIO 1
 #define MODE_CHORD 2
@@ -73,12 +73,12 @@ button octave(-1, true, MODIFIER_RESPONSE_TIME);
 button modifier_up(-1, true, MODIFIER_RESPONSE_TIME);
 button modifier_mid(-1, true, MODIFIER_RESPONSE_TIME);
 button modifier_down(-1, true, MODIFIER_RESPONSE_TIME);
-button modifier_sub_up(-1, true, MODIFIER_RESPONSE_TIME);
-button modifier_sub_down(-1, true, MODIFIER_RESPONSE_TIME);
-button up_menu(-1, true, MODIFIER_RESPONSE_TIME);
-button down_menu(-1, true, MODIFIER_RESPONSE_TIME);
-button right_menu(-1, true, MODIFIER_RESPONSE_TIME);
-button left_menu(-1, true, MODIFIER_RESPONSE_TIME);
+button modifier_sub_up(-1, true, SUB_MODIFIER_RESPONSE_TIME);
+button modifier_sub_down(-1, true, SUB_MODIFIER_RESPONSE_TIME);
+button up_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
+button down_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
+button right_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
+button left_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
 
 
 //mettre up down et right left
@@ -114,11 +114,11 @@ int midi_octave = 0;
 /******* STATE **************/
 /****************************/
 bool delta_mode = true;
-byte arpegio_mode = MODE_NORMAL;
+int arpegio_mode = MODE_NORMAL;
 bool played = false;
 int breath_sensitivity = 0;
 bool pitchbend_enable = false;
-unsigned long midi_note_time = 0;
+
 
 
 
@@ -206,18 +206,6 @@ void setup() {
 
 void loop() {
 
-  joy_SW.update();
-  octave.update();
-  modifier_up.update();
-  modifier_mid.update();
-  modifier_down.update();
-  modifier_sub_up.update();
-  modifier_sub_down.update();
-  breath.update();
-  joy_X.update();
-  joy_Y.update();
-  breath_CC.update();
-
   if (!played && millis() - stop_played_time > SCREEN_IDLE_WAITING_TIME)
   {
     ssd.draw_standby_screen(midi_octave, midi_transpose, arpegio_mode, delta_mode, X_CC.get_value(), Y_CC.get_value(), tap.get_tempo());
@@ -225,17 +213,22 @@ void loop() {
   }
 
 
+    joy_SW.update();
+    octave.update();
+    modifier_up.update();
+    modifier_mid.update();
+    modifier_down.update();
+    modifier_sub_up.update();
+    modifier_sub_down.update();
+    breath.update();
+    joy_X.update();
+    joy_Y.update();
+    breath_CC.update();
 
 
 
+    if (arpegio_mode == MODE_ARPEGIO && tap.has_change())  for (byte i = 0; i < N_ARP; i++)  arp[i].set_tempo(tap.get_tempo_time());   // update tempo of arpegiators
 
-  if (arpegio_mode == MODE_ARPEGIO && tap.has_change())  for (byte i = 0; i < N_ARP; i++)  arp[i].set_tempo(tap.get_tempo_time());   // update tempo of arpegiators
-
-
-
-  if (millis() - midi_note_time > MIDI_NOTE_MIN_TIME)  // should do a queue instead, or increase buffer size?
-  {
-    midi_note_time = millis();
 
 
     /***********************************
@@ -303,7 +296,7 @@ void loop() {
         for (byte i = 0; i < 3; i++) arp[i].stop();
       }
     }
-  }
+  
 
 
 

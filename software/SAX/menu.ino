@@ -95,6 +95,7 @@ void menu()
         ssd.draw_title_value("Arp Mode", arp_mode[arpegio_mode]);
         arpegio_mode += up;
         if (arpegio_mode > 2) arpegio_mode = 0;
+        if (arpegio_mode <0) arpegio_mode = 2;
         break;
 
       case 7:
