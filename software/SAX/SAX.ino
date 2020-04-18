@@ -47,6 +47,7 @@ Adafruit_SSD1306 display(OLED_RESET);
 #define PITCHBEND_MIN_TIME 10
 #define SCREEN_UPDATE_TIME 20
 #define SCREEN_IDLE_WAITING_TIME 400
+#define MIDI_NOTE_MIN_TIME 1
 #define MODE_NORMAL 0
 #define MODE_ARPEGIO 1
 #define MODE_CHORD 2
@@ -117,6 +118,7 @@ byte arpegio_mode = MODE_NORMAL;
 bool played = false;
 int breath_sensitivity = 0;
 bool pitchbend_enable = false;
+unsigned long midi_note_time = 0;
 
 
 
@@ -231,74 +233,77 @@ void loop() {
 
 
 
-  /***********************************
-     NEW NOTE
-   ***********************************/
-  if (manager.update())   // different note has been detected
+  if (millis() - midi_note_time > MIDI_NOTE_MIN_TIME)  // should do a queue instead, or increase buffer size?
   {
-    if (manager.get_previous_note()[0] != 0 && played)    //already played but different note -> shutdown previous note
+    midi_note_time = millis();
+
+
+    /***********************************
+       NEW NOTE
+     ***********************************/
+    if (manager.update())   // different note has been detected
+    {
+      if (manager.get_previous_note()[0] != 0 && played)    //already played but different note -> shutdown previous note
+      {
+        for (byte i = 0; i < POLYPHONY; i++)
+        {
+          if (manager.get_previous_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i])
+          {
+            MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel);
+          }
+
+        }
+        played = false;
+        stop_played_time = millis();
+      }
+
+      if (manager.get_note()[0] != 0 && breath.value() > 0)   // new note is playable  -> play it
+      {
+        played = true;
+        for (byte i = 0; i < POLYPHONY; i++)
+        {
+          if (manager.get_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i])
+          {
+            MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel);
+          }
+
+        }
+      }
+    }  // end of   «if (manager.update())»
+
+
+    if (breath.value() > 0 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note
     {
       for (byte i = 0; i < POLYPHONY; i++)
       {
-        if (manager.get_previous_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i])
-        {
-          MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel);
-        }
+        if (manager.get_note()[i] != 0) MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel);
+        else break;
+      }
+      played = true;
+      if (arpegio_mode == MODE_ARPEGIO)
+      {
+        if (modifier_up.is_pressed()) arp[0].start();
+        if (modifier_mid.is_pressed()) arp[1].start();
+        if (modifier_down.is_pressed()) arp[2].start();
+      }
+    }
 
+
+    if (breath.value() == 0 && played)    // breath is low enough to stop note
+    {
+      for (byte i = 0; i < POLYPHONY; i++)
+      {
+        if (manager.get_note()[i] != 0) MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel);
+        else break;
       }
       played = false;
       stop_played_time = millis();
-    }
-
-    if (manager.get_note()[0] != 0 && breath.value() > 0)   // new note is playable  -> play it
-    {
-      played = true;
-      for (byte i = 0; i < POLYPHONY; i++)
+      if (arpegio_mode == MODE_ARPEGIO)
       {
-        if (manager.get_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i])
-        {
-          MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel);
-        }
-
+        for (byte i = 0; i < 3; i++) arp[i].stop();
       }
     }
-  }  // end of   «if (manager.update())»
-
-
-  if (breath.value() > 0 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note
-  {
-    for (byte i = 0; i < POLYPHONY; i++)
-    {
-      if (manager.get_note()[i] != 0) MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel);
-      else break;
-    }
-    played = true;
-    if (arpegio_mode == MODE_ARPEGIO)
-    {
-      if (modifier_up.is_pressed()) arp[0].start();
-      if (modifier_mid.is_pressed()) arp[1].start();
-      if (modifier_down.is_pressed()) arp[2].start();
-    }
   }
-
-
-  if (breath.value() == 0 && played)    // breath is low enough to stop note
-  {
-    for (byte i = 0; i < POLYPHONY; i++)
-    {
-      if (manager.get_note()[i] != 0) MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel);
-      else break;
-    }
-    played = false;
-    stop_played_time = millis();
-    if (arpegio_mode == MODE_ARPEGIO)
-    {
-      for (byte i = 0; i < 3; i++) arp[i].stop();
-    }
-  }
-
-
-
 
 
 
