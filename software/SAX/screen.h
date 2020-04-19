@@ -20,7 +20,7 @@ class screen
     void draw_title_value(String title, String value, int sub_value=0);
     void draw_title_value(String title, char value, int sub_value = 0);
     void draw_single_value(String value);
-    void draw_standby_screen(int & _octave, int & _transpose, byte _global_mode, bool _delta_mode, byte _joystick, byte _joystick_bis, unsigned long tempo);
+    void draw_standby_screen(int & _octave, int & _transpose, byte _global_mode, bool _delta_mode, byte _joystick, byte _joystick_bis, unsigned int tempo);
     void draw_progress_bar(byte value);
 
     void clear();
@@ -39,7 +39,7 @@ class screen
     bool delta_mode = 0;
     byte joystick = 0;
     byte joystick_bis = 0;
-    unsigned long tempo = 120;
+    unsigned int tempo = 0;
 };
 
 char global_modes[3] = {'N', 'A', 'C'};

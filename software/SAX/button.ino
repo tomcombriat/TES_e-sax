@@ -45,6 +45,11 @@ button::button(int _pin, bool inverse, unsigned long _response_time)
 
 }
 
+unsigned long button::get_response_time()
+{
+  return response_time;
+}
+
 bool button::is_pressed()
 {
   return pressed;
@@ -65,7 +70,7 @@ bool button::has_been_released()
 {
   if (been_released)
   {
-    //been_released = false;
+
     return true;
   }
   return false;

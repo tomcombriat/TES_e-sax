@@ -14,7 +14,7 @@
 
 
 
-const int N_entry = 11;
+const int N_entry = 12;
 int current_entry = 0;
 String transpose_notes[12] = {":C", ":C#", ":D", ":D#", ":E", ":F", ":F#", ":G", ":G#", ":A", ":A#", ":B"};
 String arp_mode[3] = {"N", "A", "C"};
@@ -45,7 +45,8 @@ void menu()
 
     int up = joy_Y.up_down() + up_menu.has_been_pressed() - down_menu.has_been_pressed();
 
-
+    
+    
     switch (current_entry)
     {
       case 0:
@@ -95,7 +96,7 @@ void menu()
         ssd.draw_title_value("Arp Mode", arp_mode[arpegio_mode]);
         arpegio_mode += up;
         if (arpegio_mode > 2) arpegio_mode = 0;
-        if (arpegio_mode <0) arpegio_mode = 2;
+        if (arpegio_mode < 0) arpegio_mode = 2;
         break;
 
       case 7:
@@ -108,7 +109,7 @@ void menu()
         {
           case MODE_ARPEGIO:
             ssd.draw_title_value("ARP 0", arp[0].get_name(), arp[0].get_duration_scaling());
-            
+
             selected_arp[0] += up;
             if (selected_arp[0] >= N_ARP) selected_arp[0] = 0;
             if (selected_arp[0] < 0) selected_arp[0] = N_ARP - 1;
@@ -132,7 +133,7 @@ void menu()
         switch (arpegio_mode)
         {
           case MODE_ARPEGIO:
-            ssd.draw_title_value("ARP 1", arp[1].get_name(),arp[1].get_duration_scaling());
+            ssd.draw_title_value("ARP 1", arp[1].get_name(), arp[1].get_duration_scaling());
             selected_arp[1] += up;
             if (selected_arp[1] >= N_ARP) selected_arp[1] = 0;
             if (selected_arp[1] < 0) selected_arp[1] = N_ARP - 1;
@@ -158,7 +159,7 @@ void menu()
         switch (arpegio_mode)
         {
           case MODE_ARPEGIO:
-            ssd.draw_title_value("ARP 2", arp[2].get_name(),arp[2].get_duration_scaling());
+            ssd.draw_title_value("ARP 2", arp[2].get_name(), arp[2].get_duration_scaling());
             //ssd.draw_title_value("ARP 2", arp[selected_arp[2]].get_name(),arp[selected_arp[2]].get_duration_scaling());
             selected_arp[2] += up;
             if (selected_arp[2] >= N_ARP) selected_arp[2] = 0;
@@ -212,7 +213,9 @@ void menu()
     if (modifier_down.has_been_released()) current_entry = 10;
 
   }
+
   ssd.clear();
   ssd.draw_standby_screen(midi_octave, midi_transpose, arpegio_mode, delta_mode, X_CC.get_value(), Y_CC.get_value(), tap.get_tempo());
   ssd.force_update();
+
 }

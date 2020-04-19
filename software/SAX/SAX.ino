@@ -206,12 +206,14 @@ void setup() {
 
 void loop() {
 
+
+
+
   if (!played && millis() - stop_played_time > SCREEN_IDLE_WAITING_TIME)
   {
     ssd.draw_standby_screen(midi_octave, midi_transpose, arpegio_mode, delta_mode, X_CC.get_value(), Y_CC.get_value(), tap.get_tempo());
     ssd.update();
   }
-
 
     joy_SW.update();
     octave.update();
@@ -226,9 +228,7 @@ void loop() {
     breath_CC.update();
 
 
-
-    if (arpegio_mode == MODE_ARPEGIO && tap.has_change())  for (byte i = 0; i < N_ARP; i++)  arp[i].set_tempo(tap.get_tempo_time());   // update tempo of arpegiators
-
+    if (arpegio_mode == MODE_ARPEGIO && tap.has_change())  for (byte i = 0; i < 3; i++)  arp[i].set_tempo(tap.get_tempo_time());   // update tempo of arpegiators
 
 
     /***********************************
@@ -263,6 +263,9 @@ void loop() {
         }
       }
     }  // end of   «if (manager.update())»
+
+
+
 
 
     if (breath.value() > 0 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note

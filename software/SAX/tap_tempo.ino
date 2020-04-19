@@ -7,7 +7,7 @@
       This file is part of the OS embedded in the e-sax - TES
       This code is under GPL3
 
-      
+
       This is the class file for the class managing the tap_tempo
 */
 
@@ -62,7 +62,7 @@ void tap_tempo::add_tap()
       new_tap_time /= N;
       tap_time = new_tap_time;
     }
-
+    tempo =  60000 / tap_time ;
   }
 }
 
@@ -71,12 +71,12 @@ unsigned long tap_tempo::get_tempo_time()
   return tap_time;
 }
 
-unsigned long tap_tempo::get_tempo()
+unsigned int tap_tempo::get_tempo()
 {
   return tempo;
 }
 
-void tap_tempo::set_tempo(unsigned long _tempo)
+void tap_tempo::set_tempo(unsigned int _tempo)
 {
   tempo = _tempo;
   tap_time = 60000 / tempo;

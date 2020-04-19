@@ -62,11 +62,12 @@ bool note_manager::update()
     right_left = 0;
   */
 
-  up_menu.manual_input(0);
+
+
   down_menu.manual_input(0);
   right_menu.manual_input(0);
   left_menu.manual_input(0);
-
+  up_menu.manual_input(0);
 
 
 
@@ -135,16 +136,21 @@ bool note_manager::update()
       note[0] = 46;
       break;
 
-    case 8672912:  // TAP
-      if (previous_touch_no_mod != 8672912) tap.add_tap();
-      break;
     case 1463952:
       down_menu.manual_input(1);
       break;
+
     case 9852048:
       up_menu.manual_input(1);
       break;
+
+    case 8672912:  // TAP
+      if (previous_touch_no_mod != 8672912) tap.add_tap();
+      break;
   }  // end of switch case
+
+
+
 
 
   /********** OCTAVE */
