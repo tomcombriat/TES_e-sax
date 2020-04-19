@@ -78,7 +78,7 @@ void button::manual_input(bool _input)
 
 void button::update()
 {
-  pressed = false;
+  //pressed = false;
   been_pressed = false;
   been_released = false;
   been_released_after_long_press = false;
