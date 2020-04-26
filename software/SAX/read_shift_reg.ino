@@ -19,11 +19,11 @@ unsigned int read_shift_regs()
 
   /* Trigger a parallel Load to latch the state of the data lines,
   */
-  digitalWrite(clockEnablePin, HIGH);
+  digitalWrite(clockEnablePin, HIGH);  // can I remove that ?
   digitalWrite(ploadPin, LOW);
   delayMicroseconds(PULSE_WIDTH_USEC);
   digitalWrite(ploadPin, HIGH);
-  digitalWrite(clockEnablePin, LOW);
+  digitalWrite(clockEnablePin, LOW);  // and that? Yes, put to GND all the time should work
 
   /* Loop to read each bit value from the serial out line
      of the SN74HC165N.
