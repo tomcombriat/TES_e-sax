@@ -20,6 +20,8 @@ midi_cc::midi_cc(byte _control, int _biais) {
   control = _control;
   previous_value = -1;
   biais = _biais;
+  last_biais_time = 0;
+  last_event_time = 0;
 }
 
 int midi_cc::get_value()
@@ -58,6 +60,7 @@ void midi_cc::update()
   changed = false;
   if (millis() - last_event_time > CC_MIN_TIME)
   {
+    
     max_accessible_range = max(127 - biais, biais);
     int return_value = value * max_accessible_range / 127. + biais;
     if (return_value > 127) return_value = 127;

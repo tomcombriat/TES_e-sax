@@ -14,7 +14,7 @@
 
 
 
-const int N_entry = 12;
+const int N_entry = 13;
 int current_entry = 0;
 String transpose_notes[12] = {":C", ":C#", ":D", ":D#", ":E", ":F", ":F#", ":G", ":G#", ":A", ":A#", ":B"};
 String arp_mode[3] = {"N", "A", "C"};
@@ -45,8 +45,8 @@ void menu()
 
     int up = joy_Y.up_down() + up_menu.has_been_pressed() - down_menu.has_been_pressed();
 
-    
-    
+
+
     switch (current_entry)
     {
       case 0:
@@ -196,7 +196,21 @@ void menu()
         }
         break;
 
+      case 12:
+        {
+          int current_value = pitchbend_amp_CC.get_value();
+          ssd.draw_title_value("PitchB Amp", current_value);
+          if (up != 0)
+          {
+            current_value += up;
+            pitchbend_amp_CC.set_value(current_value);
+            pitchbend_amp_CC.update();
+          }
+          break;
+        }
     }
+
+
 
     current_entry += joy_X.up_down();
     current_entry += right_menu.has_been_pressed() - left_menu.has_been_pressed();
