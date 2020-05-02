@@ -185,7 +185,7 @@ bool note_manager::update()
       {
         if (arp[i].is_started())
         {
-          arp[i].change(note[0]);
+          arp[i].change(note[0]);  //50 microsS for S2 ARP
           note[0] = arp[i].next();
         }
       }

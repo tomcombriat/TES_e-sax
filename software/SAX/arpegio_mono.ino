@@ -55,7 +55,7 @@ void arpegio_mono::set_tempo(unsigned long temp)
   duration = temp;
 }
 
-bool arpegio_mono::change(byte current_note)
+bool arpegio_mono::change(byte current_note) //could be optimized by checking only the next note, instead of a for loop. That is only 50micros for a 15 length arp so…
 {
   if (current_note != 0)
   {
@@ -64,6 +64,7 @@ bool arpegio_mono::change(byte current_note)
       previous_note = current_note;
       start();
     }
+
     float time_in_arp = ((millis() - start_time) % (duration * duration_scaling)) / (duration * 1.0); // compute fraction of time into loop (maybe better not to use floats ?)
     for (unsigned int i = 0; i < N_note_arp - 1; i++)
     {
