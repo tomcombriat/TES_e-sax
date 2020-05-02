@@ -34,3 +34,14 @@ char chord::get_name()
   return chord_name;
 }
 
+unsigned int chord::get_N_notes()
+{
+  return N_notes;
+}
+
+int * chord::get_notes()
+{
+  return notes;
+}
+
+

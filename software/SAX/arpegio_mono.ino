@@ -151,3 +151,13 @@ int arpegio_mono::get_duration_scaling()
   return duration_scaling;
 }
 
+unsigned int arpegio_mono::get_N_notes()
+{
+  return N_note_arp;
+}
+
+int * arpegio_mono::get_notes()
+{
+  return notes_arp;
+}
+

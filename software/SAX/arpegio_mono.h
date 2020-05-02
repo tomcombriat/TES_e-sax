@@ -34,6 +34,8 @@ class arpegio_mono
     bool is_paused();
     void pause();
     int get_duration_scaling();
+    unsigned int get_N_notes();
+    int * get_notes();
 
 
   private:

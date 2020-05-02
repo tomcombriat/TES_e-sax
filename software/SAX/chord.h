@@ -12,6 +12,8 @@ class chord
     void  set_notes(unsigned int N, int * _notes, char _name);
     void apply(byte * note);
     char get_name();
+    unsigned int get_N_notes();
+    int * get_notes();
 
   private:
     char chord_name;

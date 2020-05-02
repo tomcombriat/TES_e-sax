@@ -68,8 +68,54 @@ void screen::draw_title_value(String _title, String _value, int sub_value)
 
 void screen::draw_title_value(String _title, char _value, int sub_value)
 {
-  draw_title_value(_title, (String) _value,sub_value);
+  draw_title_value(_title, (String) _value, sub_value);
 }
+
+
+
+
+void screen::draw_title_value(String _title, char value, int N, int * _values , int sub_value)
+{
+  String _value = String(value);
+  int keyprint = _title.length() + 3 * sub_value + _values[N - 1] - N;
+
+  if (keyprint != previous_keyprint || _value != previous_value)
+  {
+    previous_keyprint = keyprint;
+    previous_value = _value;
+    changed = true;
+    display.clearDisplay();
+    display.fillRect(0, 0, 128, 20, 1);
+    display.setTextSize(2);
+    display.setTextColor(0);
+    display.setCursor((128 - (_title.length()) * 12) / 2, 3);
+    display.print(_title);
+    display.setTextSize(3);
+    display.setTextColor(1);
+    display.setCursor((128 - (_value.length()) * 18) / 2, 24);
+    display.print(_value);
+    if (sub_value != 0)
+    {
+      display.setCursor(75, 30);
+      display.setTextSize(2);
+      display.print(sub_value);
+    }
+    String enum_notes = String(_values[0]);
+    for (int i = 1; i < N; i++)
+    {
+      enum_notes += String(' ');
+      enum_notes += String(_values[i]);
+    }
+    display.setTextSize(1);
+    display.setCursor((128 - (enum_notes.length()) * 6) / 2, 49);
+    display.print(enum_notes);
+  }
+}
+
+
+
+
+
 
 
 void screen::draw_single_value(String _value)
