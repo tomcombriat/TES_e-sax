@@ -39,6 +39,7 @@ bool analog_input::update()
   if (millis() - last_read_time > response_time)
   {
     last_read_time = millis();
+    //last_read_time += response_time;    better? Should be more exact
     int value = analogRead(pin);
     value = (value - (biais + biais_offset))*scaling_factor;
     if (value > max_value) value = max_value;

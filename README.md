@@ -2,4 +2,4 @@
 
 Embedded software of the TES electronic saxophone.
 
-(to be commented)
+(to be commented…)
