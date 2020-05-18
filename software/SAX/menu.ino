@@ -121,11 +121,11 @@ void menu()
             break;
           case MODE_CHORD:
             //ssd.draw_title_value("CHORD 0", chords[0].get_name());
-            ssd.draw_title_value("CHORD 0", chords[0].get_name(), chords[0].get_N_notes(), chords[0].get_notes());
+            ssd.draw_title_value("CHORD 0", chords[0].get_long_name(), chords[0].get_N_notes(), chords[0].get_notes());
             selected_chord[0] += up;
             if (selected_chord[0] >= N_CHORD) selected_chord[0] = 0;
             if (selected_chord[0] < 0) selected_chord[0] = N_CHORD - 1;
-            chords[0].set_notes(chord_N[selected_chord[0]],  chord_notes[selected_chord[0]], chord_name[selected_chord[0]]);
+            chords[0].set_notes(chord_N[selected_chord[0]],  chord_notes[selected_chord[0]], chord_name[selected_chord[0]],chord_long_names[selected_chord[0]]);
             break;
         }
         break;
@@ -146,11 +146,11 @@ void menu()
             normal_mid_modifier += up;
             break;
           case MODE_CHORD:
-            ssd.draw_title_value("CHORD 1", chords[1].get_name(), chords[1].get_N_notes(), chords[1].get_notes());
+            ssd.draw_title_value("CHORD 1", chords[1].get_long_name(), chords[1].get_N_notes(), chords[1].get_notes());
             selected_chord[1] += up;
             if (selected_chord[1] >= N_CHORD) selected_chord[1] = 0;
             if (selected_chord[1] < 0) selected_chord[1] = N_CHORD - 1;
-            chords[1].set_notes(chord_N[selected_chord[1]],  chord_notes[selected_chord[1]], chord_name[selected_chord[1]]);
+            chords[1].set_notes(chord_N[selected_chord[1]],  chord_notes[selected_chord[1]], chord_name[selected_chord[1]],chord_long_names[selected_chord[1]]);
             break;
         }
         break;
@@ -174,11 +174,11 @@ void menu()
             normal_down_modifier += up;
             break;
           case MODE_CHORD:
-            ssd.draw_title_value("CHORD 2", chords[2].get_name(), chords[2].get_N_notes(), chords[2].get_notes());
+            ssd.draw_title_value("CHORD 2", chords[2].get_long_name(), chords[2].get_N_notes(), chords[2].get_notes());
             selected_chord[2] += up;
             if (selected_chord[2] >= N_CHORD) selected_chord[2] = 0;
             if (selected_chord[2] < 0) selected_chord[2] = N_CHORD - 1;
-            chords[2].set_notes(chord_N[selected_chord[2]],  chord_notes[selected_chord[2]], chord_name[selected_chord[2]]);
+            chords[2].set_notes(chord_N[selected_chord[2]],  chord_notes[selected_chord[2]], chord_name[selected_chord[2]],chord_long_names[selected_chord[2]]);
             break;
         }
         break;

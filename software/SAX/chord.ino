@@ -21,6 +21,14 @@ void chord::set_notes(unsigned int N, int * _notes, char _name)
   chord_name = _name;
 }
 
+void chord::set_notes(unsigned int N, int * _notes, char _name, String * _long_name)
+{
+  N_notes = N;
+  notes = _notes;
+  chord_name = _name;
+  long_name = _long_name;
+}
+
 void chord::apply(byte * note)
 {
   for (unsigned int i=1;i<N_notes;i++)
@@ -32,6 +40,11 @@ void chord::apply(byte * note)
 char chord::get_name()
 {
   return chord_name;
+}
+
+String * chord::get_long_name()
+{
+  return long_name;
 }
 
 unsigned int chord::get_N_notes()
