@@ -47,7 +47,7 @@ void arpegio_mono::set_notes(unsigned int N, float * times, int * notes, char _n
   notes_arp = notes;
   arp_name = _name;
   duration_scaling = int (times[N - 1] + 1);
-  
+
 }
 
 void arpegio_mono::set_notes(unsigned int N, float * times, int * notes, char _name, String * l_name)
@@ -66,8 +66,10 @@ void arpegio_mono::set_tempo(unsigned long temp)
   duration = temp;
 }
 
-bool arpegio_mono::change(byte current_note) //could be optimized by checking only the next note, instead of a for loop. That is only 50micros for a 15 length arp so…
-{
+
+/*
+  bool arpegio_mono::change(byte current_note) //could be optimized by checking only the next note, instead of a for loop. That is only 50micros for a 15 length arp so…
+  {
   if (current_note != 0)
   {
     if (current_note != previous_note) // restart on changing note
@@ -112,7 +114,46 @@ bool arpegio_mono::change(byte current_note) //could be optimized by checking on
     next_note = 0;
   }
   return false;  // arp not started
+  }
+*/
+
+bool arpegio_mono::change(byte current_note) //Now 2micros!
+{
+
+  if (current_note != 0)
+  {
+    if (current_note != previous_note) // restart on changing note
+    {
+      previous_note = current_note;
+      start();
+    }
+
+    //float time_in_arp = ((millis() - start_time) % (duration * duration_scaling)) / (duration * 1.0); // compute fraction of time into loop (maybe better not to use floats ?)
+    if (millis() >= next_event_time)
+    {
+      float next_duration = 0.;
+      
+
+      if (next_index + 1 == N_note_arp) next_duration = duration_scaling  + times_arp[0] - times_arp[next_index]; //rollback
+      else next_duration = times_arp[next_index + 1] - times_arp[next_index];
+
+      if (notes_arp[next_index] != -255)   next_note = notes_arp[next_index] + current_note;
+      else next_note = 0;  //silent note
+
+      next_event_time += duration * next_duration ;
+      next_index += 1;
+      if (next_index == N_note_arp) next_index = 0; //rollback
+      return true;
+    }
+  }  // if (current_note !=0)
+  else {
+    previous_note = 0;
+    next_note = 0;
+  }
+  return false;  // arp not started
 }
+
+
 
 int arpegio_mono::next()
 {
@@ -127,6 +168,8 @@ int arpegio_mono::previous()
 void arpegio_mono::start()
 {
   start_time = millis();
+  next_index = 0;
+  next_event_time = start_time;
   started = true;
   paused = false;
 }

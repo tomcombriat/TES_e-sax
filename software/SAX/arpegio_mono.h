@@ -29,7 +29,7 @@ class arpegio_mono
     int previous();
     void start();
     void stop();
-    bool change(byte current_note);  //
+    bool change(byte current_note);  
     bool is_started();
     char get_name();
     String * get_long_name();
@@ -45,9 +45,9 @@ class arpegio_mono
     unsigned int  N_note_arp;
     float *  times_arp;
     int * notes_arp;
-    int  N_played = 0;
+    unsigned int  next_index = 0;
     bool started  = false;
-    unsigned long start_time = 0, duration = 500;
+    unsigned long start_time = 0, duration = 500, next_event_time = 0;
     char arp_name;
     String * long_name;
     short next_note;

@@ -199,7 +199,7 @@ void setup() {
   joy_Y.set_scaling_factor(JOY_BASE_SCALING);
   joy_X.set_min_max(-127, 127);
   joy_Y.set_min_max(-127, 127);
-  
+
   display.setRotation(2);
 
   MIDI.begin(MIDI_CHANNEL_OMNI);
@@ -240,15 +240,12 @@ void loop() {
    ***********************************/
   if (manager.update())   // different note has been detected
   {
+
     if (manager.get_previous_note()[0] != 0 && played)    //already played but different note -> shutdown previous note
     {
       for (byte i = 0; i < POLYPHONY; i++)
       {
-        if (manager.get_previous_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i])
-        {
-          MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel);
-        }
-
+        if (manager.get_previous_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i]) MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel);
       }
       played = false;
       stop_played_time = millis();
