@@ -14,7 +14,7 @@
 
 
 
-const int N_entry = 13;
+const int N_entry = 14;
 int current_entry = 0;
 String transpose_notes[12] = {":C", ":C#", ":D", ":D#", ":E", ":F", ":F#", ":G", ":G#", ":A", ":A#", ":B"};
 char arp_mode[3] = {'N', 'A', 'C'};
@@ -209,6 +209,12 @@ void menu()
             pitchbend_amp_CC.set_value(current_value);
             pitchbend_amp_CC.update();
           }
+          break;
+        }
+        case 13:
+        {
+          ssd.draw_title_value("Crazy tempo", "?!");
+          if (up!=0) tap.set_tempo(400);
           break;
         }
     }

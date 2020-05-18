@@ -36,7 +36,7 @@ class tap_tempo
     //static const int N_tap_max = 20;
     unsigned long taps[N_tap_max];
     unsigned const long delay_before_reinit = 3000;
-    unsigned long bounce_time = 50;
+    unsigned long bounce_time = 100;
     unsigned long tap_time = 500;
     unsigned long previous_tap_time = 0;
     unsigned int tempo = 120;
