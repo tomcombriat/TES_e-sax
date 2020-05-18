@@ -47,6 +47,17 @@ void arpegio_mono::set_notes(unsigned int N, float * times, int * notes, char _n
   notes_arp = notes;
   arp_name = _name;
   duration_scaling = int (times[N - 1] + 1);
+  
+}
+
+void arpegio_mono::set_notes(unsigned int N, float * times, int * notes, char _name, String * l_name)
+{
+  N_note_arp = N;
+  times_arp = times;
+  notes_arp = notes;
+  arp_name = _name;
+  long_name = l_name;
+  duration_scaling = int (times[N - 1] + 1);
 }
 
 
@@ -129,6 +140,11 @@ void arpegio_mono::stop()
 char arpegio_mono::get_name()
 {
   return arp_name;
+}
+
+String * arpegio_mono::get_long_name()
+{
+  return long_name;
 }
 
 bool arpegio_mono::is_started()

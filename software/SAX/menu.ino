@@ -17,7 +17,7 @@
 const int N_entry = 13;
 int current_entry = 0;
 String transpose_notes[12] = {":C", ":C#", ":D", ":D#", ":E", ":F", ":F#", ":G", ":G#", ":A", ":A#", ":B"};
-String arp_mode[3] = {"N", "A", "C"};
+char arp_mode[3] = {'N', 'A', 'C'};
 
 
 
@@ -109,11 +109,11 @@ void menu()
         {
           case MODE_ARPEGIO:
             //ssd.draw_title_value("ARP 0", arp[0].get_name(), arp[0].get_duration_scaling());
-            ssd.draw_title_value("ARP 0", arp[0].get_name(), arp[0].get_N_notes(), arp[0].get_notes(), arp[0].get_duration_scaling());
+            ssd.draw_title_value("ARP 0", arp[0].get_long_name(), arp[0].get_N_notes(), arp[0].get_notes(), arp[0].get_duration_scaling());
             selected_arp[0] += up;
             if (selected_arp[0] >= N_ARP) selected_arp[0] = 0;
             if (selected_arp[0] < 0) selected_arp[0] = N_ARP - 1;
-            arp[0].set_notes(arp_N[selected_arp[0]], arp_times[selected_arp[0]], arp_notes[selected_arp[0]], arp_name[selected_arp[0]]);
+            arp[0].set_notes(arp_N[selected_arp[0]], arp_times[selected_arp[0]], arp_notes[selected_arp[0]], arp_name[selected_arp[0]],arp_long_names[selected_arp[0]]);
             break;
           case MODE_NORMAL:
             ssd.draw_title_value("Mod UP", normal_up_modifier);
@@ -135,11 +135,11 @@ void menu()
         {
           case MODE_ARPEGIO:
             //ssd.draw_title_value("ARP 1", arp[1].get_name(), arp[1].get_duration_scaling());
-            ssd.draw_title_value("ARP 1", arp[1].get_name(), arp[1].get_N_notes(), arp[1].get_notes(), arp[1].get_duration_scaling());
+            ssd.draw_title_value("ARP 1", arp[1].get_long_name(), arp[1].get_N_notes(), arp[1].get_notes(), arp[1].get_duration_scaling());
             selected_arp[1] += up;
             if (selected_arp[1] >= N_ARP) selected_arp[1] = 0;
             if (selected_arp[1] < 0) selected_arp[1] = N_ARP - 1;
-            arp[1].set_notes(arp_N[selected_arp[1]], arp_times[selected_arp[1]], arp_notes[selected_arp[1]], arp_name[selected_arp[1]]);
+            arp[1].set_notes(arp_N[selected_arp[1]], arp_times[selected_arp[1]], arp_notes[selected_arp[1]], arp_name[selected_arp[1]],arp_long_names[selected_arp[1]]);
             break;
           case MODE_NORMAL:
             ssd.draw_title_value("Mod MID", normal_mid_modifier);
@@ -163,11 +163,11 @@ void menu()
           case MODE_ARPEGIO:
             //ssd.draw_title_value("ARP 2", arp[2].get_name(), arp[2].get_duration_scaling());
             //ssd.draw_title_value("ARP 2", arp[selected_arp[2]].get_name(),arp[selected_arp[2]].get_duration_scaling());
-            ssd.draw_title_value("ARP 2", arp[2].get_name(), arp[2].get_N_notes(), arp[2].get_notes(), arp[2].get_duration_scaling());
+            ssd.draw_title_value("ARP 2", arp[2].get_long_name(), arp[2].get_N_notes(), arp[2].get_notes(), arp[2].get_duration_scaling());
             selected_arp[2] += up;
             if (selected_arp[2] >= N_ARP) selected_arp[2] = 0;
             if (selected_arp[2] < 0) selected_arp[2] = N_ARP - 1;
-            arp[2].set_notes(arp_N[selected_arp[2]], arp_times[selected_arp[2]], arp_notes[selected_arp[2]], arp_name[selected_arp[2]]);
+            arp[2].set_notes(arp_N[selected_arp[2]], arp_times[selected_arp[2]], arp_notes[selected_arp[2]], arp_name[selected_arp[2]],arp_long_names[selected_arp[2]]);
             break;
           case MODE_NORMAL:
             ssd.draw_title_value("Mod DWN", normal_down_modifier);
