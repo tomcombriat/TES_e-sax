@@ -183,7 +183,7 @@ void setup() {
   display.setCursor(35, 50);
 
   for (int i = 0; i < 3; i++) arp[i].set_notes(arp_N[i], arp_times[i], arp_notes[i], arp_name[i], arp_long_names[i]);
-  for (int i = 0; i < 3; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i]);
+  for (int i = 0; i < 3; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i], chord_long_names[i]);
 
 
 
