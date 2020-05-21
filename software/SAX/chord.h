@@ -25,7 +25,7 @@ class chord
 };
 
 
-#define N_CHORD 10
+#define N_CHORD 12
 
 
 const unsigned int chord0_N = 3;
@@ -80,12 +80,22 @@ int chord9_notes[chord9_N] = {0, 5, 7};
 char chord9_name = '4';
 String chord9_long_name = "sus4";
 
+const unsigned int chord10_N = 3;
+int chord10_notes[chord10_N] = {0, 4, 9};
+char chord10_name = '6';
+String chord10_long_name = "maj6no5";
+
+const unsigned int chord11_N = 2;
+int chord11_notes[chord11_N] = {0, 5};
+char chord11_name = '5';
+String chord11_long_name = "d5";
 
 
-int * chord_notes[N_CHORD] = {chord0_notes, chord1_notes, chord2_notes, chord3_notes, chord4_notes, chord5_notes, chord6_notes, chord7_notes, chord8_notes, chord9_notes};
-char chord_name[N_CHORD] = {chord0_name, chord1_name, chord2_name, chord3_name, chord4_name, chord5_name, chord6_name, chord7_name, chord8_name, chord9_name};
-int chord_N[N_CHORD] = {chord0_N, chord1_N, chord2_N, chord3_N, chord4_N, chord5_N, chord6_N, chord7_N, chord8_N, chord9_N};
-String * chord_long_names[N_CHORD] = {&chord0_long_name, &chord1_long_name, &chord2_long_name, &chord3_long_name, &chord4_long_name, &chord5_long_name, &chord6_long_name, &chord7_long_name, &chord8_long_name, &chord9_long_name};
+
+int * chord_notes[N_CHORD] = {chord0_notes, chord1_notes, chord2_notes, chord3_notes, chord4_notes, chord5_notes, chord6_notes, chord7_notes, chord8_notes, chord9_notes, chord10_notes, chord11_notes};
+char chord_name[N_CHORD] = {chord0_name, chord1_name, chord2_name, chord3_name, chord4_name, chord5_name, chord6_name, chord7_name, chord8_name, chord9_name, chord10_name, chord11_name};
+int chord_N[N_CHORD] = {chord0_N, chord1_N, chord2_N, chord3_N, chord4_N, chord5_N, chord6_N, chord7_N, chord8_N, chord9_N, chord10_N, chord11_N};
+String * chord_long_names[N_CHORD] = {&chord0_long_name, &chord1_long_name, &chord2_long_name, &chord3_long_name, &chord4_long_name, &chord5_long_name, &chord6_long_name, &chord7_long_name, &chord8_long_name, &chord9_long_name, &chord10_long_name, &chord11_long_name};
 
 
 
