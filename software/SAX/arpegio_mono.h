@@ -116,9 +116,9 @@ String arp7_long_name = "3";
 
 const int arp8_N = 4;
 float arp8_times[arp8_N] = {0.0, 0.25, 0.5, 0.75};
-int arp8_notes[arp8_N] = {0, 3, -5, -2};
-char arp8_name = 'R';
-String arp8_long_name = "Rev";
+int arp8_notes[arp8_N] = {0, 7, -5, 12};
+char arp8_name = 'F';
+String arp8_long_name = "Fifth";
 
 const int arp9_N = 15;
 float arp9_times[arp9_N] = {0.0, 0.15, 0.25, 0.4, 0.5, 0.65, 0.75, 1., 1.15, 1.25, 1.40, 1.50, 1.65, 1.75, 1.9};

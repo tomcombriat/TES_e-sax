@@ -373,13 +373,10 @@ void loop() {
   */
   if (modifier_sub_up.has_been_released()) midi_octave -= 1;
   if (modifier_sub_down.has_been_released()) midi_octave += 1;
+  
   else if (joy_SW.has_been_released() && !joy_SW.has_been_released_after_long_press())
   {
     delta_mode = !delta_mode;
-
-    /*
-      if (delta_mode) ssd.draw_single_value("D");
-      else ssd.clear();*/
   }
   if (joy_SW.has_been_released_after_long_press()) menu();
   // if (modifier_sub_up.is_pressed() && modifier_sub_down.is_pressed()) menu();
