@@ -1,151 +1,102 @@
-#ifndef _arpegio_mono_
-#define _arpegio_mono_
+#ifndef _chord_
+#define _chord_
 
 
 
-/*
-      Combriat 2018, 2019, 2020
-      This file is part of the OS embedded in the e-sax - TES
-      This code is under GPL3
-
-
-      This is the include file for the class managing arpegiators
-*/
-
-
-
-
-class arpegio_mono
+class chord
 {
   public:
-    arpegio_mono();
-    arpegio_mono(unsigned int N, float * times, int * notes);
-    arpegio_mono(unsigned int N, float * times, int * notes, char _name);
-    void set_notes(unsigned int N, float * times, int * notes);
-    void set_notes(unsigned int N, float * times, int * notes, char _name);
-    void set_notes(unsigned int N, float * times, int * notes, char _name, String * l_name);
-    void set_tempo(unsigned long _tempo);
-    int next();
-    int previous();
-    void start();
-    void stop();
-    bool change(byte current_note);  
-    bool is_started();
+    chord();
+    chord(unsigned int N, int * _notes);
+    void  set_notes(unsigned int N, int * _notes);
+    void  set_notes(unsigned int N, int * _notes, char _name);
+    void  set_notes(unsigned int N, int * _notes, char _name, String * _long_name);
+    void apply(byte * note);
     char get_name();
     String * get_long_name();
-    bool is_paused();
-    void pause();
-    int get_duration_scaling();
     unsigned int get_N_notes();
     int * get_notes();
 
-
   private:
-    int duration_scaling = 1;
-    unsigned int  N_note_arp;
-    float *  times_arp;
-    int * notes_arp;
-    unsigned int  next_index = 0;
-    bool started  = false;
-    unsigned long start_time = 0, duration = 500, next_event_time = 0;
-    char arp_name;
+    char chord_name;
     String * long_name;
-    short next_note;
-    short previous_note;
-    bool paused;
+    int * notes;
+    unsigned int N_notes;
 };
 
 
+#define N_CHORD 12
+
+
+const unsigned int chord0_N = 3;
+int chord0_notes[chord0_N] = {0, 7, 12};
+char chord0_name = 'P';
+String chord0_long_name = "Power";
+
+const unsigned int chord1_N = 4;
+int chord1_notes[chord1_N] = {0, 7, 9, 12};
+char chord1_name = '7';
+String chord1_long_name = "7th";
+
+const unsigned int chord2_N = 4;
+int chord2_notes[chord2_N] = {0, 7, 12, -12};
+char chord2_name = 'B';
+String chord2_long_name = "Full B";
+
+const unsigned int chord3_N = 3;
+int chord3_notes[chord3_N] = {0, 3, 7};
+char chord3_name = 'm';
+String chord3_long_name = "min";
+
+const unsigned int chord4_N = 3;
+int chord4_notes[chord4_N] = {0, 4, 7};
+char chord4_name = 'M';
+String chord4_long_name = "Maj";
+
+const unsigned int chord5_N = 4;
+int chord5_notes[chord5_N] = {0, 4, 7, 11};
+char chord5_name = '7';
+String chord5_long_name = "Maj7";
+
+const unsigned int chord6_N = 4;
+int chord6_notes[chord6_N] = {0, 4, 7, 10};
+char chord6_name = '7';
+String chord6_long_name = "dom7";
+
+const unsigned int chord7_N = 4;
+int chord7_notes[chord7_N] = {0, 3, 7, 10};
+char chord7_name = '7';
+String chord7_long_name = "m7";
+
+
+const unsigned int chord8_N = 3;
+int chord8_notes[chord8_N] = {0, 2, 7};
+char chord8_name = '2';
+String chord8_long_name = "sus2";
+
+
+const unsigned int chord9_N = 3;
+int chord9_notes[chord9_N] = {0, 5, 7};
+char chord9_name = '4';
+String chord9_long_name = "sus4";
+
+const unsigned int chord10_N = 3;
+int chord10_notes[chord10_N] = {0, 4, 9};
+char chord10_name = '6';
+String chord10_long_name = "maj6no5";
+
+const unsigned int chord11_N = 2;
+int chord11_notes[chord11_N] = {0, 5};
+char chord11_name = '5';
+String chord11_long_name = "d5";
 
 
 
-#define N_ARP 10
-
-
-
-const int arp0_N = 4;
-float arp0_times[arp0_N] = {0.0, 0.25, 0.5, 0.75};
-int arp0_notes[arp0_N] = {0, 7, 19, 12};
-char arp0_name = 'C';
-String arp0_long_name = "Classic";
-
-const int arp1_N = 4;
-float arp1_times[arp1_N] = {0.0, 0.25, 0.5, 0.75};
-int arp1_notes[arp1_N] = {0, 4, 7, 4};
-char arp1_name = 'M';
-String arp1_long_name = "Maj";
-
-
-const int arp2_N = 4;
-float arp2_times[arp2_N] = {0.0, 0.25, 0.5, 0.75};
-int arp2_notes[arp2_N] = {0, 3, 7, 3};
-char arp2_name = 'm';
-String arp2_long_name = "min";
-
-
-const int arp3_N = 3;
-float arp3_times[arp3_N] = {0.0, 0.5, 0.75};
-int arp3_notes[arp3_N] = {0, 7, 12};
-char arp3_name = 'T';
-String arp3_long_name = "F/o";
-
-
-const int arp4_N = 8;
-float arp4_times[arp4_N] = {0.0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875};
-int arp4_notes[arp4_N] = {0, -255, 0, -255, 0, -255, 0, -255};
-char arp4_name = '4';
-String arp4_long_name = "4";
-
-const int arp5_N = 4;
-float arp5_times[arp5_N] = {0.0, 0.25, 0.5, 0.75};
-int arp5_notes[arp5_N] = {0, -255, 0, -255};
-char arp5_name = '2';
-String arp5_long_name = "2";
-
-const int arp6_N = 2;
-float arp6_times[arp6_N] = {0.0, 0.5};
-int arp6_notes[arp6_N] = {0, -255};
-char arp6_name = '1';
-String arp6_long_name = "1";
-
-const int arp7_N = 6;
-float arp7_times[arp7_N] = {0.0, 1. / 6, 1. / 3, 0.5, 2. / 3, 5. / 6};
-int arp7_notes[arp7_N] = {0, -255, 0, -255, 0, -255};
-char arp7_name = '3';
-String arp7_long_name = "3";
-
-const int arp8_N = 4;
-float arp8_times[arp8_N] = {0.0, 0.25, 0.5, 0.75};
-int arp8_notes[arp8_N] = {0, 7, -5, 12};
-char arp8_name = 'F';
-String arp8_long_name = "Fifth";
-
-const int arp9_N = 15;
-float arp9_times[arp9_N] = {0.0, 0.15, 0.25, 0.4, 0.5, 0.65, 0.75, 1., 1.15, 1.25, 1.40, 1.50, 1.65, 1.75, 1.9};
-int arp9_notes[arp9_N] = {0, -255, 0,  -255, 0, -255, 0, 3, -255, 2, -255, -5, -255, -2, -255};
-char arp9_name = 'S';
-String arp9_long_name = "Amb";
-
-
-// Really need to find another to do this, while being statically allocated...
-
-float * arp_times[N_ARP] = {arp0_times, arp1_times, arp2_times, arp3_times, arp4_times, arp7_times, arp5_times, arp6_times, arp8_times, arp9_times};
-int * arp_notes[N_ARP] = {arp0_notes, arp1_notes, arp2_notes, arp3_notes, arp4_notes, arp7_notes, arp5_notes, arp6_notes, arp8_notes, arp9_notes};
-char arp_name[N_ARP] = {arp0_name, arp1_name, arp2_name, arp3_name, arp4_name, arp7_name, arp5_name, arp6_name, arp8_name, arp9_name};
-int arp_N[N_ARP] = {arp0_N, arp1_N, arp2_N, arp3_N, arp4_N, arp7_N, arp5_N, arp6_N, arp8_N, arp9_N};
-String * arp_long_names[N_ARP] = {&arp0_long_name,&arp1_long_name,&arp2_long_name,&arp3_long_name,&arp4_long_name,&arp7_long_name,&arp5_long_name,&arp6_long_name,&arp8_long_name,&arp9_long_name};
-
-
-
-
-/*
-  float arp3_times[4] = {0.0,0.25,0.5,0.75};
-  int arp3_notes[4] = {0,12,-7,7};
-  char arp3_name = 'W';
-*/
-
+int * chord_notes[N_CHORD] = {chord0_notes, chord1_notes, chord2_notes, chord3_notes, chord4_notes, chord5_notes, chord6_notes, chord7_notes, chord8_notes, chord9_notes, chord10_notes, chord11_notes};
+char chord_name[N_CHORD] = {chord0_name, chord1_name, chord2_name, chord3_name, chord4_name, chord5_name, chord6_name, chord7_name, chord8_name, chord9_name, chord10_name, chord11_name};
+int chord_N[N_CHORD] = {chord0_N, chord1_N, chord2_N, chord3_N, chord4_N, chord5_N, chord6_N, chord7_N, chord8_N, chord9_N, chord10_N, chord11_N};
+String * chord_long_names[N_CHORD] = {&chord0_long_name, &chord1_long_name, &chord2_long_name, &chord3_long_name, &chord4_long_name, &chord5_long_name, &chord6_long_name, &chord7_long_name, &chord8_long_name, &chord9_long_name, &chord10_long_name, &chord11_long_name};
 
 
 
 #endif
-
