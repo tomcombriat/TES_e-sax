@@ -80,7 +80,7 @@ const int arp2_N = 4;
 float arp2_times[arp2_N] = {0.0, 0.25, 0.5, 0.75};
 int arp2_notes[arp2_N] = {0, 3, 7, 3};
 char arp2_name = 'm';
-String arp2_long_name = "Min";
+String arp2_long_name = "min";
 
 
 const int arp3_N = 3;
