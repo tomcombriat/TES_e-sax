@@ -179,7 +179,7 @@ bool note_manager::update()
 
 
     /****** ARPEGIO */
-    if (arpegio_mode == MODE_ARPEGIO)
+    if (arpegio_mode == MODE_ARPEGIO || arpegio_mode == MODE_ARPEGIO_RAND)
     {
       for (byte i = 0; i < 3; i++)
       {

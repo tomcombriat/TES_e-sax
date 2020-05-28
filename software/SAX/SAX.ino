@@ -48,9 +48,11 @@ Adafruit_SSD1306 display(OLED_RESET);
 #define PITCHBEND_MIN_TIME 10
 #define SCREEN_UPDATE_TIME 20
 #define SCREEN_IDLE_WAITING_TIME 400
+
 #define MODE_NORMAL 0
 #define MODE_ARPEGIO 1
 #define MODE_CHORD 2
+#define MODE_ARPEGIO_RAND 3
 
 #define JOY_BASE_SCALING 0.065
 #define JOY_PB_SCALING 4.2
@@ -232,7 +234,7 @@ void loop() {
   breath_CC.update();
 
 
-  if (arpegio_mode == MODE_ARPEGIO && tap.has_change())  for (byte i = 0; i < 3; i++)  arp[i].set_tempo(tap.get_tempo_time());   // update tempo of arpegiators
+  if ((arpegio_mode == MODE_ARPEGIO || arpegio_mode == MODE_ARPEGIO_RAND) && tap.has_change())  for (byte i = 0; i < 3; i++)  arp[i].set_tempo(tap.get_tempo_time());   // update tempo of arpegiators
 
 
   /***********************************
@@ -277,7 +279,7 @@ void loop() {
       else break;
     }
     played = true;
-    if (arpegio_mode == MODE_ARPEGIO)
+    if (arpegio_mode == MODE_ARPEGIO || arpegio_mode == MODE_ARPEGIO_RAND)
     {
       if (modifier_up.is_pressed()) arp[0].start();
       if (modifier_mid.is_pressed()) arp[1].start();
@@ -295,7 +297,7 @@ void loop() {
     }
     played = false;
     stop_played_time = millis();
-    if (arpegio_mode == MODE_ARPEGIO)
+    if (arpegio_mode == MODE_ARPEGIO || arpegio_mode == MODE_ARPEGIO_RAND)
     {
       for (byte i = 0; i < 3; i++) arp[i].stop();
     }
@@ -356,7 +358,7 @@ void loop() {
   /****************************
             ARPS
   */
-  if (arpegio_mode == MODE_ARPEGIO)
+  if (arpegio_mode == MODE_ARPEGIO || arpegio_mode == MODE_ARPEGIO_RAND)
   {
     if (modifier_up.has_been_released()) arp[0].stop();
     if (modifier_mid.has_been_released()) arp[1].stop();

@@ -82,17 +82,38 @@ bool arpegio_mono::change(byte current_note) //Now 2micros!
     if (millis() >= next_event_time)
     {
       float next_duration = 0.;
-      
 
+
+      /*
+      // Calculating the duration of the next note
       if (next_index + 1 == N_note_arp) next_duration = duration_scaling  + times_arp[0] - times_arp[next_index]; //rollback
       else next_duration = times_arp[next_index + 1] - times_arp[next_index];
+*/
 
+      // Updating the next note
       if (notes_arp[next_index] != -255)   next_note = notes_arp[next_index] + current_note;
       else next_note = 0;  //silent note
 
-      next_event_time += duration * next_duration ;
-      next_index += 1;
+
+      // Calculation the time for next note
+      //next_event_time += duration * next_duration ;
+      
+      if (arpegio_mode == MODE_ARPEGIO) next_index += 1;
+      else if (arpegio_mode == MODE_ARPEGIO_RAND)
+      {
+        unsigned int next_index_tamp = next_index;
+        while (next_index_tamp == next_index)    next_index_tamp = random(0,N_note_arp);
+        next_index = next_index_tamp;
+      }
+      
+      
       if (next_index == N_note_arp) next_index = 0; //rollback
+
+      if (next_index == 0) next_duration = duration_scaling  + times_arp[0] - times_arp[N_note_arp-1]; //rollback
+      else next_duration = times_arp[next_index] - times_arp[next_index-1];
+
+      next_event_time += duration * next_duration ;
+      
       return true;
     }
   }  // if (current_note !=0)

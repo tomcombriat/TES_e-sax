@@ -245,6 +245,19 @@ void screen::draw_standby_screen(int& _octave, int& _transpose, byte _global_mod
       display.print(arp[2].get_name());
     }
 
+        if (global_mode == MODE_ARPEGIO_RAND)
+    {
+      display.setCursor(50, 0);
+      display.print(tempo);
+      display.setTextSize(2);
+      display.setCursor(60, 20);
+      display.print(arp[0].get_name());  // getting out of my logic… bah.
+      display.setCursor(75, 28);
+      display.print(arp[1].get_name());
+      display.setCursor(60, 36);
+      display.print(arp[2].get_name());
+    }
+
     else if (global_mode == MODE_NORMAL)
     {
       display.setTextSize(1);

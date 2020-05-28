@@ -44,7 +44,7 @@ class screen
     unsigned int tempo = 0;
 };
 
-char global_modes[3] = {'N', 'A', 'C'};
+char global_modes[4] = {'N', 'A', 'C','R'};
 
 
 
