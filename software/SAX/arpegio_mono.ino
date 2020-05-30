@@ -102,7 +102,7 @@ bool arpegio_mono::change(byte current_note) //Now 2micros!
       else if (arpegio_mode == MODE_ARPEGIO_RAND)
       {
         unsigned int next_index_tamp = next_index;
-        while (next_index_tamp == next_index)    next_index_tamp = random(0,N_note_arp);
+        while (next_index_tamp == next_index || notes_arp[next_index_tamp] == notes_arp[next_index])    next_index_tamp = random(0,N_note_arp);
         next_index = next_index_tamp;
       }
       

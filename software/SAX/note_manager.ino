@@ -68,6 +68,8 @@ bool note_manager::update()
   right_menu.manual_input(0);
   left_menu.manual_input(0);
   up_menu.manual_input(0);
+  /*Serial.println(current_touch_no_mod);
+  delay(100);*/
 
 
 
@@ -89,11 +91,33 @@ bool note_manager::update()
       note[0] = 60;
       right_menu.manual_input(1);
       break;
+    case 398464: //C
+      note[0] = 60;
+      break;
+    case 1447040: //C
+      note[0] = 60;
+      break;
+    case 9835648: //C
+      note[0] = 60;
+      break;
+
     case 9848464:  // B
       note[0] = 59;
       left_menu.manual_input(1);
       break;
     case 9832064:  // A
+      note [0] = 57;
+      break;
+    case 394368:  // A
+      note [0] = 57;
+      break;
+    case 1442944:  // A
+      note [0] = 57;
+      break;
+    case 9831552:  // A
+      note [0] = 57;
+      break;
+    case 1443456:  // A
       note [0] = 57;
       break;
     case 9848448:  // A#
