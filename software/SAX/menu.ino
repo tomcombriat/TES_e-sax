@@ -43,7 +43,11 @@ void menu()
     left_menu.update();
     right_menu.update();
 
-    int up = joy_Y.up_down() + up_menu.has_been_pressed() - down_menu.has_been_pressed();
+
+
+    int up = 0;
+
+    if (!joy_SW.is_pressed()) up = joy_Y.up_down() + up_menu.has_been_pressed() - down_menu.has_been_pressed();
 
 
 

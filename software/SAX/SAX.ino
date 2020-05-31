@@ -247,7 +247,11 @@ void loop() {
     {
       for (byte i = 0; i < POLYPHONY; i++)
       {
-        if (manager.get_previous_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i]) MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel);
+        if (manager.get_previous_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i]) 
+        {
+          if (i) MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel+1);
+          else MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel);
+        }
       }
       played = false;
       stop_played_time = millis();
@@ -260,7 +264,8 @@ void loop() {
       {
         if (manager.get_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i])
         {
-          MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel);
+          if (i) MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel+1);
+          else MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel);
         }
 
       }
@@ -275,7 +280,11 @@ void loop() {
   {
     for (byte i = 0; i < POLYPHONY; i++)
     {
-      if (manager.get_note()[i] != 0) MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel);
+      if (manager.get_note()[i] != 0) 
+      {
+        if (i) MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel+1);
+        else MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel);
+      }
       else break;
     }
     played = true;
@@ -292,7 +301,11 @@ void loop() {
   {
     for (byte i = 0; i < POLYPHONY; i++)
     {
-      if (manager.get_note()[i] != 0) MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel);
+      if (manager.get_note()[i] != 0) 
+      {
+        if (i) MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel+1);
+        else MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel);
+      }
       else break;
     }
     played = false;
