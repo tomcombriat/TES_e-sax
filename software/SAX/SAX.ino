@@ -120,6 +120,7 @@ int arpegio_mode = MODE_NORMAL;
 bool played = false;
 int breath_sensitivity = 0;
 bool pitchbend_enable = false;
+bool dynamic_velocity = true;
 
 
 
@@ -247,9 +248,9 @@ void loop() {
     {
       for (byte i = 0; i < POLYPHONY; i++)
       {
-        if (manager.get_previous_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i]) 
+        if (manager.get_previous_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i])
         {
-          if (i) MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel+1);
+          if (i) MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel + 1);
           else MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel);
         }
       }
@@ -259,13 +260,15 @@ void loop() {
 
     if (manager.get_note()[0] != 0 && breath.value() > 0)   // new note is playable  -> play it
     {
+      byte vel = 127;
+      if (dynamic_velocity) vel = breath.value();
       played = true;
       for (byte i = 0; i < POLYPHONY; i++)
       {
         if (manager.get_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i])
         {
-          if (i) MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel+1);
-          else MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel);
+          if (i) MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel + 1);
+          else MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel);
         }
 
       }
@@ -278,12 +281,15 @@ void loop() {
 
   if (breath.value() > 0 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note
   {
+    byte vel = 127;
+    if (dynamic_velocity) vel = breath.value();
+    
     for (byte i = 0; i < POLYPHONY; i++)
     {
-      if (manager.get_note()[i] != 0) 
+      if (manager.get_note()[i] != 0)
       {
-        if (i) MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel+1);
-        else MIDI.sendNoteOn(manager.get_note()[i], breath.value(), midi_channel);
+        if (i) MIDI.sendNoteOn(manager.get_note()[i],vel, midi_channel + 1);
+        else MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel);
       }
       else break;
     }
@@ -301,9 +307,9 @@ void loop() {
   {
     for (byte i = 0; i < POLYPHONY; i++)
     {
-      if (manager.get_note()[i] != 0) 
+      if (manager.get_note()[i] != 0)
       {
-        if (i) MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel+1);
+        if (i) MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel + 1);
         else MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel);
       }
       else break;
@@ -388,7 +394,7 @@ void loop() {
   */
   if (modifier_sub_up.has_been_released()) midi_octave -= 1;
   if (modifier_sub_down.has_been_released()) midi_octave += 1;
-  
+
   else if (joy_SW.has_been_released() && !joy_SW.has_been_released_after_long_press())
   {
     delta_mode = !delta_mode;

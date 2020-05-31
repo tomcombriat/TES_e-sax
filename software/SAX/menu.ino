@@ -14,7 +14,7 @@
 
 
 
-const int N_entry = 14;
+const int N_entry = 16;
 int current_entry = 0;
 String transpose_notes[12] = {":C", ":C#", ":D", ":D#", ":E", ":F", ":F#", ":G", ":G#", ":A", ":A#", ":B"};
 char arp_mode[4] = {'N', 'A', 'C', 'R'};
@@ -96,19 +96,25 @@ void menu()
         Y_CC.set_control(Y_CC.get_control() + up);
         break;
 
-      case 6:
+              case 6:
+        if (breath_CC.get_control() > 128) breath_CC.set_control(128);
+        ssd.draw_title_value("Breath CC", breath_CC.get_control());
+        breath_CC.set_control(breath_CC.get_control() + up);
+        break;
+
+      case 7:
         ssd.draw_title_value("Arp Mode", arp_mode[arpegio_mode]);
         arpegio_mode += up;
         if (arpegio_mode > 3) arpegio_mode = 0;
         if (arpegio_mode < 0) arpegio_mode = 3;
         break;
 
-      case 7:
+      case 8:
         ssd.draw_title_value("Tempo", (int) tap.get_tempo());
         tap.set_tempo(tap.get_tempo() + up);
         break;
 
-      case 8:
+      case 9:
         switch (arpegio_mode)
         {
           case MODE_ARPEGIO:
@@ -140,7 +146,7 @@ void menu()
         }
         break;
 
-      case 9:
+      case 10:
         switch (arpegio_mode)
         {
           case MODE_ARPEGIO:
@@ -173,7 +179,7 @@ void menu()
 
 
 
-      case 10:
+      case 11:
         switch (arpegio_mode)
         {
           case MODE_ARPEGIO:
@@ -205,7 +211,7 @@ void menu()
         break;
 
 
-      case 11:
+      case 12:
         ssd.draw_title_value("Pitchbend", pitchbend_enable);
         pitchbend_enable += up;
         if (!pitchbend_enable)
@@ -220,7 +226,7 @@ void menu()
         }
         break;
 
-      case 12:
+      case 13:
         {
           int current_value = pitchbend_amp_CC.get_value();
           ssd.draw_title_value("PitchB Amp", current_value);
@@ -232,10 +238,16 @@ void menu()
           }
           break;
         }
-      case 13:
+      case 14:
         {
           ssd.draw_title_value("Crazy tempo", "?!");
           if (up != 0) tap.set_tempo(400);
+          break;
+        }
+        case 15:
+        {
+          ssd.draw_title_value("Dyn. Vel.", dynamic_velocity);
+          dynamic_velocity += up;
           break;
         }
     }
@@ -252,9 +264,9 @@ void menu()
 
 
 
-    if (modifier_up.has_been_released()) current_entry = 8;
-    if (modifier_mid.has_been_released()) current_entry = 9;
-    if (modifier_down.has_been_released()) current_entry = 10;
+    if (modifier_up.has_been_released()) current_entry = 9;
+    if (modifier_mid.has_been_released()) current_entry = 10;
+    if (modifier_down.has_been_released()) current_entry = 11;
 
   }
 

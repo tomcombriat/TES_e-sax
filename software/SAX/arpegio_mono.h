@@ -29,7 +29,7 @@ class arpegio_mono
     int previous();
     void start();
     void stop();
-    bool change(byte current_note);  
+    bool change(byte current_note);
     bool is_started();
     char get_name();
     String * get_long_name();
@@ -59,7 +59,7 @@ class arpegio_mono
 
 
 
-#define N_ARP 10
+#define N_ARP 11
 
 
 
@@ -126,14 +126,20 @@ int arp9_notes[arp9_N] = {0, -255, 0,  -255, 0, -255, 0, 3, -255, 2, -255, -5, -
 char arp9_name = 'S';
 String arp9_long_name = "Amb";
 
+const int arp10_N = 8;
+float arp10_times[arp10_N] = {0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75};
+int arp10_notes[arp10_N] = {0, 7, 3, 10, 0, 7, 5, 10};
+char arp10_name = 'P';
+String arp10_long_name = "Penta";
+
 
 // Really need to find another to do this, while being statically allocated...
 
-float * arp_times[N_ARP] = {arp0_times, arp1_times, arp2_times, arp3_times, arp4_times, arp7_times, arp5_times, arp6_times, arp8_times, arp9_times};
-int * arp_notes[N_ARP] = {arp0_notes, arp1_notes, arp2_notes, arp3_notes, arp4_notes, arp7_notes, arp5_notes, arp6_notes, arp8_notes, arp9_notes};
-char arp_name[N_ARP] = {arp0_name, arp1_name, arp2_name, arp3_name, arp4_name, arp7_name, arp5_name, arp6_name, arp8_name, arp9_name};
-int arp_N[N_ARP] = {arp0_N, arp1_N, arp2_N, arp3_N, arp4_N, arp7_N, arp5_N, arp6_N, arp8_N, arp9_N};
-String * arp_long_names[N_ARP] = {&arp0_long_name,&arp1_long_name,&arp2_long_name,&arp3_long_name,&arp4_long_name,&arp7_long_name,&arp5_long_name,&arp6_long_name,&arp8_long_name,&arp9_long_name};
+float * arp_times[N_ARP] = {arp0_times, arp1_times, arp2_times, arp3_times, arp4_times, arp7_times, arp5_times, arp6_times, arp8_times, arp9_times, arp10_times};
+int * arp_notes[N_ARP] = {arp0_notes, arp1_notes, arp2_notes, arp3_notes, arp4_notes, arp7_notes, arp5_notes, arp6_notes, arp8_notes, arp9_notes, arp10_notes};
+char arp_name[N_ARP] = {arp0_name, arp1_name, arp2_name, arp3_name, arp4_name, arp7_name, arp5_name, arp6_name, arp8_name, arp9_name, arp10_name};
+int arp_N[N_ARP] = {arp0_N, arp1_N, arp2_N, arp3_N, arp4_N, arp7_N, arp5_N, arp6_N, arp8_N, arp9_N, arp10_N};
+String * arp_long_names[N_ARP] = {&arp0_long_name, &arp1_long_name, &arp2_long_name, &arp3_long_name, &arp4_long_name, &arp7_long_name, &arp5_long_name, &arp6_long_name, &arp8_long_name, &arp9_long_name, &arp10_long_name};
 
 
 
