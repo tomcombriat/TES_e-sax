@@ -98,8 +98,8 @@ bool arpegio_mono::change(byte current_note) //Now 2micros!
       // Calculation the time for next note
       //next_event_time += duration * next_duration ;
       
-      if (arpegio_mode == MODE_ARPEGIO) next_index += 1;
-      else if (arpegio_mode == MODE_ARPEGIO_RAND)
+      if (global_mode == MODE_ARPEGIO) next_index += 1;
+      else if (global_mode == MODE_ARPEGIO_RAND)
       {
         unsigned int next_index_tamp = next_index;
         while (next_index_tamp == next_index || notes_arp[next_index_tamp] == notes_arp[next_index])    next_index_tamp = random(0,N_note_arp);

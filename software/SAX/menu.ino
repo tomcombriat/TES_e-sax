@@ -14,10 +14,10 @@
 
 
 
-const int N_entry = 16;
+int N_entry = 16;
 int current_entry = 0;
 String transpose_notes[12] = {":C", ":C#", ":D", ":D#", ":E", ":F", ":F#", ":G", ":G#", ":A", ":A#", ":B"};
-char arp_mode[4] = {'N', 'A', 'C', 'R'};
+//char arp_mode[4] = {'N', 'A', 'C', 'R'};
 
 
 
@@ -96,26 +96,68 @@ void menu()
         Y_CC.set_control(Y_CC.get_control() + up);
         break;
 
-              case 6:
+      case 6:
         if (breath_CC.get_control() > 128) breath_CC.set_control(128);
         ssd.draw_title_value("Breath CC", breath_CC.get_control());
         breath_CC.set_control(breath_CC.get_control() + up);
         break;
 
       case 7:
-        ssd.draw_title_value("Arp Mode", arp_mode[arpegio_mode]);
-        arpegio_mode += up;
-        if (arpegio_mode > 3) arpegio_mode = 0;
-        if (arpegio_mode < 0) arpegio_mode = 3;
+        ssd.draw_title_value("Pitchbend", pitchbend_enable);
+        pitchbend_enable += up;
+        if (!pitchbend_enable)
+        {
+          joy_Y.set_scaling_factor(JOY_BASE_SCALING);
+          joy_Y.set_min_max(-127, 127);
+        }
+        else
+        {
+          joy_Y.set_min_max(-8192, 8191);
+          joy_Y.set_scaling_factor(JOY_PB_SCALING);
+        }
         break;
 
       case 8:
+        {
+          int current_value = pitchbend_amp_CC.get_value();
+          ssd.draw_title_value("PitchB Amp", current_value);
+          if (up != 0)
+          {
+            current_value += up;
+            pitchbend_amp_CC.set_value(current_value);
+            pitchbend_amp_CC.update();
+          }
+          break;
+        }
+
+
+      case 9:
+        ssd.draw_title_value("Dyn. Vel.", dynamic_velocity);
+        dynamic_velocity += up;
+        break;
+
+
+      case 10:
+        ssd.draw_title_value("Global Mode", global_modes[global_mode]);
+        global_mode += up;
+        if (global_mode > 4) global_mode = 0;
+        if (global_mode < 0) global_mode = 4;
+        break;
+
+
+      case 11:
         ssd.draw_title_value("Tempo", (int) tap.get_tempo());
         tap.set_tempo(tap.get_tempo() + up);
         break;
 
-      case 9:
-        switch (arpegio_mode)
+      case 12:
+        ssd.draw_title_value("Crazy tempo", "?!");
+        if (up != 0) tap.set_tempo(400);
+        break;
+
+
+      case 13:
+        switch (global_mode)
         {
           case MODE_ARPEGIO:
             ssd.draw_title_value("ARP 0", arp[0].get_long_name(), arp[0].get_N_notes(), arp[0].get_notes(), arp[0].get_duration_scaling());
@@ -146,8 +188,8 @@ void menu()
         }
         break;
 
-      case 10:
-        switch (arpegio_mode)
+      case 14:
+        switch (global_mode)
         {
           case MODE_ARPEGIO:
             ssd.draw_title_value("ARP 1", arp[1].get_long_name(), arp[1].get_N_notes(), arp[1].get_notes(), arp[1].get_duration_scaling());
@@ -177,10 +219,8 @@ void menu()
         }
         break;
 
-
-
-      case 11:
-        switch (arpegio_mode)
+      case 15:
+        switch (global_mode)
         {
           case MODE_ARPEGIO:
             ssd.draw_title_value("ARP 2", arp[2].get_long_name(), arp[2].get_N_notes(), arp[2].get_notes(), arp[2].get_duration_scaling());
@@ -209,53 +249,17 @@ void menu()
             break;
         }
         break;
-
-
-      case 12:
-        ssd.draw_title_value("Pitchbend", pitchbend_enable);
-        pitchbend_enable += up;
-        if (!pitchbend_enable)
-        {
-          joy_Y.set_scaling_factor(JOY_BASE_SCALING);
-          joy_Y.set_min_max(-127, 127);
-        }
-        else
-        {
-          joy_Y.set_min_max(-8192, 8191);
-          joy_Y.set_scaling_factor(JOY_PB_SCALING);
-        }
-        break;
-
-      case 13:
-        {
-          int current_value = pitchbend_amp_CC.get_value();
-          ssd.draw_title_value("PitchB Amp", current_value);
-          if (up != 0)
-          {
-            current_value += up;
-            pitchbend_amp_CC.set_value(current_value);
-            pitchbend_amp_CC.update();
-          }
-          break;
-        }
-      case 14:
-        {
-          ssd.draw_title_value("Crazy tempo", "?!");
-          if (up != 0) tap.set_tempo(400);
-          break;
-        }
-        case 15:
-        {
-          ssd.draw_title_value("Dyn. Vel.", dynamic_velocity);
-          dynamic_velocity += up;
-          break;
-        }
     }
 
 
 
     current_entry += joy_X.up_down();
     current_entry += right_menu.has_been_pressed() - left_menu.has_been_pressed();
+
+
+    if (global_mode == MODE_NORMAL) N_entry = 11;
+    else N_entry = 16;
+
     if (current_entry < 0) current_entry = N_entry - 1;
     if (current_entry == N_entry) current_entry = 0;
     joy_SW.update();
@@ -264,14 +268,14 @@ void menu()
 
 
 
-    if (modifier_up.has_been_released()) current_entry = 9;
-    if (modifier_mid.has_been_released()) current_entry = 10;
-    if (modifier_down.has_been_released()) current_entry = 11;
+    if (modifier_up.has_been_released()) current_entry = 13;
+    if (modifier_mid.has_been_released()) current_entry = 14;
+    if (modifier_down.has_been_released()) current_entry = 15;
 
   }
 
   ssd.clear();
-  ssd.draw_standby_screen(midi_octave, midi_transpose, arpegio_mode, delta_mode, X_CC.get_value(), Y_CC.get_value(), tap.get_tempo());
+  ssd.draw_standby_screen(midi_octave, midi_transpose, global_mode, delta_mode, X_CC.get_value(), Y_CC.get_value(), tap.get_tempo());
   ssd.force_update();
 
 }

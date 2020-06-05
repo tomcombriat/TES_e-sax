@@ -49,10 +49,15 @@ Adafruit_SSD1306 display(OLED_RESET);
 #define SCREEN_UPDATE_TIME 20
 #define SCREEN_IDLE_WAITING_TIME 400
 
-#define MODE_NORMAL 0
+
+/*
+#define MODE_EWI 0
 #define MODE_ARPEGIO 1
 #define MODE_CHORD 2
-#define MODE_ARPEGIO_RAND 3
+#define MODE_ARPEGIO_RAND 3*/
+
+enum modes {MODE_NORMAL,MODE_EWI, MODE_ARPEGIO, MODE_CHORD, MODE_ARPEGIO_RAND};
+char global_modes[5] = {'N','E', 'A', 'C','R'};
 
 #define JOY_BASE_SCALING 0.065
 #define JOY_PB_SCALING 4.2
@@ -116,7 +121,7 @@ int midi_octave = 0;
 /******* STATE **************/
 /****************************/
 bool delta_mode = true;
-int arpegio_mode = MODE_NORMAL;
+int global_mode = MODE_EWI;
 bool played = false;
 int breath_sensitivity = 0;
 bool pitchbend_enable = false;
@@ -218,7 +223,7 @@ void loop() {
 
   if (!played && millis() - stop_played_time > SCREEN_IDLE_WAITING_TIME)
   {
-    ssd.draw_standby_screen(midi_octave, midi_transpose, arpegio_mode, delta_mode, X_CC.get_value(), Y_CC.get_value(), tap.get_tempo());
+    ssd.draw_standby_screen(midi_octave, midi_transpose, global_mode, delta_mode, X_CC.get_value(), Y_CC.get_value(), tap.get_tempo());
     ssd.update();
   }
 
@@ -235,7 +240,7 @@ void loop() {
   breath_CC.update();
 
 
-  if ((arpegio_mode == MODE_ARPEGIO || arpegio_mode == MODE_ARPEGIO_RAND) && tap.has_change())  for (byte i = 0; i < 3; i++)  arp[i].set_tempo(tap.get_tempo_time());   // update tempo of arpegiators
+  if ((global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND) && tap.has_change())  for (byte i = 0; i < 3; i++)  arp[i].set_tempo(tap.get_tempo_time());   // update tempo of arpegiators
 
 
   /***********************************
@@ -294,7 +299,7 @@ void loop() {
       else break;
     }
     played = true;
-    if (arpegio_mode == MODE_ARPEGIO || arpegio_mode == MODE_ARPEGIO_RAND)
+    if (global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND)
     {
       if (modifier_up.is_pressed()) arp[0].start();
       if (modifier_mid.is_pressed()) arp[1].start();
@@ -316,7 +321,7 @@ void loop() {
     }
     played = false;
     stop_played_time = millis();
-    if (arpegio_mode == MODE_ARPEGIO || arpegio_mode == MODE_ARPEGIO_RAND)
+    if (global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND)
     {
       for (byte i = 0; i < 3; i++) arp[i].stop();
     }
@@ -377,7 +382,7 @@ void loop() {
   /****************************
             ARPS
   */
-  if (arpegio_mode == MODE_ARPEGIO || arpegio_mode == MODE_ARPEGIO_RAND)
+  if (global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND)
   {
     if (modifier_up.has_been_released()) arp[0].stop();
     if (modifier_mid.has_been_released()) arp[1].stop();
