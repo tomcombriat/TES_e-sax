@@ -51,13 +51,13 @@ Adafruit_SSD1306 display(OLED_RESET);
 
 
 /*
-#define MODE_EWI 0
-#define MODE_ARPEGIO 1
-#define MODE_CHORD 2
-#define MODE_ARPEGIO_RAND 3*/
+  #define MODE_EWI 0
+  #define MODE_ARPEGIO 1
+  #define MODE_CHORD 2
+  #define MODE_ARPEGIO_RAND 3*/
 
-enum modes {MODE_NORMAL,MODE_EWI, MODE_ARPEGIO, MODE_CHORD, MODE_ARPEGIO_RAND};
-char global_modes[5] = {'N','E', 'A', 'C','R'};
+enum modes {MODE_NORMAL, MODE_EWI, MODE_ARPEGIO, MODE_CHORD, MODE_ARPEGIO_RAND};
+char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 
 #define JOY_BASE_SCALING 0.065
 #define JOY_PB_SCALING 4.2
@@ -239,7 +239,7 @@ void loop() {
   joy_Y.update();
   breath_CC.update();
 
-
+//Serial.println(breath.value());
   if ((global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND) && tap.has_change())  for (byte i = 0; i < 3; i++)  arp[i].set_tempo(tap.get_tempo_time());   // update tempo of arpegiators
 
 
@@ -288,12 +288,12 @@ void loop() {
   {
     byte vel = 127;
     if (dynamic_velocity) vel = breath.value();
-    
+
     for (byte i = 0; i < POLYPHONY; i++)
     {
       if (manager.get_note()[i] != 0)
       {
-        if (i) MIDI.sendNoteOn(manager.get_note()[i],vel, midi_channel + 1);
+        if (i) MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel + 1);
         else MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel);
       }
       else break;
@@ -397,9 +397,17 @@ void loop() {
   /*****************************
         MENU
   */
-  if (modifier_sub_up.has_been_released()) midi_octave -= 1;
-  if (modifier_sub_down.has_been_released()) midi_octave += 1;
-
+  if (global_mode != MODE_NORMAL)
+  {
+    if (modifier_sub_up.has_been_released())
+    {
+      midi_octave += 1;
+    }
+    if (modifier_sub_down.has_been_released())
+    {
+      midi_octave -= 1;
+    }
+  }
   else if (joy_SW.has_been_released() && !joy_SW.has_been_released_after_long_press())
   {
     delta_mode = !delta_mode;

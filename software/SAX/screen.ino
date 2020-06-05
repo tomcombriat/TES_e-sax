@@ -173,6 +173,9 @@ void screen::draw_single_value(String _value)
 
 void screen::draw_standby_screen(int& _octave, int& _transpose, byte _global_mode, bool _delta_mode, byte _joystick, byte _joystick_bis, unsigned int  _tempo)
 {
+  //Serial.print(_octave);
+  //Serial.print(" ");
+  //Serial.println(octave);
   if (_octave != octave)
   {
     changed = true;
@@ -258,7 +261,7 @@ void screen::draw_standby_screen(int& _octave, int& _transpose, byte _global_mod
       display.print(arp[2].get_name());
     }
 
-    else if (global_mode == MODE_NORMAL)
+    else if (global_mode == MODE_EWI)
     {
       display.setTextSize(1);
       display.setCursor(60, 20);

@@ -173,7 +173,7 @@ void menu()
             if (selected_arp[0] < 0) selected_arp[0] = N_ARP - 1;
             arp[0].set_notes(arp_N[selected_arp[0]], arp_times[selected_arp[0]], arp_notes[selected_arp[0]], arp_name[selected_arp[0]], arp_long_names[selected_arp[0]]);
             break;
-          case MODE_NORMAL:
+          case MODE_EWI:
             ssd.draw_title_value("Mod UP", normal_up_modifier);
             normal_up_modifier += up;
             break;
@@ -205,7 +205,7 @@ void menu()
             if (selected_arp[1] < 0) selected_arp[1] = N_ARP - 1;
             arp[1].set_notes(arp_N[selected_arp[1]], arp_times[selected_arp[1]], arp_notes[selected_arp[1]], arp_name[selected_arp[1]], arp_long_names[selected_arp[1]]);
             break;
-          case MODE_NORMAL:
+          case MODE_EWI:
             ssd.draw_title_value("Mod MID", normal_mid_modifier);
             normal_mid_modifier += up;
             break;
@@ -236,7 +236,7 @@ void menu()
             if (selected_arp[2] < 0) selected_arp[2] = N_ARP - 1;
             arp[2].set_notes(arp_N[selected_arp[2]], arp_times[selected_arp[2]], arp_notes[selected_arp[2]], arp_name[selected_arp[2]], arp_long_names[selected_arp[2]]);
             break;
-          case MODE_NORMAL:
+          case MODE_EWI:
             ssd.draw_title_value("Mod DWN", normal_down_modifier);
             normal_down_modifier += up;
             break;
