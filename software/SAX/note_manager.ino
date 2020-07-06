@@ -48,11 +48,11 @@ bool note_manager::update()
   //modifier_sub_up.manual_input( bool(current_touch & 0b000000000000000001000000));
 
 
-  
+
   //modifier_sub_up.manual_input( bool(current_touch & 0b000000000000000000100000));
   //modifier_sub_down.manual_input( bool(current_touch & 0b000000000000000001000000));
-modifier_sub_down.manual_input( bool(current_touch & 0b000000000000000000100000));
-modifier_sub_up.manual_input( bool(current_touch & 0b000000000000000001000000));
+  modifier_sub_down.manual_input( bool(current_touch & 0b000000000000000000100000));
+  modifier_sub_up.manual_input( bool(current_touch & 0b000000000000000001000000));
 
   /*
     up_down = 0;
@@ -398,6 +398,17 @@ modifier_sub_up.manual_input( bool(current_touch & 0b000000000000000001000000));
     previous_touch_no_mod = current_touch_no_mod;
 
 
+
+    if (note[0] != 0)
+    {
+      note[0] += midi_transpose;
+      note[0] += midi_octave * 12;
+      if (octave.is_pressed()) note[0] += 12;
+    }
+
+
+
+
     if (note[0] != 0)
     {
       /********* NORMAL */
@@ -441,15 +452,7 @@ modifier_sub_up.manual_input( bool(current_touch & 0b000000000000000001000000));
 
 
 
-  for (byte i = 0; i < POLYPHONY; i++)
-  {
-    if (note[i] != 0)
-    {
-      note[i] += midi_transpose;
-      note[i] += midi_octave * 12;
-      if (octave.is_pressed()) note[i] += 12;
-    }
-  }
+
 
 
   if (previous_note[0] != note[0])
