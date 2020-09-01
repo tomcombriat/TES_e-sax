@@ -408,11 +408,12 @@ void loop() {
       midi_octave -= 1;
     }
   }
-  else if (joy_SW.has_been_released() && !joy_SW.has_been_released_after_long_press())
+   if (joy_SW.has_been_released() && !joy_SW.has_been_released_after_long_press())  //else ???
   {
     delta_mode = !delta_mode;
   }
   if (joy_SW.has_been_released_after_long_press()) menu();
+  //if (joy_SW.has_been_pressed()) delta_mode = !delta_mode;
   // if (modifier_sub_up.is_pressed() && modifier_sub_down.is_pressed()) menu();
 
 
