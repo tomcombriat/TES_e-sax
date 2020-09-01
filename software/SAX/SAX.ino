@@ -284,7 +284,7 @@ void loop() {
 
 
 
-  if (breath.value() > 0 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note  TODO: TEST WITH BREATH > 5, TO AVOID LOW VOLUME GLITCHES
+  if (breath.value() > 5 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note  TODO: TEST WITH BREATH > 5, TO AVOID LOW VOLUME GLITCHES
   {
     byte vel = 127;
     if (dynamic_velocity) vel = breath.value();
