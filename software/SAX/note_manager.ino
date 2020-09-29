@@ -270,6 +270,16 @@ bool note_manager::update()
 
 
     }
+    previous_touch_no_mod = current_touch_no_mod;
+
+
+
+    if (note[0] != 0)
+    {
+      note[0] += midi_transpose;
+      note[0] += midi_octave * 12;
+      if (octave.is_pressed()) note[0] += 12;
+    }
 
   }
 
