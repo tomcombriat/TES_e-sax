@@ -75,7 +75,7 @@ analog_input breath(PA1, 0, BREATH_RESPONSE_TIME, 20);
 /***************************/
 /********* BUTTONS *********/
 /***************************/
-button joy_SW(PA0, false, JOYSTICK_RESPONSE_TIME);
+button joy_SW(PB1, false, JOYSTICK_RESPONSE_TIME);
 button octave(-1, true, MODIFIER_RESPONSE_TIME);
 button modifier_up(-1, true, MODIFIER_RESPONSE_TIME);
 button modifier_mid(-1, true, MODIFIER_RESPONSE_TIME);
@@ -179,8 +179,8 @@ int normal_down_modifier = +7;
 
 void setup() {
 
-  //Serial.begin(115200);
-  //Serial.println("Start setup");
+  Serial.begin(9600);
+  Serial.println("Start setup");
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
   display.clearDisplay();

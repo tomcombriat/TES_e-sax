@@ -39,6 +39,7 @@ byte * note_manager::get_previous_note()
 bool note_manager::update()
 {
   unsigned int current_touch = read_shift_regs();
+  Serial.println(current_touch, BIN);
 
   // Getting modifying touches
   octave.manual_input( bool(current_touch & 0b000000010000000000000000)); //mouhahahah
