@@ -67,8 +67,8 @@ char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 /***************************/
 /****** ANALOG INPUTS ******/
 /***************************/
-analog_input joy_Y(PA7, 0, JOYSTICK_RESPONSE_TIME);
-analog_input joy_X(PB0, 0, JOYSTICK_RESPONSE_TIME);
+analog_input joy_Y(PB0, 0, JOYSTICK_RESPONSE_TIME);
+analog_input joy_X(PA7, 0, JOYSTICK_RESPONSE_TIME);
 analog_input breath(PA1, 0, BREATH_RESPONSE_TIME, 20);
 
 
@@ -198,6 +198,8 @@ void setup() {
   display.setTextSize(2);
   display.print("e-Sax");
   display.display();
+  joy_X.set_invert(true);
+  joy_Y.set_invert(true);
   joy_X.calibrate();
   joy_Y.calibrate();
   breath.calibrate();

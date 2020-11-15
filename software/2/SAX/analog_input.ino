@@ -26,7 +26,7 @@ analog_input::analog_input(int _pin, int _biais, unsigned long _response_time, i
   scaling_factor = _scaling_factor;
   min_value = -10000;
   max_value = 10000;
-}
+ }
 
 bool analog_input::has_changed()
 {
@@ -41,6 +41,7 @@ bool analog_input::update()
     last_read_time = millis();
     //last_read_time += response_time;    better? Should be more exact
     int value = analogRead(pin);
+    if (inverted) value = 4096 - value;
     value = (value - (biais + biais_offset))*scaling_factor;
     if (value > max_value) value = max_value;
     else if (value < min_value) value = min_value;
@@ -64,7 +65,8 @@ int analog_input::value()
 
 void analog_input::calibrate()
 {
-  biais = analogRead(pin);
+  if (inverted) biais = 4096 - analogRead(pin);
+  else  biais = analogRead(pin);
 }
 
 void analog_input::set_biais(int _biais)
@@ -90,5 +92,10 @@ int analog_input::up_down()
   int prev_up = up;
   up = 0;
   return prev_up;
+}
+
+void analog_input::set_invert(bool _inverted)
+{
+  inverted = _inverted;
 }
 
