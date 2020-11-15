@@ -69,7 +69,7 @@ char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 /***************************/
 analog_input joy_Y(PB0, 0, JOYSTICK_RESPONSE_TIME);
 analog_input joy_X(PA7, 0, JOYSTICK_RESPONSE_TIME);
-analog_input breath(PA1, 0, BREATH_RESPONSE_TIME, 20);
+analog_input breath(PA6, 0, BREATH_RESPONSE_TIME, 20);
 
 
 /***************************/
