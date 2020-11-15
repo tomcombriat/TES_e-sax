@@ -234,8 +234,6 @@ void loop() {
   modifier_up.update();
   modifier_mid.update();
   modifier_down.update();
-  modifier_sub_up.update();
-  modifier_sub_down.update();
   breath.update();
   joy_X.update();
   joy_Y.update();
@@ -399,17 +397,6 @@ void loop() {
   /*****************************
         MENU
   */
-  if (global_mode != MODE_NORMAL)
-  {
-    if (modifier_sub_up.has_been_released())
-    {
-      midi_octave += 1;
-    }
-    if (modifier_sub_down.has_been_released())
-    {
-      midi_octave -= 1;
-    }
-  }
    if (joy_SW.has_been_released() && !joy_SW.has_been_released_after_long_press())  //else ???
   {
     delta_mode = !delta_mode;
