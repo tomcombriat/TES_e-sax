@@ -39,7 +39,8 @@ byte * note_manager::get_previous_note()
 bool note_manager::update()
 {
   unsigned int current_touch = read_shift_regs();
-  Serial.println(current_touch, BIN);
+  /* Serial.println(current_touch, BIN);
+    delay(100);*/
 
   // Getting modifying touches
   octave.manual_input( bool(current_touch & 0b000000010000000000000000)); //mouhahahah
@@ -283,23 +284,24 @@ bool note_manager::update()
 
   else
   {
-    unsigned int current_touch_no_mod = current_touch & (0b111111101110111101111101);  //haha (removing modifiers)
+    unsigned int current_touch_no_mod = current_touch & (0b111111101110111100111101);  //haha (removing modifiers)
+    /*
     Serial.println(current_touch_no_mod);
-    delay(100);
+    delay(100);*/
 
 
     switch (current_touch_no_mod)
     {
-      case 16706905:   //E up
+      case 16706841:   //E up
         note[0] = 64;
         break;
-      case 16674137:  //D# up
+      case 16674073:  //D# up
         note[0] = 63;
         break;
-      case 16411993:  // D up
+      case 16411929:  // D up
         note[0] = 62;
         break;
-      case 15887705:  // C#
+      case 15887641:  // C#
         note[0] = 61;
         break;
       case 15740185:  // C#
@@ -316,7 +318,7 @@ bool note_manager::update()
       case 15739913:  // C#
         note[0] = 61;
         break;
-      case 15754585:  // C
+      case 15754521:  // C
         note[0] = 60;
         right_menu.manual_input(1);
         break;
@@ -338,11 +340,11 @@ bool note_manager::update()
       case 15737865: //C
         note[0] = 60;
         break;
-      case 15887704:  // B
+      case 15887640:  // B
         note[0] = 59;
         left_menu.manual_input(1);
         break;
-      case 15756632:  // A#
+      case 15756568:  // A#
         note[0] = 58;
         break;
       case 15740184:  // A#
@@ -357,7 +359,7 @@ bool note_manager::update()
       case 15739912:  // A#
         note[0] = 58;
         break;
-      case 15754584:  // A
+      case 15754520:  // A
         note [0] = 57;
         break;
       case 15738136:  // A
@@ -372,10 +374,10 @@ bool note_manager::update()
       case 15737864:  // A
         note [0] = 57;
         break;
-      case 15754072:  // G#
+      case 15754008:  // G#
         note[0] = 56;
         break;
-      case 15753560:  // G
+      case 15753496:  // G
         note[0] = 55;
         break;
       case 15753480:  // F#
