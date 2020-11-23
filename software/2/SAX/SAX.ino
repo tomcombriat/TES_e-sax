@@ -127,7 +127,7 @@ int midi_octave = 0;
 bool delta_mode = true;
 int global_mode = MODE_EWI;
 bool played = false;
-int breath_sensitivity = 0;
+int breath_sensitivity = 3;
 bool pitchbend_enable = false;
 bool dynamic_velocity = true;
 
