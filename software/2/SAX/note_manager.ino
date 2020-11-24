@@ -74,188 +74,172 @@ bool note_manager::update()
   if (global_mode == MODE_NORMAL)
   {
 
-    unsigned int current_touch_no_mod = current_touch & (0b111111101111111111111111);  //haha (removing modifiers)
+    unsigned int current_touch_no_mod = current_touch & (0b111111101111111110111111);  //haha (removing modifiers)
 
+   /* Serial.println(current_touch_no_mod);
+    delay(100);*/
 
     switch (current_touch_no_mod)
     {
 
 
-      case 0:   //A# bass
+      /*case 0:   //A# bass
         note[0] = 46;;
-        break;
+        break;*/
 
-      case 128:
+      case 15728640:
         note[0] = 47;  //B
         break;
 
-      case 262272:  //C bass
+      case 15732744-4096:  //C bass
         note[0] = 48;
         break;
 
-      case 262528: //C# bass
+      case 15732776-4096: //C# bass
         note[0] = 49;
         break;
 
-      case 263296: //D
+      case 15740936-4096: //D
         note[0] = 50;
         break;
 
-      case 265344: //D#
+      case 15740940-4096: //D#
         note[0] = 51;
         break;
 
-      case 1311872: //E
+      case 15741192-4096: //E
         note[0] = 52;
         break;
 
-      case 9700480: //F
+      case 15741208-4096: //F
         note[0] = 53;
         break;
 
-      case 1312392: //F#
+      case 15757576-4096: //F#
         note[0] = 54;
         break;
 
-      case 9700512: //F#
-        note[0] = 54;
-        break;
+      /* case 9700512: //F#
+         note[0] = 54;
+         break;*/
 
-      case 9701000: //G
+      case 15757592-4096: //G
         note[0] = 55;
         break;
 
-      case 11798152: //G#
+      case 15758104-4096: //G#
         note[0] = 56;
         break;
 
-      case 11536008: //G#
+      case 15757584-4096: //G#
         note[0] = 56;
         break;
 
-      case 11798408: //G#
+      case 15757624-4096: //G#
         note[0] = 56;
         break;
 
-      case 11535880: //G#
-        note[0] = 56;
-        break;
+      /*    case 11535880: //G#
+            note[0] = 56;
+            break;*/
 
-      case 9832072: //A
+      case 15754520: //A
         note[0] = 57;
         break;
 
-      case 9840264: //A#
+      case 9840264-4096: //A#
         note[0] = 58;
         break;
 
-      case 9848456: //A#
+      case 15760664-4096: //A#
         note[0] = 58;
         break;
 
-      case 9847936: //A#
+      case 15744280-4096: //A#
         note[0] = 58;
         break;
 
-      case 1459848: //A#
+      case 15760648-4096: //A#
         note[0] = 58;
         break;
 
-      case 1459328: //A#
+      case 15744264-4096: //A#
         note[0] = 58;
         break;
 
-      case 410752: //A#
+      case 15744008-4096: //A#
         note[0] = 58;
         break;
 
-      case 9848472: //B
+      case 15891736-4096: //B
         note[0] = 59;
         left_menu.manual_input(1);
         break;
 
-      case 9836168: //C
+      case 15758617-4096: //C
         note[0] = 60;
         right_menu.manual_input(1);
         break;
 
-      case 9881240: //C
+      case 15891736: //C
         note[0] = 60;
         break;
 
-      case 11802248: //C
+      case 15754009: //C
         note[0] = 60;
         break;
 
-      case 9852570: //C#
+      case 15887641: //C#
         note[0] = 61;
         break;
 
-      case 283778: //C#
+      case 15740185: //C#
+        up_menu.manual_input(1);
         note[0] = 61;
         break;
 
-      case 9721498: //C#
+      case 15756553: //C#
+        down_menu.manual_input(1);
         note[0] = 61;
         break;
 
-      case 414850: //C#
+      case 15740169: //C#
         note[0] = 61;
         break;
 
-      case 1463426: //C#
+      case 15739913: //C#
         note[0] = 61;
         break;
 
       case 9852034: //C#
         note[0] = 61;
-        up_menu.manual_input(1);
         break;
 
-      case 1463946: //C#
-        note[0] = 61;
-        down_menu.manual_input(1);
-        break;
-
-      case 9852066:  //C#
+      case 15756313:  //C#
         note[0] = 61;
         break;
 
-      case 14046874:  //D
+      case 16411929:  //D
         note[0] = 62;
         break;
 
-      case 10360456:  //D
-        note[0] = 62;
-        break;
-
-      case 10372764:  //D
-        note[0] = 62;
-        break;
-
-      case 14571162:  //D#
+      case 16674073:  //D#
         note[0] = 63;
         break;
 
-      case 14603930:  //E
+      case 16674201:  //E
         note[0] = 64;
         break;
 
-      case 10409626:  //E
+      case 16706841:  //E
         note[0] = 64;
         break;
 
-      case 9848473:  //E
-        note[0] = 64;
-        break;
-
-      case 14603931:  //F
+      case 16706969:  //F
         note[0] = 65;
         break;
 
-      case 9832073:  //F
-        note[0] = 65;
-        break;
+
 
 
 
@@ -286,8 +270,8 @@ bool note_manager::update()
   {
     unsigned int current_touch_no_mod = current_touch & (0b111111101110111100111101);  //haha (removing modifiers)
     /*
-    Serial.println(current_touch_no_mod);
-    delay(100);*/
+      Serial.println(current_touch_no_mod);
+      delay(100);*/
 
 
     switch (current_touch_no_mod)

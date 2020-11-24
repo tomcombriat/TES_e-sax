@@ -125,7 +125,7 @@ int midi_octave = 0;
 /******* STATE **************/
 /****************************/
 bool delta_mode = true;
-int global_mode = MODE_EWI;
+int global_mode = MODE_NORMAL;
 bool played = false;
 int breath_sensitivity = 3;
 bool pitchbend_enable = false;
@@ -183,7 +183,7 @@ int normal_down_modifier = +7;
 
 void setup() {
 
-  //Serial.begin(9600);
+ // Serial.begin(9600);
   //Serial.println("Start setup");
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
