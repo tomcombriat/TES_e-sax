@@ -147,6 +147,22 @@ bool note_manager::update()
         note[0] = 57;
         break;
 
+      case 15738136: //A
+        note[0] = 57;
+        break;
+
+      case 15754504: //A
+        note[0] = 57;
+        break;
+
+      case 15738120: //A
+        note[0] = 57;
+        break;
+
+      case 15737864: //A
+        note[0] = 57;
+        break;
+
       case 9840264-4096: //A#
         note[0] = 58;
         break;
