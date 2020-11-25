@@ -11,7 +11,7 @@
 
 /* TODO
 
- */
+*/
 
 
 #include <SPI.h>
@@ -20,6 +20,7 @@
 #include <Adafruit_SSD1306_STM32.h>
 
 #include <MIDI.h>
+#include <interruptCapSense.h>
 
 
 
@@ -34,6 +35,7 @@
 #include "arpegio_mono.h"
 #include "chord.h"
 #include "pitchbend.h"
+
 
 
 
@@ -52,6 +54,11 @@ Adafruit_SSD1306 display(OLED_RESET);
 #define PITCHBEND_MIN_TIME 10
 #define SCREEN_UPDATE_TIME 20
 #define SCREEN_IDLE_WAITING_TIME 400
+#define BATT_PIN PA0
+
+#define CAP_SEND_PIN PB9
+#define CAP_RECEIVE_PIN PB8
+
 
 
 /*
@@ -181,9 +188,22 @@ int normal_mid_modifier = -1;
 int normal_down_modifier = +7;
 
 
+
+
+/****************************/
+/******** CAP SENSE *********/
+/****************************/
+interruptCapSense SensorCap(CAP_SEND_PIN, 20, 1000000);
+void interrupt()
+{
+  SensorCap.ISR_target = micros();
+}
+
+
+
 void setup() {
 
- // Serial.begin(9600);
+   Serial.begin(9600);
   //Serial.println("Start setup");
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
@@ -193,15 +213,18 @@ void setup() {
   display.setTextSize(4);
   display.print("TES");
   display.setCursor(35, 50);
+  display.setTextSize(2);
+  display.print("e-Sax");
+  display.display();
 
   for (int i = 0; i < 3; i++) arp[i].set_notes(arp_N[i], arp_times[i], arp_notes[i], arp_name[i], arp_long_names[i]);
   for (int i = 0; i < 3; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i], chord_long_names[i]);
 
+  pinMode(BATT_PIN, INPUT);
+  pinMode(CAP_RECEIVE_PIN, INPUT);
+  attachInterrupt(digitalPinToInterrupt(CAP_RECEIVE_PIN), interrupt, RISING);
+  SensorCap.init();
 
-
-  display.setTextSize(2);
-  display.print("e-Sax");
-  display.display();
   joy_X.set_invert(true);
   joy_Y.set_invert(true);
   joy_X.calibrate();
@@ -219,6 +242,20 @@ void setup() {
   MIDI.begin(MIDI_CHANNEL_OMNI);
   pitchbend_amp_CC.set_value(2);
   pitchbend_amp_CC.update();
+
+
+  display.clearDisplay();
+  display.setCursor(30, 15);
+  display.setTextSize(3);
+  display.print("BATT");
+  display.setCursor(35, 50);
+  display.setTextSize(2);
+  display.print(analogRead(BATT_PIN));
+  display.display();
+
+  delay(1000);
+
+
 
 }
 
@@ -243,7 +280,9 @@ void loop() {
   joy_Y.update();
   breath_CC.update();
 
-//Serial.println(breath.value());
+  if(SensorCap.update()) Serial.println(SensorCap.getAverage());
+
+  //Serial.println(breath.value());
   if ((global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND) && tap.has_change())  for (byte i = 0; i < 3; i++)  arp[i].set_tempo(tap.get_tempo_time());   // update tempo of arpegiators
 
 
@@ -401,7 +440,7 @@ void loop() {
   /*****************************
         MENU
   */
-   if (joy_SW.has_been_released() && !joy_SW.has_been_released_after_long_press())  //else ???
+  if (joy_SW.has_been_released() && !joy_SW.has_been_released_after_long_press())  //else ???
   {
     delta_mode = !delta_mode;
   }
