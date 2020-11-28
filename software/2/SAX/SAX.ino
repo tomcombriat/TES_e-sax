@@ -193,7 +193,7 @@ int normal_down_modifier = +7;
 
 void setup() {
 
-   Serial.begin(9600);
+   //Serial.begin(9600);
   //Serial.println("Start setup");
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
@@ -207,9 +207,9 @@ void setup() {
   display.print("e-Sax");
   display.display();
 
+delay(500);
   for (int i = 0; i < 3; i++) arp[i].set_notes(arp_N[i], arp_times[i], arp_notes[i], arp_name[i], arp_long_names[i]);
   for (int i = 0; i < 3; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i], chord_long_names[i]);
-
   pinMode(BATT_PIN, INPUT);
   
   joy_X.set_invert(true);
@@ -232,15 +232,16 @@ void setup() {
 
 
   display.clearDisplay();
-  display.setCursor(30, 15);
+  display.setCursor(30, 05);
   display.setTextSize(3);
   display.print("BATT");
-  display.setCursor(35, 50);
+  display.setCursor(30, 40);
   display.setTextSize(2);
-  display.print(analogRead(BATT_PIN));
+  display.print(analogRead(BATT_PIN)/4096.*3.3*2);
+  display.print("V");
   display.display();
 
-  delay(1000);
+  delay(500);
 
 
 

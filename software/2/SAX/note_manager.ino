@@ -76,7 +76,7 @@ bool note_manager::update()
 
     unsigned int current_touch_no_mod = current_touch & (0b111111101111111110111111);  //haha (removing modifiers)
 
-   /* Serial.println(current_touch_no_mod);
+ /*   Serial.println(current_touch_no_mod);
     delay(100);*/
 
     switch (current_touch_no_mod)
@@ -163,27 +163,27 @@ bool note_manager::update()
         note[0] = 57;
         break;
 
-      case 9840264-4096: //A#
+      case 15754522: //A#
         note[0] = 58;
         break;
 
-      case 15760664-4096: //A#
+      case 15756568: //A#
         note[0] = 58;
         break;
 
-      case 15744280-4096: //A#
+      case 15740184: //A#
         note[0] = 58;
         break;
 
-      case 15760648-4096: //A#
+      case 15756552: //A#
         note[0] = 58;
         break;
 
-      case 15744264-4096: //A#
+      case 15740168: //A#
         note[0] = 58;
         break;
 
-      case 15744008-4096: //A#
+      case 15739912: //A#
         note[0] = 58;
         break;
 
@@ -192,18 +192,39 @@ bool note_manager::update()
         left_menu.manual_input(1);
         break;
 
-      case 15758617-4096: //C
+      case 15754521: //C
         note[0] = 60;
         right_menu.manual_input(1);
+        break;
+
+      case 15738137: //C
+        note[0] = 60;
+        break;
+
+      case 15738121: //C
+        note[0] = 60;
+        break;
+
+      case 15754505: //C
+        note[0] = 60;
+        break;
+
+      case 15737865: //C
+        note[0] = 60;
         break;
 
       case 15891736: //C
         note[0] = 60;
         break;
 
+      case 15753497: //C
+        note[0] = 60;
+        break;
+
       case 15754009: //C
         note[0] = 60;
         break;
+
 
       case 15887641: //C#
         note[0] = 61;

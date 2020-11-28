@@ -42,6 +42,7 @@ void menu()
     down_menu.update();
     left_menu.update();
     right_menu.update();
+    octave.update();
 
 
 
@@ -261,13 +262,13 @@ void menu()
     else N_entry = 16;
 
     if (current_entry < 0) current_entry = N_entry - 1;
-    if (current_entry == N_entry) current_entry = 0;
+    if (current_entry >= N_entry) current_entry = 0;
     joy_SW.update();
     if (joy_SW.has_been_released_after_long_press()) exit = true;
 
 
 
-
+    if (octave.is_pressed()) current_entry = 0;
     if (modifier_up.has_been_released()) current_entry = 13;
     if (modifier_mid.has_been_released()) current_entry = 14;
     if (modifier_down.has_been_released()) current_entry = 15;
