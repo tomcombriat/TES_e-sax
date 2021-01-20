@@ -350,21 +350,8 @@ F 3 "~" H 8650 4100 50  0001 C CNN
 	1    8450 4100
 	-1   0    0    1   
 $EndComp
-$Comp
-L Connector:TestPoint TP10
-U 1 1 5DA1C81D
-P 8300 4250
-F 0 "TP10" H 8242 4277 50  0000 R CNN
-F 1 "D4" H 8242 4368 50  0000 R CNN
-F 2 "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm" H 8500 4250 50  0001 C CNN
-F 3 "~" H 8500 4250 50  0001 C CNN
-	1    8300 4250
-	-1   0    0    1   
-$EndComp
 Wire Wire Line
 	8450 3850 8450 4100
-Wire Wire Line
-	8300 4250 8300 3950
 Wire Wire Line
 	8300 3950 8350 3950
 Wire Wire Line
@@ -1095,7 +1082,7 @@ Connection ~ 9800 3850
 Wire Wire Line
 	9800 3850 9850 3850
 Wire Wire Line
-	8150 2100 8150 2000
+	8150 2100 8150 2050
 $Comp
 L Connector:TestPoint TP20
 U 1 1 5DD171BD
@@ -1574,4 +1561,55 @@ $EndComp
 Connection ~ 7300 2000
 Wire Wire Line
 	7300 2000 7150 2000
+Text GLabel 8000 1900 0    50   Input ~ 0
+bat+
+Wire Wire Line
+	8000 1900 8100 1900
+Wire Wire Line
+	8100 1900 8100 2050
+Wire Wire Line
+	8100 2050 8150 2050
+Connection ~ 8150 2050
+Wire Wire Line
+	8150 2050 8150 2000
+Text GLabel 8000 4350 0    50   Input ~ 0
+bat+
+$Comp
+L power:GND #PWR0102
+U 1 1 5F45D614
+P 8300 4800
+F 0 "#PWR0102" H 8300 4550 50  0001 C CNN
+F 1 "GND" H 8305 4627 50  0000 C CNN
+F 2 "" H 8300 4800 50  0001 C CNN
+F 3 "" H 8300 4800 50  0001 C CNN
+	1    8300 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R27
+U 1 1 5F45D727
+P 8150 4350
+F 0 "R27" V 7943 4350 50  0000 C CNN
+F 1 "22k" V 8034 4350 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 8080 4350 50  0001 C CNN
+F 3 "~" H 8150 4350 50  0001 C CNN
+	1    8150 4350
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R28
+U 1 1 5F45D8D4
+P 8300 4500
+F 0 "R28" H 8370 4546 50  0000 L CNN
+F 1 "22k" H 8370 4455 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 8230 4500 50  0001 C CNN
+F 3 "~" H 8300 4500 50  0001 C CNN
+	1    8300 4500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8300 4650 8300 4800
+Wire Wire Line
+	8300 3950 8300 4350
+Connection ~ 8300 4350
 $EndSCHEMATC
