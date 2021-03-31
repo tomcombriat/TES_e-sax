@@ -187,7 +187,7 @@ int normal_down_modifier = +7;
 
 void setup() {
 
-  Serial.begin(9600);
+ // Serial.begin(9600);
   //Serial.println("Start setup");
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
