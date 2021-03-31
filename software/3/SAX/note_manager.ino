@@ -39,15 +39,16 @@ byte * note_manager::get_previous_note()
 bool note_manager::update()
 {
   unsigned int current_touch = read_shift_regs();
-   Serial.println(current_touch, BIN);
-    delay(100);
+  Serial.println(current_touch, BIN);
+  delay(100);
 
   // Getting modifying touches
   octave.manual_input( bool(current_touch & 0b000000010000000000000000)); //mouhahahah
-  modifier_up.manual_input( bool(current_touch & 0b000000000000000010000000)); //mouhahahahaha
-  modifier_mid.manual_input( bool(current_touch & 0b000000000001000000000000));
-  modifier_down.manual_input( bool(current_touch & 0b000000000000000000000010));
-  //modifier_sub_up.manual_input( bool(current_touch & 0b000000000000000001000000));
+  modifier_up.manual_input( bool(current_touch & 0b010000000000000000000000)); //mouhahahahaha
+  modifier_mid.manual_input( bool(current_touch & 0b000000000000000000000100));
+  modifier_down.manual_input( bool(current_touch & 0b000000000000100000000000));
+  modifier_sub_down.manual_input( bool(current_touch & 0b000010000000000000000000));
+  modifier_sub_up.manual_input( bool(current_touch & 0b000000000000000000001000));
 
 
   down_menu.manual_input(0);
@@ -76,8 +77,8 @@ bool note_manager::update()
 
     unsigned int current_touch_no_mod = current_touch & (0b111111101111111110111111);  //haha (removing modifiers)
 
- /*   Serial.println(current_touch_no_mod);
-    delay(100);*/
+    /*   Serial.println(current_touch_no_mod);
+       delay(100);*/
 
     switch (current_touch_no_mod)
     {
@@ -305,10 +306,10 @@ bool note_manager::update()
 
   else
   {
-    unsigned int current_touch_no_mod = current_touch & (0b111111101110111100111101);  //haha (removing modifiers)
-    /*
+    unsigned int current_touch_no_mod = current_touch & (0b101101101111011111110111);  //haha (removing modifiers)
+    
       Serial.println(current_touch_no_mod);
-      delay(100);*/
+      delay(100);
 
 
     switch (current_touch_no_mod)

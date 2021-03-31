@@ -187,7 +187,7 @@ int normal_down_modifier = +7;
 
 void setup() {
 
-   Serial.begin(9600);
+  Serial.begin(9600);
   //Serial.println("Start setup");
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
@@ -201,11 +201,11 @@ void setup() {
   display.print("e-Sax");
   display.display();
 
-delay(500);
+  delay(500);
   for (int i = 0; i < 3; i++) arp[i].set_notes(arp_N[i], arp_times[i], arp_notes[i], arp_name[i], arp_long_names[i]);
   for (int i = 0; i < 3; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i], chord_long_names[i]);
   pinMode(BATT_PIN, INPUT);
-  
+
   //joy_X.set_invert(true);
   //joy_Y.set_invert(true);
   joy_X.calibrate();
@@ -231,7 +231,7 @@ delay(500);
   display.print("BATT");
   display.setCursor(30, 40);
   display.setTextSize(2);
-  display.print(analogRead(BATT_PIN)/4096.*3.3*2);
+  display.print(analogRead(BATT_PIN) / 4096.*3.3 * 2);
   display.print("V");
   display.display();
 
@@ -257,6 +257,8 @@ void loop() {
   modifier_up.update();
   modifier_mid.update();
   modifier_down.update();
+  modifier_sub_up.update();
+  modifier_sub_down.update();
   breath.update();
   joy_X.update();
   joy_Y.update();
@@ -415,6 +417,18 @@ void loop() {
     if (modifier_up.has_been_pressed() && !arp[0].is_started()) arp[0].start();
     if (modifier_mid.has_been_pressed() && !arp[1].is_started()) arp[1].start();
     if (modifier_down.has_been_pressed() && !arp[2].is_started()) arp[2].start();
+  }
+
+  if (global_mode != MODE_NORMAL)
+  {
+    if (modifier_sub_up.has_been_released())
+    {
+      midi_octave += 1;
+    }
+    if (modifier_sub_down.has_been_released())
+    {
+      midi_octave -= 1;
+    }
   }
 
 
