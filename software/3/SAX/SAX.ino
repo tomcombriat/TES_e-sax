@@ -187,7 +187,7 @@ int normal_down_modifier = +7;
 
 void setup() {
 
-   //Serial.begin(9600);
+   Serial.begin(9600);
   //Serial.println("Start setup");
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
@@ -206,8 +206,8 @@ delay(500);
   for (int i = 0; i < 3; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i], chord_long_names[i]);
   pinMode(BATT_PIN, INPUT);
   
-  joy_X.set_invert(true);
-  joy_Y.set_invert(true);
+  //joy_X.set_invert(true);
+  //joy_Y.set_invert(true);
   joy_X.calibrate();
   joy_Y.calibrate();
   breath.calibrate();
