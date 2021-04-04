@@ -34,6 +34,16 @@ void midi_cc::set_value(int _value)
   value = _value;
 }
 
+int midi_cc::get_biais()
+{
+  return biais;
+}
+
+void midi_cc::set_biais(int _biais)
+{
+  biais = _biais;
+}
+
 void midi_cc::increment_biais(int increment)
 {
   if (millis() - last_biais_time > CC_DELTA_TIME)  // just to limit increase in delta mode (not limited by analog_input timer)

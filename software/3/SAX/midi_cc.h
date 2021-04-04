@@ -19,6 +19,8 @@ class midi_cc
     midi_cc(byte control, int _biais=0);
     int get_value();
     void set_value(int _value);
+    int get_biais();
+    void set_biais(int _biais);
     void increment_biais(int increment);
     void set_control(byte _control);
     byte get_control();
