@@ -145,19 +145,48 @@ void menu()
         if (global_mode < 0) global_mode = 4;
         break;
 
-
       case 11:
+        ssd.draw_title_value("Save Pt", current_preset);
+        current_preset += up;
+        if (current_preset >= N_presets) current_preset = 0;
+        if (current_preset < 0) current_preset = N_presets - 1;
+
+        if (joy_SW.has_been_released())
+        {
+          preset_save(current_preset);
+          ssd.draw_single_value("OK");
+          ssd.force_update();
+          delay(1000);
+        }
+        break;
+
+      case 12:
+      ssd.draw_title_value("Recall Pt", current_preset);
+        current_preset += up;
+        if (current_preset >= N_presets) current_preset = 0;
+        if (current_preset < 0) current_preset = N_presets - 1;
+
+        if (joy_SW.has_been_released())
+        {
+          preset_recall(current_preset);
+          ssd.draw_single_value("OK");
+          ssd.force_update();
+          delay(1000);
+        }
+        break;
+
+      case 13:
         ssd.draw_title_value("Tempo", (int) tap.get_tempo());
         tap.set_tempo(tap.get_tempo() + up);
         break;
 
-      case 12:
+      case 14:
         ssd.draw_title_value("Crazy tempo", "?!");
         if (up != 0) tap.set_tempo(400);
         break;
 
 
-      case 13:
+      case 15:
         switch (global_mode)
         {
           case MODE_ARPEGIO:
@@ -189,7 +218,7 @@ void menu()
         }
         break;
 
-      case 14:
+      case 16:
         switch (global_mode)
         {
           case MODE_ARPEGIO:
@@ -220,7 +249,7 @@ void menu()
         }
         break;
 
-      case 15:
+      case 17:
         switch (global_mode)
         {
           case MODE_ARPEGIO:
@@ -253,13 +282,18 @@ void menu()
     }
 
 
-
+int inc_current_entry = joy_X.up_down() + right_menu.has_been_pressed() - left_menu.has_been_pressed();
+/*
     current_entry += joy_X.up_down();
-    current_entry += right_menu.has_been_pressed() - left_menu.has_been_pressed();
+    current_entry += right_menu.has_been_pressed() - left_menu.has_been_pressed();*/
+    if (inc_current_entry != 0);
+    {
+      current_entry += inc_current_entry;
+    }
 
 
-    if (global_mode == MODE_NORMAL) N_entry = 11;
-    else N_entry = 16;
+    if (global_mode == MODE_NORMAL) N_entry = 13;
+    else N_entry = 18;
 
     if (current_entry < 0) current_entry = N_entry - 1;
     if (current_entry >= N_entry) current_entry = 0;
@@ -269,9 +303,9 @@ void menu()
 
 
     if (octave.is_pressed()) current_entry = 0;
-    if (modifier_up.has_been_released()) current_entry = 13;
-    if (modifier_mid.has_been_released()) current_entry = 14;
-    if (modifier_down.has_been_released()) current_entry = 15;
+    if (modifier_up.has_been_released()) current_entry = 15;
+    if (modifier_mid.has_been_released()) current_entry = 16;
+    if (modifier_down.has_been_released()) current_entry = 17;
 
   }
 
