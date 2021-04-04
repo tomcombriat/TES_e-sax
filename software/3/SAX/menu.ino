@@ -103,8 +103,14 @@ void menu()
         breath_CC.set_control(breath_CC.get_control() + up);
         break;
 
-      case 7:
-        ssd.draw_title_value("Pitchbend", pitchbend_enable);
+              case 7:
+        if (pitchbend_amp_CC.get_control() > 128) pitchbend_amp_CC.set_control(128);
+        ssd.draw_title_value("PB amp CC", pitchbend_amp_CC.get_control());
+        pitchbend_amp_CC.set_control(pitchbend_amp_CC.get_control() + up);
+        break;
+
+      case 8:
+        ssd.draw_title_value("PB O/1", pitchbend_enable);
         pitchbend_enable += up;
         if (!pitchbend_enable)
         {
@@ -118,7 +124,7 @@ void menu()
         }
         break;
 
-      case 8:
+      case 9:
         {
           int current_value = pitchbend_amp_CC.get_value();
           ssd.draw_title_value("PitchB Amp", current_value);
@@ -132,20 +138,20 @@ void menu()
         }
 
 
-      case 9:
+      case 10:
         ssd.draw_title_value("Dyn. Vel.", dynamic_velocity);
         dynamic_velocity += up;
         break;
 
 
-      case 10:
+      case 11:
         ssd.draw_title_value("Global Mode", global_modes[global_mode]);
         global_mode += up;
         if (global_mode > 4) global_mode = 0;
         if (global_mode < 0) global_mode = 4;
         break;
 
-      case 11:
+      case 12:
         ssd.draw_title_value("Save Pt", current_preset);
         current_preset += up;
         if (current_preset >= N_presets) current_preset = 0;
@@ -160,7 +166,7 @@ void menu()
         }
         break;
 
-      case 12:
+      case 13:
       ssd.draw_title_value("Recall Pt", current_preset);
         current_preset += up;
         if (current_preset >= N_presets) current_preset = 0;
@@ -175,18 +181,18 @@ void menu()
         }
         break;
 
-      case 13:
+      case 14:
         ssd.draw_title_value("Tempo", (int) tap.get_tempo());
         tap.set_tempo(tap.get_tempo() + up);
         break;
 
-      case 14:
+      case 15:
         ssd.draw_title_value("Crazy tempo", "?!");
         if (up != 0) tap.set_tempo(400);
         break;
 
 
-      case 15:
+      case 16:
         switch (global_mode)
         {
           case MODE_ARPEGIO:
@@ -218,7 +224,7 @@ void menu()
         }
         break;
 
-      case 16:
+      case 17:
         switch (global_mode)
         {
           case MODE_ARPEGIO:
@@ -249,7 +255,7 @@ void menu()
         }
         break;
 
-      case 17:
+      case 18:
         switch (global_mode)
         {
           case MODE_ARPEGIO:
@@ -292,8 +298,8 @@ int inc_current_entry = joy_X.up_down() + right_menu.has_been_pressed() - left_m
     }
 
 
-    if (global_mode == MODE_NORMAL) N_entry = 13;
-    else N_entry = 18;
+    if (global_mode == MODE_NORMAL) N_entry = 14;
+    else N_entry = 19;
 
     if (current_entry < 0) current_entry = N_entry - 1;
     if (current_entry >= N_entry) current_entry = 0;
@@ -303,9 +309,9 @@ int inc_current_entry = joy_X.up_down() + right_menu.has_been_pressed() - left_m
 
 
     if (octave.is_pressed()) current_entry = 0;
-    if (modifier_up.has_been_released()) current_entry = 15;
-    if (modifier_mid.has_been_released()) current_entry = 16;
-    if (modifier_down.has_been_released()) current_entry = 17;
+    if (modifier_up.has_been_released()) current_entry = 16;
+    if (modifier_mid.has_been_released()) current_entry = 17;
+    if (modifier_down.has_been_released()) current_entry = 18;
 
   }
 
