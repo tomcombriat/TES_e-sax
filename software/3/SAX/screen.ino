@@ -73,7 +73,15 @@ void screen::draw_title_value(String _title, char _value, int sub_value)
   draw_title_value(_title, (String) _value, sub_value);
 }
 
-
+void screen::draw_low_batt()
+{
+  display.clearDisplay();
+  display.setTextSize(2);
+  changed = true;
+  display.setTextColor(1);
+  display.setCursor((128 - (11) * 12) / 2, 28);
+  display.print("Low Battery");
+}
 
 
 void screen::draw_title_value(String _title, String * value, int N, int * _values , int sub_value)
@@ -152,7 +160,7 @@ void screen::draw_title_value(String _title, char  value, int N, int * _values ,
     display.setCursor((128 - (enum_notes.length()) * 6) / 2, 49);
     display.print(enum_notes);
   }
-  }
+}
 
 
 
@@ -252,7 +260,7 @@ void screen::draw_standby_screen(int& _octave, int& _transpose, byte _global_mod
       display.print(arp[2].get_name());
     }
 
-        if (global_mode == MODE_ARPEGIO_RAND)
+    if (global_mode == MODE_ARPEGIO_RAND)
     {
       display.setCursor(50, 0);
       display.print(tempo);

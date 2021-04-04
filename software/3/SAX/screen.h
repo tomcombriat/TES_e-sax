@@ -24,6 +24,7 @@ class screen
     void draw_single_value(String value);
     void draw_standby_screen(int & _octave, int & _transpose, byte _global_mode, bool _delta_mode, byte _joystick, byte _joystick_bis, unsigned int tempo);
     void draw_progress_bar(byte value);
+    void draw_low_batt();
 
     void clear();
     void update();

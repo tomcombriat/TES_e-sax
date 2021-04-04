@@ -29,6 +29,7 @@
 #include "chord.h"
 #include "pitchbend.h"
 #include "presets.h"
+#include "battery.h"
 
 
 
@@ -42,6 +43,7 @@ Adafruit_SSD1306 display(OLED_RESET);
 #define SUB_MODIFIER_RESPONSE_TIME 20
 #define MODIFIER_RESPONSE_TIME 3
 #define JOYSTICK_RESPONSE_TIME 10
+#define BATTERY_RESPONSE_TIME 3000
 #define BREATH_RESPONSE_TIME 1
 #define CC_DELTA_TIME 40
 #define CC_MIN_TIME 5
@@ -184,6 +186,13 @@ int normal_down_modifier = +7;
 
 
 
+/*****************************/
+/**** BATTERY ****************/
+/*****************************/
+battery batt(BATT_PIN, 2110, 2360, BATTERY_RESPONSE_TIME);
+
+
+
 
 void setup() {
 
@@ -224,16 +233,10 @@ void setup() {
   pitchbend_amp_CC.update();
 
 
-  display.clearDisplay();
-  display.setCursor(30, 05);
-  display.setTextSize(3);
-  display.print("BATT");
-  display.setCursor(30, 40);
-  display.setTextSize(2);
-  display.print(analogRead(BATT_PIN) / 4096.*3.3 * 2);
-  display.print("V");
-  display.display();
+  batt.update();
+  batt.display_percentage();
 
+  
   eeprom_init();
   preset_recall(0);
   delay(500);
@@ -247,7 +250,7 @@ void loop() {
 
 
 
-  if (!played && millis() - stop_played_time > SCREEN_IDLE_WAITING_TIME)
+  if ((!played && millis() - stop_played_time > SCREEN_IDLE_WAITING_TIME) )
   {
     ssd.draw_standby_screen(midi_octave, midi_transpose, global_mode, delta_mode, X_CC.get_value(), Y_CC.get_value(), tap.get_tempo());
     ssd.update();
