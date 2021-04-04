@@ -17,9 +17,10 @@ screen::screen() {};
 void screen::draw_title_value(String _title, int _value)
 {
   int keyprint = _title.length() + 2 * _value;
-  if (keyprint != previous_keyprint)
+  if (keyprint != previous_keyprint || _title != previous_title)
   {
     previous_keyprint = keyprint;
+    previous_title = _title;
     changed = true;
     display.clearDisplay();
     display.fillRect(0, 0, 128, 20, 1);
@@ -42,8 +43,9 @@ void screen::draw_title_value(String _title, String _value, int sub_value)
 {
   int keyprint = _title.length() + 2 * _value.length() + 3 * sub_value;
 
-  if (keyprint != previous_keyprint || _value != previous_value)
+  if (keyprint != previous_keyprint || _value != previous_value || _title != previous_title)
   {
+    previous_title = _title;
     previous_keyprint = keyprint;
     previous_value = _value;
     changed = true;
@@ -79,10 +81,11 @@ void screen::draw_title_value(String _title, String * value, int N, int * _value
   String _value = *value;
   int keyprint = _title.length() + 3 * sub_value + _values[N - 1] - N;
 
-  if (keyprint != previous_keyprint || _value != previous_value)
+  if (keyprint != previous_keyprint || _value != previous_value || _title != previous_title)
   {
     previous_keyprint = keyprint;
     previous_value = _value;
+    previous_title = _title;
     changed = true;
     display.clearDisplay();
     display.fillRect(0, 0, 128, 20, 1);
@@ -117,10 +120,11 @@ void screen::draw_title_value(String _title, char  value, int N, int * _values ,
   String _value = String(value);
   int keyprint = _title.length() + 3 * sub_value + _values[N - 1] - N;
 
-  if (keyprint != previous_keyprint || _value != previous_value)
+  if (keyprint != previous_keyprint || _value != previous_value || _title != previous_title)
   {
     previous_keyprint = keyprint;
     previous_value = _value;
+    previous_title = _title;
     changed = true;
     display.clearDisplay();
     display.fillRect(0, 0, 128, 20, 1);

@@ -33,6 +33,7 @@ class screen
     unsigned long last_update_time = 0;
     int previous_keyprint = 0;
     String previous_value = "aaaa";
+    String previous_title = "aaaa";
     bool changed = false;
 
     int octave = 0;
