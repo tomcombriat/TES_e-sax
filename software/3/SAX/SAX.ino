@@ -7,7 +7,6 @@
 
 
 
-
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -29,6 +28,7 @@
 #include "arpegio_mono.h"
 #include "chord.h"
 #include "pitchbend.h"
+#include "presets.h"
 
 
 
@@ -187,8 +187,32 @@ int normal_down_modifier = +7;
 
 void setup() {
 
- // Serial.begin(9600);
-  //Serial.println("Start setup");
+   Serial.begin(9600);
+
+   /*
+    //EEPROM.init();
+    delay(1000);
+    uint16 data;
+     EEPROM.write(EEPROM.PageBase0 + 1, static_cast<uint16> (-30001));
+    EEPROM.write(EEPROM.PageBase0, 0xFFFF);
+    (EEPROM.read(EEPROM.PageBase0, &data));
+    Serial.println(data);
+
+    (EEPROM.read(EEPROM.PageBase0 + 1, &data));
+    Serial.println(static_cast<int16>(data));
+    // EEPROM.write(EEPROM.PageBase0, 120);
+    // EEPROM.write(EEPROM.PageBase0, 6558);
+    EEPROM.write(EEPROM.PageBase0+2, 65529);
+    (EEPROM.read(EEPROM.PageBase0 + 1, &data));
+    Serial.println(static_cast<int16>(data));
+    (EEPROM.read(EEPROM.PageBase0, &data));
+    Serial.println(data);
+     (EEPROM.read(EEPROM.PageBase0+2, &data));
+    Serial.println(data);*/
+
+
+
+
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
   display.clearDisplay();
@@ -235,6 +259,8 @@ void setup() {
   display.print("V");
   display.display();
 
+  eeprom_init();
+  preset_recall(0);
   delay(500);
 
 
@@ -265,7 +291,7 @@ void loop() {
   breath_CC.update();
 
 
-  //Serial.println(breath.value());
+  // Serial.println(breath.value());
   if ((global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND) && tap.has_change())  for (byte i = 0; i < 3; i++)  arp[i].set_tempo(tap.get_tempo_time());   // update tempo of arpegiators
 
 
@@ -439,7 +465,11 @@ void loop() {
   {
     delta_mode = !delta_mode;
   }
-  if (joy_SW.has_been_released_after_long_press()) menu();
+  if (joy_SW.has_been_released_after_long_press()) 
+  {
+    joy_SW.reset();
+    menu();
+  }
   //if (joy_SW.has_been_pressed()) delta_mode = !delta_mode;
   // if (modifier_sub_up.is_pressed() && modifier_sub_down.is_pressed()) menu();
 
