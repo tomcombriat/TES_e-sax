@@ -328,5 +328,6 @@ void screen::update()
 void screen::force_update()
 {
   changed = true;
+  update();
 }
 
