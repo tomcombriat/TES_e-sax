@@ -187,32 +187,7 @@ int normal_down_modifier = +7;
 
 void setup() {
 
-   Serial.begin(9600);
-
-   /*
-    //EEPROM.init();
-    delay(1000);
-    uint16 data;
-     EEPROM.write(EEPROM.PageBase0 + 1, static_cast<uint16> (-30001));
-    EEPROM.write(EEPROM.PageBase0, 0xFFFF);
-    (EEPROM.read(EEPROM.PageBase0, &data));
-    Serial.println(data);
-
-    (EEPROM.read(EEPROM.PageBase0 + 1, &data));
-    Serial.println(static_cast<int16>(data));
-    // EEPROM.write(EEPROM.PageBase0, 120);
-    // EEPROM.write(EEPROM.PageBase0, 6558);
-    EEPROM.write(EEPROM.PageBase0+2, 65529);
-    (EEPROM.read(EEPROM.PageBase0 + 1, &data));
-    Serial.println(static_cast<int16>(data));
-    (EEPROM.read(EEPROM.PageBase0, &data));
-    Serial.println(data);
-     (EEPROM.read(EEPROM.PageBase0+2, &data));
-    Serial.println(data);*/
-
-
-
-
+  //Serial.begin(9600);
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
   display.clearDisplay();
@@ -465,7 +440,7 @@ void loop() {
   {
     delta_mode = !delta_mode;
   }
-  if (joy_SW.has_been_released_after_long_press()) 
+  if (joy_SW.has_been_released_after_long_press())
   {
     joy_SW.reset();
     menu();
