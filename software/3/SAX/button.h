@@ -26,6 +26,7 @@ class button
     void set_pin(int pin);
     void manual_input(bool _input);
     unsigned long get_response_time();
+    void reset();
 
 
     void update();

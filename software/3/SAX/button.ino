@@ -7,7 +7,7 @@
       This file is part of the OS embedded in the e-sax - TES
       This code is under GPL3
 
-      
+
       This is the cluss file for the class managing buttons (modifiers and joystick)
 */
 
@@ -31,18 +31,24 @@ button::button(int _pin, bool inverse, unsigned long _response_time)
     pin = _pin;
     previous_state = digitalRead(pin);
   }
-  else 
+  else
   {
     manual = true;
     last_manual_input = !inverse;
-    
+
   }
   been_pressed = false;
   been_released = false;
   response_time = _response_time;
   inverse_logic = inverse;
-  
+}
 
+void button::reset()
+{
+  been_pressed = false;
+  been_released = false;
+  been_released_after_long_press = false;
+  been_long_pressed = false;
 }
 
 unsigned long button::get_response_time()
