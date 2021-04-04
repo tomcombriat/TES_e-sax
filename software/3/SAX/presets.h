@@ -16,7 +16,7 @@
 #include <EEPROM.h>
 
 
-#define N_presets 5
+#define N_presets 10
 #define N_presets_parameters 20
 int current_preset = 0;
 
