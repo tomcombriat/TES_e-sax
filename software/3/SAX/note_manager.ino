@@ -291,7 +291,7 @@ bool note_manager::update()
         break;
 
       case 14088184:  //F#
-        note[0] = 65;
+        note[0] = 66;
         break;
 
 
@@ -394,9 +394,9 @@ bool note_manager::update()
       case 8794656:  // A# (D)
         note[0] = 58;
         break;
-      /*case 15739912:  // A#
+      case 8828576:  // A#  (std)
         note[0] = 58;
-        break;*/
+        break;
       case 8697504:  // A
         note [0] = 57;
         break;
