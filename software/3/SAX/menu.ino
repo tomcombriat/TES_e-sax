@@ -38,6 +38,8 @@ void menu()
     modifier_up.update();
     modifier_mid.update();
     modifier_down.update();
+    modifier_sub_up.update();
+    modifier_sub_down.update();
     up_menu.update();
     down_menu.update();
     left_menu.update();
@@ -316,7 +318,14 @@ void menu()
 
     }
     else if (modifier_up.has_been_released() || modifier_mid.has_been_released() || modifier_down.has_been_released()) current_entry = 11;
+
+    if (modifier_sub_up.has_been_released()) current_entry = 12;
+    if (modifier_sub_down.has_been_released()) current_entry = 13;
+    
   }
+
+
+  
 
   ssd.clear();
   ssd.draw_standby_screen(midi_octave, midi_transpose, global_mode, delta_mode, X_CC.get_value(), Y_CC.get_value(), tap.get_tempo());
