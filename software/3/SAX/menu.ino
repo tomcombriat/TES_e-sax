@@ -103,7 +103,7 @@ void menu()
         breath_CC.set_control(breath_CC.get_control() + up);
         break;
 
-              case 7:
+      case 7:
         if (pitchbend_amp_CC.get_control() > 128) pitchbend_amp_CC.set_control(128);
         ssd.draw_title_value("PB amp CC", pitchbend_amp_CC.get_control());
         pitchbend_amp_CC.set_control(pitchbend_amp_CC.get_control() + up);
@@ -167,7 +167,7 @@ void menu()
         break;
 
       case 13:
-      ssd.draw_title_value("Recall Pt", current_preset);
+        ssd.draw_title_value("Recall Pt", current_preset);
         current_preset += up;
         if (current_preset >= N_presets) current_preset = 0;
         if (current_preset < 0) current_preset = N_presets - 1;
@@ -288,10 +288,10 @@ void menu()
     }
 
 
-int inc_current_entry = joy_X.up_down() + right_menu.has_been_pressed() - left_menu.has_been_pressed();
-/*
-    current_entry += joy_X.up_down();
-    current_entry += right_menu.has_been_pressed() - left_menu.has_been_pressed();*/
+    int inc_current_entry = joy_X.up_down() + right_menu.has_been_pressed() - left_menu.has_been_pressed();
+    /*
+        current_entry += joy_X.up_down();
+        current_entry += right_menu.has_been_pressed() - left_menu.has_been_pressed();*/
     if (inc_current_entry != 0);
     {
       current_entry += inc_current_entry;
@@ -307,12 +307,15 @@ int inc_current_entry = joy_X.up_down() + right_menu.has_been_pressed() - left_m
     if (joy_SW.has_been_released_after_long_press()) exit = true;
 
 
+    if (global_mode != MODE_NORMAL)
+    {
+      if (octave.is_pressed()) current_entry = 0;
+      if (modifier_up.has_been_released()) current_entry = 16;
+      if (modifier_mid.has_been_released()) current_entry = 17;
+      if (modifier_down.has_been_released()) current_entry = 18;
 
-    if (octave.is_pressed()) current_entry = 0;
-    if (modifier_up.has_been_released()) current_entry = 16;
-    if (modifier_mid.has_been_released()) current_entry = 17;
-    if (modifier_down.has_been_released()) current_entry = 18;
-
+    }
+    else if (modifier_up.has_been_released() || modifier_mid.has_been_released() || modifier_down.has_been_released()) current_entry = 11;
   }
 
   ssd.clear();

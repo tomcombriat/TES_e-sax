@@ -38,7 +38,11 @@
   byte  midi_cc X_CC(71, 64);
   byte midi_cc Y_CC(1, 64);
   byte midi_cc breath_CC(74);
-  byte midi_cc pitchbend_amp_CC(5);   19
+  byte midi_cc pitchbend_amp_CC(5);   21
+
+  int pitchbend_amp_CC get_value() / set_value()
+  int X_CC get_value() / set_value()      23
+
 */
 
 
@@ -84,6 +88,9 @@ void preset_save(byte i)
   EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 19, static_cast<uint16> (pitchbend_amp_CC.get_value()));
   EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 20, static_cast<uint16> (X_CC.get_biais()));
   EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 21, static_cast<uint16> (Y_CC.get_biais()));
+  EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 22, static_cast<uint16> (pitchbend_amp_CC.get_value()));
+  EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 23, static_cast<uint16> (X_CC.get_value()));
+  EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 24, static_cast<uint16> (Y_CC.get_value()));
 }
 
 void preset_recall(byte i)
@@ -135,6 +142,15 @@ void preset_recall(byte i)
   X_CC.set_biais(static_cast<int16>(data));
   EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 21, &data);
   Y_CC.set_biais(static_cast<int16>(data));
+  EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 22, &data);
+  pitchbend_amp_CC.set_value(static_cast<int16>(data));
+  pitchbend_amp_CC.update();
+  EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 23, &data);
+  X_CC.set_value(static_cast<int16>(data));
+  X_CC.update();
+  EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 24, &data);
+  Y_CC.set_value(static_cast<int16>(data));
+  Y_CC.update();
 
 
   for (int j = 0; j < 3; j++) arp[j].set_notes(arp_N[selected_arp[j]], arp_times[selected_arp[j]], arp_notes[selected_arp[j]], arp_name[selected_arp[j]], arp_long_names[selected_arp[j]]);
