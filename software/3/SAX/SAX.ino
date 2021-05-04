@@ -115,7 +115,7 @@ unsigned long stop_played_time = 0;
 /****************************/
 /******* MIDI ***************/
 /****************************/
-MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI);
+MIDI_CREATE_INSTANCE(HardwareSerial, Serial2, MIDI);
 byte midi_channel = 2;
 int midi_transpose = 0;
 int midi_octave = 0;
