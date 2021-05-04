@@ -294,7 +294,7 @@ void menu()
     /*
         current_entry += joy_X.up_down();
         current_entry += right_menu.has_been_pressed() - left_menu.has_been_pressed();*/
-    if (inc_current_entry != 0);
+    if (inc_current_entry != 0)
     {
       current_entry += inc_current_entry;
     }
