@@ -17,7 +17,7 @@
 
 
 #define N_presets 2
-#define N_presets_parameters 25
+#define N_presets_parameters 24
 int current_preset = 0;
 
 void eeprom_init();
