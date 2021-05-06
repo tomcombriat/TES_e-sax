@@ -6,7 +6,7 @@
       This file is part of the OS embedded in the e-sax - TES
       This code is under GPL3
 
-      
+
       This is the class file for the class MIDI control changes
 */
 
@@ -70,7 +70,7 @@ void midi_cc::update()
   changed = false;
   if (millis() - last_event_time > CC_MIN_TIME)
   {
-    
+
     max_accessible_range = max(127 - biais, biais);
     int return_value = value * max_accessible_range / 127. + biais;
     if (return_value > 127) return_value = 127;
@@ -82,7 +82,7 @@ void midi_cc::update()
     {
       changed = true;
       previous_value = return_value;
-      MIDI.sendControlChange(control,return_value,midi_channel);
+      MIDI.sendControlChange(control, return_value, midi_channel);
     }
   }
 }

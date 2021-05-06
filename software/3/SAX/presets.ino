@@ -89,8 +89,8 @@ void preset_save(byte i)
   EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 19, static_cast<uint16> (X_CC.get_biais()));
   EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 20, static_cast<uint16> (Y_CC.get_biais()));
   EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 21, static_cast<uint16> (pitchbend_amp_CC.get_value()));
-  EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 22, static_cast<uint16> (X_CC.get_value()));
-  EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 23, static_cast<uint16> (Y_CC.get_value()));
+ /* EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 22, static_cast<uint16> (X_CC.get_value()));
+  EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 23, static_cast<uint16> (Y_CC.get_value()));*/
 }
 
 void preset_recall(byte i)
@@ -153,18 +153,20 @@ void preset_recall(byte i)
     pitchbend_amp_CC.update();*/
   EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 19, &data);
   X_CC.set_biais(static_cast<int16>(data));
+    X_CC.update();
   EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 20, &data);
   Y_CC.set_biais(static_cast<int16>(data));
+    Y_CC.update();
   EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 21, &data);
   pitchbend_amp_CC.set_value(static_cast<int16>(data));
   pitchbend_amp_CC.update();
-  EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 22, &data);
+/*  EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 22, &data);
   X_CC.set_value(static_cast<int16>(data));
   X_CC.update();
   EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 23, &data);
   Y_CC.set_value(static_cast<int16>(data));
   Y_CC.update();
-
+*/
 
   for (int j = 0; j < 3; j++) arp[j].set_notes(arp_N[selected_arp[j]], arp_times[selected_arp[j]], arp_notes[selected_arp[j]], arp_name[selected_arp[j]], arp_long_names[selected_arp[j]]);
   for (int j = 0; j < 3; j++) chords[j].set_notes(chord_N[selected_chord[j]],  chord_notes[selected_chord[j]], chord_name[selected_chord[j]], chord_long_names[selected_chord[j]]);
