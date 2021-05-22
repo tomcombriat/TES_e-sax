@@ -18,6 +18,10 @@ The main MCU is a cheap BluePill STM32, programmed using the [Arduino STM32 libr
 
 
 ## Making
+This gives some guidelines in order to allow people to make such an E-sax themselves. It precludes that the PCB is already printed and drilled.
+
+Note: no 3D parts are included in this repo for now. Except for the beak, every part usually need to be redesigned for a different saxophone. Do not hesitate to contact me on that.
+
 
 ### Bill of Materials 
 
@@ -41,7 +45,18 @@ The main MCU is a cheap BluePill STM32, programmed using the [Arduino STM32 libr
 - 2 pairs (male and female) of JST connectors 3 pins
 - 1 pair of JST connectors 5 pins
 
-### Wiring the 
+### Wiring the saxophone
+
+The controller needs to know what keys are pressed at any given time in order to be able to generate the correct MidiNote for a synthesizer. In order for the behavior to be as close as possible to a real saxophone, the sensors are positionned on the pads and not on the keys: if a key closing a pad is not pressed enough to close the pad the controller will consider it "open" just like it would be for a real saxophone. All the wires for the pads are going through the sax body.
+
+The saxophone is a complex instrument and not every pad can be dismounted "alone": it is usual that some of them need other to be removed first in order to be dismounted.
+
+#### Dismounting
+This is why it is usually easier to dismount all the keys first and wire them on remounting.
+Note: take some notes about which keys did you dismounted first: as the order matters they will need to be remounted in the _reverse order_. My personnal way of doing it is to write on every part a number and a letter (the latter only if this is a pad): the number denotes the order of dismounting (first dismounted part will be labelled "1", second "2"…) and the letter denotes the hole the pad is covering. I also write the same letter next to, or in, the hole which is covered by the pad. This way, upon remounting, one can start by the part with highest number, spot its hole (if any) and remount it.
+
+#### Wiring the pads
+
 
 
 
