@@ -68,7 +68,18 @@ The sensor is composed of a thin copper layer glued to the pad and wire to the P
 The copper tape needs to be glued to the pad:
 
 - cut a piece of copper tape that matches more or less the dimension of the pad. The exact size of this piece is not critical but:
-  - test
+  - it need to cover some of the parts of the pad which are in contact with the body when closed. If possible at two different locations meaning that the length of this copper part should be at least be equal to the diameter of the hole covered by the pad.
+  - it should not be too long either in order not to touch the metallic part of the key.
+- apply a thin layer of neopren glue on the **tape** side of the copper, it should cover it all. Beware not to put some glue on the "clear" part of the copper
+- apply a thin layer of neopren on the pad, it should match the dimensions of the piece of copper.
+- wait from 10 to 15 minutes
+- apply the copper, glue side of the tape facing the glue side of the pad, it should stick immediatly so the first attempt should be well positionned.
+- using a soldering iron, add some solder at **the middle of the pad**, it should not touch the part where the pad touches the body.
+- soldier a flexible wire long enough to go from the corresponding hole to the bell plus 5cm to it.
+- put the wire in the hole and make it go to the bell throught the body (this can be hard for some keys) and tape it to the bell.
+- remount the key on its hole.
+- if done correctly, the key should action seemlessly and feel as natural as before.
+- start again for all the other keys.
 
 
 
