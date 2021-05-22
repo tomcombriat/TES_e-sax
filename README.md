@@ -44,6 +44,7 @@ Note: no 3D parts are included in this repo for now. Except for the beak, every 
 - 1 switch (non-momentary)
 - 2 pairs (male and female) of JST connectors 3 pins
 - 1 pair of JST connectors 5 pins
+- 10 magnets (10x4x2mm^3) (optionnal)
 
 ### Wiring the saxophone
 
@@ -57,7 +58,17 @@ Note: take some notes about which keys did you dismounted first: as the order ma
 
 #### Wiring the pads
 
+The pads can be wired upon remounting. All pads need to be wired except the one which is just above the left hand forefinger which is not independant from the pad located under the left hand forefinger.
 
+The sensor is composed of a thin copper layer glued to the pad and wire to the PCB. Using a push-up resistor, and by placing the whole sax body at GND the pad will behave as a switch:
+
+- closed, the potential of the copper part will be at GND as it is in contact with the body
+- open, the potential will be at 3.3V, thanks to a push-up resistor.
+
+The copper tape needs to be glued to the pad:
+
+- cut a piece of copper tape that matches more or less the dimension of the pad. The exact size of this piece is not critical but:
+  - test
 
 
 
