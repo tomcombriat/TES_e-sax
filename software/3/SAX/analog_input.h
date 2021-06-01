@@ -16,7 +16,7 @@ class analog_input
 {
   public:
     analog_input();
-    analog_input(int _pin, int _biais = 0 , unsigned long _response_time = 0, int _biais_offset = 0, float _scaling_factor = 1);
+    analog_input(int _pin, int _biais = 0 , unsigned long _response_time = 0, int _biais_offset = 0, float _scaling_factor = 1.);
     
     bool update();
     int value();

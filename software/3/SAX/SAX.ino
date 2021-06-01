@@ -30,6 +30,7 @@
 #include "pitchbend.h"
 #include "presets.h"
 #include "battery.h"
+#include "curved_analog_input.h"
 
 
 
@@ -75,7 +76,8 @@ char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 /***************************/
 analog_input joy_Y(PB0, 0, JOYSTICK_RESPONSE_TIME);
 analog_input joy_X(PA7, 0, JOYSTICK_RESPONSE_TIME);
-analog_input breath(PA1, 0, BREATH_RESPONSE_TIME, 20);
+//analog_input breath(PA1, 0, BREATH_RESPONSE_TIME, 20);
+curved_analog_input breath(PA1, 4055,0, BREATH_RESPONSE_TIME);
 
 
 /***************************/
@@ -129,7 +131,6 @@ int midi_octave = 0;
 bool delta_mode = true;
 int global_mode = MODE_NORMAL;
 bool played = false;
-int breath_sensitivity = 3;
 bool pitchbend_enable = false;
 bool dynamic_velocity = true;
 
@@ -219,8 +220,8 @@ void setup() {
   joy_X.calibrate();
   joy_Y.calibrate();
   breath.calibrate();
-  breath.set_scaling_factor(((breath_sensitivity * 0.1) + 1) * 127 / 2000.);
-  breath.set_min_max(0, 127);
+  //breath.set_scaling_factor(((breath_sensitivity * 0.1) + 1) * 127 / 2000.);
+  //breath.set_min_max(0, 127);
   joy_X.set_scaling_factor(JOY_BASE_SCALING);
   joy_Y.set_scaling_factor(JOY_BASE_SCALING);
   joy_X.set_min_max(-127, 127);
@@ -314,7 +315,7 @@ void loop() {
 
 
 
-  if (breath.value() > 5 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note  TODO: TEST WITH BREATH > 5, TO AVOID LOW VOLUME GLITCHES
+  if (breath.value() > 1 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note  
   {
     byte vel = 127;
     if (dynamic_velocity) vel = breath.value();
