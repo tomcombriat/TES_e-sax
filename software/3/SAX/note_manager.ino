@@ -120,9 +120,9 @@ bool note_manager::update()
         note[0] = 54;
         break;
 
-       case 9180832: //F# (sub down)
-         note[0] = 54;
-         break;
+      case 9180832: //F# (sub down)
+        note[0] = 54;
+        break;
 
       case 8689312: //G
         note[0] = 55;
@@ -179,8 +179,16 @@ bool note_manager::update()
       case 8699552: //A# (mod down)
         note[0] = 58;
         break;
-        
+
       case 8795808: //A# (F)
+        note[0] = 58;
+        break;
+
+      case 8796064: //A# (F)
+        note[0] = 58;
+        break;
+
+      case 8827552: //A# (F#)
         note[0] = 58;
         break;
 
@@ -192,7 +200,15 @@ bool note_manager::update()
         note[0] = 58;
         break;
 
+      case 8795040: //A# (E)
+        note[0] = 58;
+        break;
+
       case 8794656: //A# (D)
+        note[0] = 58;
+        break;
+
+      case 8794912: //A# (D)
         note[0] = 58;
         break;
 
@@ -234,12 +250,16 @@ bool note_manager::update()
         note[0] = 60;
         break;
 
-    /*  case 15754009: //C
-        note[0] = 60;
-        break;
-*/
+      /*  case 15754009: //C
+          note[0] = 60;
+          break;
+      */
 
       case 8828848: //C#
+        note[0] = 61;
+        break;
+
+      case 8828592: //C#
         note[0] = 61;
         break;
 
@@ -248,27 +268,47 @@ bool note_manager::update()
         note[0] = 61;
         break;
 
+      case 8796080: //C# (F)
+        note[0] = 61;
+        break;
+
       case 8827824: //C# (F#)
+        note[0] = 61;
+        break;
+
+      case 8827568: //C# (F#)
         down_menu.manual_input(1);
         note[0] = 61;
         break;
+
+
 
       case 8794800: //C# (E)
         note[0] = 61;
         break;
 
-      case 8794672: //C# (D)
-        note[0] = 61;
-        break;
-/*
-      case 9852034: //C#
+      case 8795056: //C# (E)
         note[0] = 61;
         break;
 
-      case 15756313:  //C#
+
+
+      case 8794672: //C# (D)
         note[0] = 61;
         break;
-*/
+
+      case 8794928: //C# (D)
+        note[0] = 61;
+        break;
+      /*
+            case 9852034: //C#
+              note[0] = 61;
+              break;
+
+            case 15756313:  //C#
+              note[0] = 61;
+              break;
+      */
 
       case 9877424:  //D
         note[0] = 62;
@@ -282,10 +322,10 @@ bool note_manager::update()
         note[0] = 64;
         break;
 
- /*     case 16706841:  //E
-        note[0] = 64;
-        break;
-*/
+      /*     case 16706841:  //E
+             note[0] = 64;
+             break;
+      */
       case 14088176:  //F
         note[0] = 65;
         break;
@@ -323,10 +363,10 @@ bool note_manager::update()
   {
 
     unsigned int current_touch_no_mod = current_touch & (0b101101101111011111110011);  //haha (removing modifiers)
-    /*
-        Serial.println(current_touch_no_mod);
-        delay(100);
-    */
+
+    /*Serial.println(current_touch_no_mod);
+      delay(100);*/
+
 
     switch (current_touch_no_mod)
     {
@@ -342,20 +382,43 @@ bool note_manager::update()
       case 8828848:  // C#
         note[0] = 61;
         break;
-      case 8795824:  // C#
+
+      case 8828592:  // C# (Bb)
+        note[0] = 61;
+        break;
+
+      case 8795824:  // C# (F)
         note[0] = 61;
         up_menu.manual_input(1);
+
+      case 8796080:  // C# (F)
+        note[0] = 61;
         break;
-      case 8827824:  // C#
+
+      case 8827568:  // C# (F#)
         note[0] = 61;
         down_menu.manual_input(1);
-        break;
-      case 8794672:  // C#
+
+      case 8827824:  // C# (F#)
         note[0] = 61;
         break;
-      case 8794800:  // C#
+
+      case 8795056:  // C# (E)
         note[0] = 61;
         break;
+
+      case 8794800:  // C# (E)
+        note[0] = 61;
+        break;
+
+      case 8794928:  // C# (D)
+        note[0] = 61;
+        break;
+
+      case 8794672:  // C# (D)
+        note[0] = 61;
+        break;
+
       case 8697520:  // C
         note[0] = 60;
         right_menu.manual_input(1);
@@ -385,15 +448,35 @@ bool note_manager::update()
       case 8795808:  // A# (F)
         note[0] = 58;
         break;
+
+      case 8796064:  // A# (F)
+        note[0] = 58;
+        break;
+
       case 8827808:  // A# (F#)
         note[0] = 58;
         break;
+
+      case 8827552:  // A# (F#)
+        note[0] = 58;
+        break;
+
       case 8794784:  // A# (E)
         note[0] = 58;
         break;
+
+      case 8795040:  // A# (E)
+        note[0] = 58;
+        break;
+
       case 8794656:  // A# (D)
         note[0] = 58;
         break;
+
+      case 8794912:  // A# (D)
+        note[0] = 58;
+        break;
+
       case 8828576:  // A#  (std)
         note[0] = 58;
         break;
