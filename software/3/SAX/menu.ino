@@ -14,7 +14,7 @@
 
 
 
-int N_entry = 17;
+int N_entry = 18;
 int current_entry = 0;
 String transpose_notes[12] = {":C", ":C#", ":D", ":D#", ":E", ":F", ":F#", ":G", ":G#", ":A", ":A#", ":B"};
 //char arp_mode[4] = {'N', 'A', 'C', 'R'};
@@ -124,13 +124,13 @@ void menu()
         pitchbend_enable += up;
         if (!pitchbend_enable)
         {
-          joy_Y.set_scaling_factor(JOY_BASE_SCALING);
-          joy_Y.set_min_max(-127, 127);
+          joy_Y.compute_scaling_factor(JOY_BASE_TARGET_RANGE);
+          joy_Y.set_min_max(-JOY_BASE_TARGET_RANGE, JOY_BASE_TARGET_RANGE);
         }
         else
         {
-          joy_Y.set_min_max(-8192, 8191);
-          joy_Y.set_scaling_factor(JOY_PB_SCALING);
+          joy_Y.set_min_max(-JOY_PB_TARGET_RANGE, JOY_PB_TARGET_RANGE - 1);
+          joy_Y.compute_scaling_factor(JOY_PB_TARGET_RANGE);
         }
         break;
 
@@ -172,7 +172,7 @@ void menu()
           preset_save(current_preset);
           ssd.draw_single_value("OK");
           ssd.force_update();
-          delay(1000);
+          delay(500);
         }
         break;
 
@@ -187,22 +187,64 @@ void menu()
           preset_recall(current_preset);
           ssd.draw_single_value("OK");
           ssd.force_update();
-          delay(1000);
+          delay(500);
         }
         break;
 
+
+
       case 15:
+        ssd.draw_title_value("Calib m/M?");
+        //ssd.force_update();
+
+        if (joy_SW.has_been_released())
+        {
+          joy_SW.update();
+          ssd.draw_single_value("GO");
+          ssd.force_update();
+          joy_X.precalibrate_min_max();
+          joy_Y.precalibrate_min_max();
+          while (!joy_SW.has_been_released())
+          {
+            joy_SW.update();
+            joy_X.calibrate_min_max();
+            joy_Y.calibrate_min_max();
+          }
+
+
+          if (!pitchbend_enable)
+          {
+            joy_Y.compute_scaling_factor(JOY_BASE_TARGET_RANGE);
+            joy_Y.set_min_max(-JOY_BASE_TARGET_RANGE, JOY_BASE_TARGET_RANGE);
+          }
+          else
+          {
+            joy_Y.set_min_max(-JOY_PB_TARGET_RANGE, JOY_PB_TARGET_RANGE - 1);
+            joy_Y.compute_scaling_factor(JOY_PB_TARGET_RANGE);
+          }
+          joy_X.compute_scaling_factor(JOY_BASE_TARGET_RANGE);
+          joy_X.set_min_max(-JOY_BASE_TARGET_RANGE, JOY_BASE_TARGET_RANGE);
+
+          save_joy_input_ranges();
+          ssd.draw_single_value("OK");
+          ssd.force_update();
+          delay(500);
+        }
+        break;
+
+
+      case 16:
         ssd.draw_title_value("Tempo", (int) tap.get_tempo());
         tap.set_tempo(tap.get_tempo() + up);
         break;
 
-      case 16:
+      case 17:
         ssd.draw_title_value("Crazy tempo", "?!");
         if (up != 0) tap.set_tempo(400);
         break;
 
 
-      case 17:
+      case 18:
         switch (global_mode)
         {
           case MODE_ARPEGIO:
@@ -234,7 +276,7 @@ void menu()
         }
         break;
 
-      case 18:
+      case 19:
         switch (global_mode)
         {
           case MODE_ARPEGIO:
@@ -265,7 +307,7 @@ void menu()
         }
         break;
 
-      case 19:
+      case 20:
         switch (global_mode)
         {
           case MODE_ARPEGIO:
@@ -308,8 +350,8 @@ void menu()
     }
 
 
-    if (global_mode == MODE_NORMAL) N_entry = 15;
-    else N_entry = 20;
+    if (global_mode == MODE_NORMAL) N_entry = 16;
+    else N_entry = 21;
 
     if (current_entry < 0) current_entry = N_entry - 1;
     if (current_entry >= N_entry) current_entry = 0;
@@ -319,9 +361,9 @@ void menu()
     if (octave.is_pressed()) current_entry = 0;
     if (global_mode != MODE_NORMAL)
     {
-      if (modifier_up.has_been_released()) current_entry = 17;
-      if (modifier_mid.has_been_released()) current_entry = 18;
-      if (modifier_down.has_been_released()) current_entry = 19;
+      if (modifier_up.has_been_released()) current_entry = 18;
+      if (modifier_mid.has_been_released()) current_entry = 19;
+      if (modifier_down.has_been_released()) current_entry = 20;
 
     }
     else if (modifier_up.has_been_released() || modifier_mid.has_been_released() || modifier_down.has_been_released()) current_entry = 12;

@@ -17,6 +17,7 @@ class screen
   public:
     screen();
     void draw_title_value(String title, int value);
+    void draw_title_value(String title);
     void draw_title_value(String title, String value, int sub_value=0);
     void draw_title_value(String title, char value, int sub_value = 0);
     void draw_title_value(String title, char value, int N, int * values ,int sub_value = 0);

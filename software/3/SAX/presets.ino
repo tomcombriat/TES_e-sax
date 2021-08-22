@@ -116,7 +116,7 @@ void preset_save(byte i)
     EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 19, static_cast<uint16> (X_CC.get_biais()));
     EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 20, static_cast<uint16> (Y_CC.get_biais()));
     EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 21, static_cast<uint16> (pitchbend_amp_CC.get_value()));
-    EEPROM.write(EEPROM.PageBase0 + (i - 5) * N_presets_parameters + 22, static_cast<uint16> (breath.get_curvature()));
+    EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 22, static_cast<uint16> (breath.get_curvature()));
 
     /* EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 22, static_cast<uint16> (X_CC.get_value()));
       EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 23, static_cast<uint16> (Y_CC.get_value()));*/
@@ -145,14 +145,15 @@ void preset_recall(byte i)
 
     if (!pitchbend_enable)
     {
-      joy_Y.set_scaling_factor(JOY_BASE_SCALING);
-      joy_Y.set_min_max(-127, 127);
+      joy_Y.compute_scaling_factor(JOY_BASE_TARGET_RANGE);
+      joy_Y.set_min_max(-JOY_BASE_TARGET_RANGE, JOY_BASE_TARGET_RANGE);
     }
     else
     {
-      joy_Y.set_min_max(-8192, 8191);
-      joy_Y.set_scaling_factor(JOY_PB_SCALING);
+      joy_Y.set_min_max(-JOY_PB_TARGET_RANGE, JOY_PB_TARGET_RANGE - 1);
+      joy_Y.compute_scaling_factor(JOY_PB_TARGET_RANGE);
     }
+    joy_X.compute_scaling_factor(JOY_BASE_TARGET_RANGE);
 
     EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 6, &data);
     normal_up_modifier = static_cast<int16>(data);
@@ -223,14 +224,15 @@ void preset_recall(byte i)
 
     if (!pitchbend_enable)
     {
-      joy_Y.set_scaling_factor(JOY_BASE_SCALING);
-      joy_Y.set_min_max(-127, 127);
+      joy_Y.compute_scaling_factor(JOY_BASE_TARGET_RANGE);
+      joy_Y.set_min_max(-JOY_BASE_TARGET_RANGE, JOY_BASE_TARGET_RANGE);
     }
     else
     {
-      joy_Y.set_min_max(-8192, 8191);
-      joy_Y.set_scaling_factor(JOY_PB_SCALING);
+      joy_Y.set_min_max(-JOY_PB_TARGET_RANGE, JOY_PB_TARGET_RANGE - 1);
+      joy_Y.compute_scaling_factor(JOY_PB_TARGET_RANGE);
     }
+    joy_X.compute_scaling_factor(JOY_BASE_TARGET_RANGE);
 
     EEPROM.read(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 6, &data);
     normal_up_modifier = static_cast<int16>(data);
@@ -270,13 +272,41 @@ void preset_recall(byte i)
     EEPROM.read(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 21, &data);
     pitchbend_amp_CC.set_value(static_cast<int16>(data));
     pitchbend_amp_CC.update();
-    EEPROM.read(EEPROM.PageBase0 + (i - 5) * N_presets_parameters + 22, &data);
+    EEPROM.read(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 22, &data);
     breath.set_curvature(static_cast<short>(data));
   }
 
   for (int j = 0; j < 3; j++) arp[j].set_notes(arp_N[selected_arp[j]], arp_times[selected_arp[j]], arp_notes[selected_arp[j]], arp_name[selected_arp[j]], arp_long_names[selected_arp[j]]);
   for (int j = 0; j < 3; j++) chords[j].set_notes(chord_N[selected_chord[j]],  chord_notes[selected_chord[j]], chord_name[selected_chord[j]], chord_long_names[selected_chord[j]]);
   //breath.set_scaling_factor(((breath_sensitivity * 0.1) + 1) * 127 / 2000.);
+}
+
+void get_joy_input_ranges()
+{
+  uint16 data;
+  EEPROM.read(EEPROM.PageBase1 + (N_presets) * N_presets_parameters + 23, &data);
+  joy_X.set_input_range(static_cast<int16>(data));
+  EEPROM.read(EEPROM.PageBase1 + (N_presets) * N_presets_parameters + 24, &data);
+  joy_Y.set_input_range(static_cast<int16>(data));
+
+  if (!pitchbend_enable)
+  {
+    joy_Y.compute_scaling_factor(JOY_BASE_TARGET_RANGE);
+    joy_Y.set_min_max(-JOY_BASE_TARGET_RANGE, JOY_BASE_TARGET_RANGE);
+  }
+  else
+  {
+    joy_Y.set_min_max(-JOY_PB_TARGET_RANGE, JOY_PB_TARGET_RANGE - 1);
+    joy_Y.compute_scaling_factor(JOY_PB_TARGET_RANGE);
+  }
+  joy_X.compute_scaling_factor(JOY_BASE_TARGET_RANGE);
+}
+
+
+int save_joy_input_ranges()
+{
+  EEPROM.write(EEPROM.PageBase1 + (N_presets) * N_presets_parameters + 23, static_cast<uint16> (joy_X.get_input_range()));
+  EEPROM.write(EEPROM.PageBase1 + (N_presets) * N_presets_parameters + 24, static_cast<uint16> (joy_Y.get_input_range()));
 }
 
 

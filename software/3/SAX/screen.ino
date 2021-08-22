@@ -38,6 +38,24 @@ void screen::draw_title_value(String _title, int _value)
   }
 }
 
+void screen::draw_title_value(String _title)
+{
+  int keyprint = _title.length() *2;
+  if (keyprint != previous_keyprint || _title != previous_title)
+  {
+    previous_keyprint = keyprint;
+    previous_title = _title;
+    changed = true;
+    display.clearDisplay();
+    display.fillRect(0, 0, 128, 20, 1);
+    display.setTextSize(2);
+    display.setTextColor(0);
+    display.setCursor((128 - (_title.length()) * 12) / 2, 3);
+    display.print(_title);
+    display.setTextColor(1);
+  }
+}
+
 
 void screen::draw_title_value(String _title, String _value, int sub_value)
 {

@@ -44,6 +44,7 @@ Adafruit_SSD1306 display(OLED_RESET);
 #define SUB_MODIFIER_RESPONSE_TIME 20
 #define MODIFIER_RESPONSE_TIME 3
 #define JOYSTICK_RESPONSE_TIME 10
+#define JOYSTICK_SAFETY 15
 #define BATTERY_RESPONSE_TIME 3000
 #define BREATH_RESPONSE_TIME 1
 #define CC_DELTA_TIME 40
@@ -66,8 +67,10 @@ Adafruit_SSD1306 display(OLED_RESET);
 enum modes {MODE_NORMAL, MODE_EWI, MODE_ARPEGIO, MODE_CHORD, MODE_ARPEGIO_RAND};
 char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 
-#define JOY_BASE_SCALING 0.065
-#define JOY_PB_SCALING 4.2
+//#define JOY_BASE_SCALING 0.065
+//#define JOY_PB_SCALING 4.2
+#define JOY_BASE_TARGET_RANGE 127
+#define JOY_PB_TARGET_RANGE 8192
 
 
 
@@ -77,7 +80,7 @@ char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 analog_input joy_Y(PB0, 0, JOYSTICK_RESPONSE_TIME);
 analog_input joy_X(PA7, 0, JOYSTICK_RESPONSE_TIME);
 //analog_input breath(PA1, 0, BREATH_RESPONSE_TIME, 20);
-curved_analog_input breath(PA1, 4055,0, BREATH_RESPONSE_TIME);
+curved_analog_input breath(PA1, 4055, 0, BREATH_RESPONSE_TIME);
 
 
 /***************************/
@@ -197,7 +200,7 @@ battery batt(BATT_PIN, 2110, 2360, BATTERY_RESPONSE_TIME);
 
 void setup() {
 
- // Serial.begin(9600);
+  //Serial.begin(9600);
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
   display.clearDisplay();
@@ -222,8 +225,9 @@ void setup() {
   breath.calibrate();
   //breath.set_scaling_factor(((breath_sensitivity * 0.1) + 1) * 127 / 2000.);
   //breath.set_min_max(0, 127);
-  joy_X.set_scaling_factor(JOY_BASE_SCALING);
-  joy_Y.set_scaling_factor(JOY_BASE_SCALING);
+  //joy_X.set_scaling_factor(JOY_BASE_SCALING);
+  //joy_Y.set_scaling_factor(JOY_BASE_SCALING);
+  get_joy_input_ranges();
   joy_X.set_min_max(-127, 127);
   joy_Y.set_min_max(-127, 127);
 
@@ -237,7 +241,7 @@ void setup() {
   batt.update();
   batt.display_percentage();
 
-  
+
   eeprom_init();
   preset_recall(0);
   delay(500);
@@ -315,7 +319,7 @@ void loop() {
 
 
 
-  if (breath.value() > 1 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note  
+  if (breath.value() > 1 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note
   {
     byte vel = 127;
     if (dynamic_velocity) vel = breath.value();
