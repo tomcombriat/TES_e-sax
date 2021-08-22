@@ -111,6 +111,7 @@ void menu()
         if (breath_CC.get_control() > 128) breath_CC.set_control(128);
         ssd.draw_title_value("Breath CC", breath_CC.get_control());
         breath_CC.set_control(breath_CC.get_control() + up);
+        breath_LSB_CC.set_control((breath_CC.get_control() + 1) % 128);
         break;
 
       case 8:
