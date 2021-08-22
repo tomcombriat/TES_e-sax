@@ -99,7 +99,6 @@ void analog_input::set_invert(bool _inverted)
 void analog_input::compute_scaling_factor(int target)
 {
   target_output = target;
-  //input_range = min(-biased_min,biased_max);
   scaling_factor = 1.*target_output / input_range;
 }
 
