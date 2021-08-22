@@ -67,8 +67,7 @@ Adafruit_SSD1306 display(OLED_RESET);
 enum modes {MODE_NORMAL, MODE_EWI, MODE_ARPEGIO, MODE_CHORD, MODE_ARPEGIO_RAND};
 char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 
-//#define JOY_BASE_SCALING 0.065
-//#define JOY_PB_SCALING 4.2
+
 #define JOY_BASE_TARGET_RANGE 127
 #define JOY_PB_TARGET_RANGE 8192
 
@@ -223,10 +222,6 @@ void setup() {
   joy_X.calibrate();
   joy_Y.calibrate();
   breath.calibrate();
-  //breath.set_scaling_factor(((breath_sensitivity * 0.1) + 1) * 127 / 2000.);
-  //breath.set_min_max(0, 127);
-  //joy_X.set_scaling_factor(JOY_BASE_SCALING);
-  //joy_Y.set_scaling_factor(JOY_BASE_SCALING);
   get_joy_input_ranges();
   joy_X.set_min_max(-127, 127);
   joy_Y.set_min_max(-127, 127);
