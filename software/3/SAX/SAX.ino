@@ -79,7 +79,7 @@ char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 analog_input joy_Y(PB0, 0, JOYSTICK_RESPONSE_TIME);
 analog_input joy_X(PA7, 0, JOYSTICK_RESPONSE_TIME);
 //analog_input breath(PA1, 0, BREATH_RESPONSE_TIME, 20);
-curved_analog_input breath(PA1, 4055, 0, BREATH_RESPONSE_TIME);
+curved_analog_input breath(PA1, 4055, 0, BREATH_RESPONSE_TIME, 7, 7);
 
 
 /***************************/
@@ -135,6 +135,7 @@ int global_mode = MODE_NORMAL;
 bool played = false;
 bool pitchbend_enable = false;
 bool dynamic_velocity = true;
+bool HQ_breath = false;
 
 
 
@@ -146,6 +147,7 @@ bool dynamic_velocity = true;
 midi_cc X_CC(71, 64);
 midi_cc Y_CC(1, 64);
 midi_cc breath_CC(74);
+midi_cc breath_LSB_CC(75);
 midi_cc pitchbend_amp_CC(5);
 
 
@@ -269,6 +271,9 @@ void loop() {
   breath_CC.update();
 
 
+ 
+
+
   // Serial.println(breath.value());
   if ((global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND) && tap.has_change())  for (byte i = 0; i < 3; i++)  arp[i].set_tempo(tap.get_tempo_time());   // update tempo of arpegiators
 
@@ -293,10 +298,10 @@ void loop() {
       stop_played_time = millis();
     }
 
-    if (manager.get_note()[0] != 0 && breath.value() > 0)   // new note is playable  -> play it
+    if (manager.get_note()[0] != 0 && breath.MSB() > 0)   // new note is playable  -> play it
     {
       byte vel = 127;
-      if (dynamic_velocity) vel = breath.value();
+      if (dynamic_velocity) vel = breath.MSB();
       played = true;
       for (byte i = 0; i < POLYPHONY; i++)
       {
@@ -314,10 +319,10 @@ void loop() {
 
 
 
-  if (breath.value() > 1 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note
+  if (breath.MSB() > 1 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note
   {
     byte vel = 127;
-    if (dynamic_velocity) vel = breath.value();
+    if (dynamic_velocity) vel = breath.MSB();
 
     for (byte i = 0; i < POLYPHONY; i++)
     {
@@ -338,7 +343,7 @@ void loop() {
   }
 
 
-  if (breath.value() == 0 && played)    // breath is low enough to stop note
+  if (breath.MSB() == 0 && played)    // breath is low enough to stop note
   {
     for (byte i = 0; i < POLYPHONY; i++)
     {
@@ -397,9 +402,14 @@ void loop() {
   */
   if (breath.has_changed())
   {
-    breath_CC.set_value(breath.value());
+    breath_CC.set_value(breath.MSB());
+    if (HQ_breath)    breath_LSB_CC.set_value(breath.LSB());
   }
-  if (played)  breath_CC.update();  // update to see if there is a change
+  if (played)
+  {
+    breath_CC.update();  // update to see if there is a change
+    if (HQ_breath)  breath_LSB_CC.update();
+  }
 
   // if (breath_CC.has_changed() && played) MIDI.sendControlChange(breath_CC.get_control(), breath_CC.get_value(), midi_channel);
 

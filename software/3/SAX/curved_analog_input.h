@@ -17,10 +17,10 @@ class curved_analog_input
 {
   public:
     curved_analog_input();
-    curved_analog_input(int _pin, short _global_max , int _biais = 0 , unsigned long _response_time = 0, float _scaling_factor = 1);
+    curved_analog_input(int _pin, short _global_max , int _biais  , unsigned long _response_time, short _N_bits_low, short _N_bits_high);
 
     bool update();
-    int value();
+    int MSB(), LSB();
     void calibrate();
     void set_sensitivity(short _sensitivity);
     short get_sensitivity();
@@ -41,6 +41,7 @@ class curved_analog_input
     unsigned long response_time;
     unsigned long last_read_time = 0;
     void compute_coef();
+    short N_bits_low, N_bits_high;
 
 
 

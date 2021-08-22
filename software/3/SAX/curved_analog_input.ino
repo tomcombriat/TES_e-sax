@@ -4,16 +4,17 @@
 
 curved_analog_input::curved_analog_input() {}
 
-curved_analog_input::curved_analog_input(int _pin, short _global_max , int _biais , unsigned long _response_time, float _scaling_factor)
+curved_analog_input::curved_analog_input(int _pin, short _global_max , int _biais , unsigned long _response_time, short _N_bits_low, short _N_bits_high)
 {
   pin = _pin;
   pinMode(pin, INPUT);
   global_max = _global_max;
   biais = biais;
   response_time = _response_time;
-  scaling_factor = _scaling_factor;
+  N_bits_low = _N_bits_low;
+  N_bits_high = _N_bits_high;
   min_output = 0;
-  max_output = 127;
+  max_output = 1<< (N_bits_low + N_bits_high);
   calibrate();
 }
 
@@ -41,9 +42,16 @@ bool curved_analog_input::update()
 }
 
 
-int curved_analog_input::value()
+int curved_analog_input::MSB()
 {
-  return output_value;
+  return output_value >> N_bits_low;
+}
+
+int curved_analog_input::LSB()
+{
+  int mask = 0;
+  for (unsigned short i=0;i<N_bits_low;i++) mask += 1<<i;
+  return (output_value & mask);
 }
 
 void curved_analog_input::calibrate()
