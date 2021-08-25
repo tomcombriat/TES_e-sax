@@ -227,6 +227,7 @@ void setup() {
   get_joy_input_ranges();
   joy_X.set_min_max(-127, 127);
   joy_Y.set_min_max(-127, 127);
+  breath.set_min_max(0,16383);
 
   display.setRotation(2);
 
