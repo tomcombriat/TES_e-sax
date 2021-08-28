@@ -2,7 +2,7 @@
       Combriat 2018, 2019, 2020
       This file is part of the OS embedded in the e-sax - TES
       This code is under GPL3
-      This is the main program
+      This is the main program. To be compiled in O2
 */
 
 
@@ -79,7 +79,7 @@ char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 analog_input joy_Y(PB0, 0, JOYSTICK_RESPONSE_TIME);
 analog_input joy_X(PA7, 0, JOYSTICK_RESPONSE_TIME);
 //analog_input breath(PA1, 0, BREATH_RESPONSE_TIME, 20);
-curved_analog_input breath(PA1, 4055, 0, BREATH_RESPONSE_TIME, 7, 7);
+curved_analog_input breath(PA1, 4055*2, 0, BREATH_RESPONSE_TIME, 7, 7);
 
 
 /***************************/
@@ -201,7 +201,7 @@ battery batt(BATT_PIN, 2110, 2360, BATTERY_RESPONSE_TIME);
 
 void setup() {
 
-  //Serial.begin(115200);
+  Serial.begin(115200);
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
   display.clearDisplay();
@@ -227,7 +227,7 @@ void setup() {
   get_joy_input_ranges();
   joy_X.set_min_max(-127, 127);
   joy_Y.set_min_max(-127, 127);
-  breath.set_min_max(0,16383);
+  breath.set_min_max(0, 16383);
 
   display.setRotation(2);
 
@@ -272,7 +272,7 @@ void loop() {
   breath_CC.update();
 
 
- 
+
 
 
   // Serial.println(breath.value());

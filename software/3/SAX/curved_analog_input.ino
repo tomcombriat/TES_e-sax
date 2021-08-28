@@ -14,7 +14,7 @@ curved_analog_input::curved_analog_input(int _pin, short _global_max , int _biai
   N_bits_low = _N_bits_low;
   N_bits_high = _N_bits_high;
   min_output = 0;
-  max_output = 1<< (N_bits_low + N_bits_high);
+  max_output = 1 << (N_bits_low + N_bits_high);
   calibrate();
 }
 
@@ -24,8 +24,17 @@ bool curved_analog_input::update()
   changed = false;
   if (millis() - last_read_time > response_time)
   {
-    last_read_time = millis();
     int value = analogRead(pin) - biais;
+    last_read_time = millis();
+    value += analogRead(pin) - biais;
+
+
+
+    //Serial.print(" ");
+
+    //Serial.println(analogRead(pin) - biais);
+
+    // to test: value += analogRead(pin) - biais; (to gain 1 bit precision)
 
     if (value != previous_raw_value)
     {
@@ -38,6 +47,7 @@ bool curved_analog_input::update()
         output_value = tamp_output_value;
       }
     }
+    //value = analogRead(pin) - biais;
   }
 }
 
@@ -50,7 +60,7 @@ int curved_analog_input::MSB()
 int curved_analog_input::LSB()
 {
   int mask = 0;
-  for (unsigned short i=0;i<N_bits_low;i++) mask += 1<<i;
+  for (unsigned short i = 0; i < N_bits_low; i++) mask += 1 << i;
   return (output_value & mask);
 }
 
