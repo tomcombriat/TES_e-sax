@@ -101,7 +101,7 @@ void button::update()
     else state = last_manual_input;
     if (inverse_logic) state = !state;
 
-    if (state != previous_state)     last_event_time = millis();
+    if (state != previous_state)  last_event_time = millis();
     if (!state)  // is pressed
     {
       pressed = true;
