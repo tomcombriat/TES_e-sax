@@ -24,17 +24,14 @@ bool curved_analog_input::update()
   changed = false;
   if (millis() - last_read_time > response_time)
   {
-    int value = analogRead(pin) - biais;
+
+
+    int value = analogRead(pin) - biais;  // next 3 lines: 15micros
     last_read_time = millis();
     value += analogRead(pin) - biais;
 
 
 
-    //Serial.print(" ");
-
-    //Serial.println(analogRead(pin) - biais);
-
-    // to test: value += analogRead(pin) - biais; (to gain 1 bit precision)
 
     if (value != previous_raw_value)
     {

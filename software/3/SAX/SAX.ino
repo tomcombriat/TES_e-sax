@@ -201,7 +201,7 @@ battery batt(BATT_PIN, 2110, 2360, BATTERY_RESPONSE_TIME);
 
 void setup() {
 
-  Serial.begin(115200);
+  //Serial.begin(115200);
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
   display.clearDisplay();
