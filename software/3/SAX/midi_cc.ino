@@ -75,11 +75,12 @@ void midi_cc::update()
     int return_value = value * max_accessible_range / 127. + biais;
     if (return_value > 127) return_value = 127;
     if (return_value < 0) return_value = 0;
-    last_event_time = millis();
+    
 
 
     if (return_value != previous_value)
     {
+      last_event_time = millis();
       changed = true;
       previous_value = return_value;
       MIDI.sendControlChange(control, return_value, midi_channel);

@@ -404,7 +404,7 @@ void loop() {
   if (breath.has_changed())
   {
     breath_CC.set_value(breath.MSB());
-    if (HQ_breath)    breath_LSB_CC.set_value(breath.LSB());
+    if (HQ_breath) breath_LSB_CC.set_value(breath.LSB());
   }
   if (played)
   {
