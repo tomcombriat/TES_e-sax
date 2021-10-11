@@ -246,7 +246,7 @@ void setup() {
   eeprom_init();
   preset_recall(0);
   delay(500);
-
+//MIDI.sendRealTime(midi::Clock);
 
 
 }
