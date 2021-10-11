@@ -78,8 +78,8 @@ bool note_manager::update()
 
     unsigned int current_touch_no_mod = current_touch & (0b111111101111111111111111);  //haha (removing modifiers)
 
-  /*  Serial.println(current_touch_no_mod);
-    delay(100);*/
+    //Serial.println(current_touch_no_mod);
+    //delay(100);
 
     switch (current_touch_no_mod)
     {
@@ -154,6 +154,10 @@ bool note_manager::update()
         break;
 
       case 8697504: //A
+        note[0] = 57;
+        break;
+
+      case 8697760: //A
         note[0] = 57;
         break;
 
@@ -365,8 +369,8 @@ bool note_manager::update()
 
     unsigned int current_touch_no_mod = current_touch & (0b101101101111011111110011);  //haha (removing modifiers)
 
-    /*Serial.println(current_touch_no_mod);
-      delay(100);*/
+    //Serial.println(current_touch_no_mod);
+    //delay(100);
 
 
     switch (current_touch_no_mod)
@@ -482,6 +486,9 @@ bool note_manager::update()
         note[0] = 58;
         break;
       case 8697504:  // A
+        note [0] = 57;
+        break;
+      case 8697760:  // A
         note [0] = 57;
         break;
       case 8664736:  // A (F)
@@ -607,5 +614,3 @@ bool note_manager::update()
   }
   return false;
 }
-
-

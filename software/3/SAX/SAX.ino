@@ -204,6 +204,8 @@ void setup() {
   //Serial.begin(115200);
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
+  pinMode(BATT_PIN, INPUT);
+  
   display.clearDisplay();
   display.setCursor(30, 15);
   display.setTextColor(1, 0);
@@ -217,7 +219,7 @@ void setup() {
   delay(500);
   for (int i = 0; i < 3; i++) arp[i].set_notes(arp_N[i], arp_times[i], arp_notes[i], arp_name[i], arp_long_names[i]);
   for (int i = 0; i < 3; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i], chord_long_names[i]);
-  pinMode(BATT_PIN, INPUT);
+
 
   //joy_X.set_invert(true);
   //joy_Y.set_invert(true);
@@ -238,6 +240,7 @@ void setup() {
 
   batt.update();
   batt.display_percentage();
+  
 
 
   eeprom_init();
