@@ -1665,4 +1665,59 @@ F 3 "" H 6600 2750 60  0000 C CNN
 	1    6600 3500
 	0    1    1    0   
 $EndComp
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 61CA7701
+P 9500 4650
+F 0 "H1" H 9600 4696 50  0000 L CNN
+F 1 "MountingHole" H 9600 4605 50  0000 L CNN
+F 2 "MountingHole:MountingHole_4.3mm_M4_DIN965_Pad" H 9500 4650 50  0001 C CNN
+F 3 "~" H 9500 4650 50  0001 C CNN
+	1    9500 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 61CA8909
+P 10000 4650
+F 0 "H3" H 10100 4696 50  0000 L CNN
+F 1 "MountingHole" H 10100 4605 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad" H 10000 4650 50  0001 C CNN
+F 3 "~" H 10000 4650 50  0001 C CNN
+	1    10000 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 61CA9906
+P 9500 4950
+F 0 "H2" H 9600 4996 50  0000 L CNN
+F 1 "MountingHole" H 9600 4905 50  0000 L CNN
+F 2 "MountingHole:MountingHole_4.3mm_M4_DIN965_Pad" H 9500 4950 50  0001 C CNN
+F 3 "~" H 9500 4950 50  0001 C CNN
+	1    9500 4950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H4
+U 1 1 61CA990C
+P 10000 4950
+F 0 "H4" H 10100 4996 50  0000 L CNN
+F 1 "MountingHole" H 10100 4905 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad" H 10000 4950 50  0001 C CNN
+F 3 "~" H 10000 4950 50  0001 C CNN
+	1    10000 4950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H5
+U 1 1 61CC6588
+P 9400 5450
+F 0 "H5" H 9500 5496 50  0000 L CNN
+F 1 "MountingHole" H 9500 5405 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad" H 9400 5450 50  0001 C CNN
+F 3 "~" H 9400 5450 50  0001 C CNN
+	1    9400 5450
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
