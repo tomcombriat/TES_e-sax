@@ -64,8 +64,11 @@ int analog_input::value()
 
 void analog_input::calibrate()
 {
-  if (inverted) biais = 4096 - analogRead(pin);
-  else  biais = analogRead(pin);
+  int calib = 0;
+  for (int i=0;i<16;i++) calib += analogRead(pin);
+  calib = calib >> 4;
+  if (inverted) biais = 4096 - calib;
+  else  biais = calib;
 }
 
 void analog_input::set_biais(int _biais)
@@ -130,4 +133,3 @@ int analog_input::get_input_range()
 {
   return input_range;
 }
-

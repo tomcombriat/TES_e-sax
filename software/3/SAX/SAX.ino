@@ -246,6 +246,9 @@ void setup() {
   eeprom_init();
   preset_recall(0);
   delay(500);
+    joy_X.calibrate();
+  joy_Y.calibrate();
+  breath.calibrate();
 //MIDI.sendRealTime(midi::Clock);
 
 
