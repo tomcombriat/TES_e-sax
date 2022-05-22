@@ -1088,7 +1088,6 @@
     )
   )
 
-
   (junction (at 48.26 106.68) (diameter 0) (color 0 0 0 0)
     (uuid 0520f61d-4522-4301-a3fa-8ed0bf060f69)
   )
@@ -1253,8 +1252,8 @@
   (no_connect (at 72.39 154.94) (uuid 935057d5-6882-4c15-9a35-54677912ba12))
   (no_connect (at 186.69 63.5) (uuid a6738794-75ae-48a6-8949-ed8717400d71))
   (no_connect (at 146.05 172.72) (uuid a811e134-f5ca-47de-abe2-5d404fd93a3d))
-  (no_connect (at 146.05 175.26) (uuid a811e134-f5ca-47de-abe2-5d404fd93a3d))
-  (no_connect (at 146.05 177.8) (uuid a811e134-f5ca-47de-abe2-5d404fd93a3d))
+  (no_connect (at 146.05 175.26) (uuid a811e134-f5ca-47de-abe2-5d404fd93a3e))
+  (no_connect (at 146.05 177.8) (uuid a811e134-f5ca-47de-abe2-5d404fd93a3f))
   (no_connect (at 199.39 -53.34) (uuid aa14c3bd-4acc-4908-9d28-228585a22a9d))
   (no_connect (at 97.79 93.98) (uuid ca87f11b-5f48-4b57-8535-68d3ec2fe5a9))
   (no_connect (at 140.97 114.3) (uuid d692b5e6-71b2-4fa6-bc83-618add8d8fef))
@@ -3220,7 +3219,7 @@
     (property "Value" "Batt" (id 1) (at 268.6812 61.341 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Connector_JST:JST_EH_B2B-EH-A_1x02_P2.50mm_Vertical" (id 2) (at 267.97 58.42 0)
+    (property "Footprint" "" (id 2) (at 267.97 58.42 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 267.97 58.42 0)
@@ -4174,7 +4173,7 @@
       (reference "J4") (unit 1) (value "MIDI OUT Y:M5 - R:M4") (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-000061bf481a"
-      (reference "J5") (unit 1) (value "Batt") (footprint "Connector_JST:JST_EH_B2B-EH-A_1x02_P2.50mm_Vertical")
+      (reference "J5") (unit 1) (value "Batt") (footprint "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-000061e7f82b"
       (reference "J6") (unit 1) (value "Neck - Y:O BK:B R:3.3") (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical")
