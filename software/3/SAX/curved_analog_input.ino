@@ -33,7 +33,7 @@ bool curved_analog_input::update()
 
 
 
-    if (value != previous_raw_value)
+    if (value != previous_raw_value) // the bigger the curvature the flatter it is a low values
     {
       previous_raw_value = value;
       int tamp_output_value = scaling_factor * (value + curvature * value * (value - current_max));
