@@ -1,7 +1,7 @@
 #ifndef _note_manager_
 #define _note_manager_
 
-#define POLYPHONY 4
+#define POLYPHONY 12
 
 
 /*
@@ -13,6 +13,9 @@
       This is the include file for the class managing the mapping between keys and notes
 */
 
+
+byte note[POLYPHONY] = {0};
+byte previous_note[POLYPHONY] = {0};
 
 class note_manager
 {

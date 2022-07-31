@@ -14,8 +14,7 @@
 
 
 
-byte note[POLYPHONY] = {0};
-byte previous_note[POLYPHONY] = {0};
+
 
 
 note_manager::note_manager() {
@@ -597,6 +596,7 @@ bool note_manager::update()
         if (modifier_up.has_been_pressed() || modifier_mid.has_been_pressed() || modifier_down.has_been_pressed())         return true;
         if (modifier_up.has_been_released() || modifier_mid.has_been_released() || modifier_down.has_been_released())        return true;
       }
+
     }
   }  // end of non-normal mode
 

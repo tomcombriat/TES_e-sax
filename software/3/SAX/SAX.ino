@@ -65,6 +65,7 @@ Adafruit_SSD1306 display(OLED_RESET);
   #define MODE_ARPEGIO_RAND 3*/
 
 enum modes {MODE_NORMAL, MODE_EWI, MODE_ARPEGIO, MODE_CHORD, MODE_ARPEGIO_RAND};
+enum chord_modes {REPLACE, STACK}; 
 char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 
 
@@ -136,6 +137,7 @@ bool played = false;
 bool pitchbend_enable = false;
 bool dynamic_velocity = true;
 bool HQ_breath = false;
+byte chord_mode = STACK;
 
 
 
@@ -338,7 +340,7 @@ void loop() {
         if (i) MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel + 1);
         else MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel);
       }
-      else break;
+      //else break;
     }
     played = true;
     if (global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND)
@@ -359,7 +361,7 @@ void loop() {
         if (i) MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel + 1);
         else MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel);
       }
-      else break;
+      //else break;
     }
     played = false;
     stop_played_time = millis();
