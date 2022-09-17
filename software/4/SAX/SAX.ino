@@ -1,6 +1,6 @@
 /*
-      Combriat 2018, 2019, 2020
-      This file is part of the OS embedded in the e-sax - TES
+      Combriat 2018, 2019, 2020, 2021
+      This file is part of the OS embedded in the e-sax SN4 - TES
       This code is under GPL3
       This is the main program. To be compiled in O2
 */
@@ -266,7 +266,7 @@ void setup() {
   breath.calibrate();
   //MIDI.sendRealTime(midi::Clock);
 
-  for (int i=0; i<NUM_LEDS;i++) strip.setPixelColor(i,(0,0,255));
+  for (int i=0; i<NUM_LEDS;i++) strip.setPixelColor(i,strip.ColorHSV(45000));
   strip.show();
 
 
@@ -464,13 +464,14 @@ void loop() {
 
   if (global_mode != MODE_NORMAL)
   {
-    if (modifier_sub_up.has_been_released())
+   /* if (modifier_sub_up.has_been_released())
     {
       midi_octave += 1;
-    }
+    }*/
     if (modifier_sub_down.has_been_released())
     {
-      midi_octave -= 1;
+     if (octave.is_pressed()) midi_octave += 1;
+     else midi_octave -=1;
     }
   }
 
