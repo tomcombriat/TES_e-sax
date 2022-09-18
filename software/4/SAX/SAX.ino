@@ -32,6 +32,7 @@
 #include "presets.h"
 #include "battery.h"
 #include "curved_analog_input.h"
+#include "LEDstrand.h"
 
 
 
@@ -46,7 +47,6 @@
 #define OLED_RESET  12
 
 // Strand
-#define NUM_LEDS 20
 #define DATA_PIN 23
 
 #define SUB_MODIFIER_RESPONSE_TIME 20
@@ -60,9 +60,9 @@
 #define PITCHBEND_MIN_TIME 10
 #define SCREEN_UPDATE_TIME 20
 #define SCREEN_IDLE_WAITING_TIME 400
-#define STRAND_RESPONSE_TIME 40
+#define STRAND_RESPONSE_TIME 20
 #define BATT_PIN A7
-#define TEENSY
+
 
 
 
@@ -210,8 +210,10 @@ int8_t normal_down_modifier = +7;
 /*****************************/
 battery batt(BATT_PIN, 2110, 2360, BATTERY_RESPONSE_TIME);
 
-
-
+/*****************************
+ * STRAND
+ */
+LEDstrand strand;
 
 void setup() {
 
@@ -292,6 +294,7 @@ void loop() {
   joy_X.update();
   joy_Y.update();
   breath_CC.update();
+  strand.update();
 
   /*
     Serial.print(analogRead(A4));
