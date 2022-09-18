@@ -68,7 +68,7 @@ void curved_analog_input::calibrate()
 }
 
 
-void curved_analog_input::set_sensitivity(short _sensitivity)
+void curved_analog_input::set_sensitivity(int8_t _sensitivity)
 {
   sensitivity = _sensitivity;
   if (sensitivity > 10) sensitivity = 10;
@@ -76,11 +76,11 @@ void curved_analog_input::set_sensitivity(short _sensitivity)
   compute_coef();
 }
 
-short curved_analog_input::get_sensitivity() {
+int8_t curved_analog_input::get_sensitivity() {
   return sensitivity;
 }
 
-void curved_analog_input::set_curvature(short _curvature_index)
+void curved_analog_input::set_curvature(int8_t _curvature_index)
 {
   curvature_index = _curvature_index;
   if (curvature_index > 10) curvature_index = 10;
@@ -89,7 +89,7 @@ void curved_analog_input::set_curvature(short _curvature_index)
   compute_coef();
 }
 
-short curved_analog_input::get_curvature() {
+int8_t curved_analog_input::get_curvature() {
   return curvature_index;
 }
 
@@ -110,6 +110,3 @@ void curved_analog_input::compute_coef()
   scaling_factor = 1.*max_output / current_max;
   curvature = 1.*curvature_index / (10 * current_max);
 }
-
-
-

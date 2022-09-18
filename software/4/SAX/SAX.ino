@@ -134,8 +134,8 @@ unsigned long stop_played_time = 0;
 /****************************/
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI);
 byte midi_channel = 2;
-int midi_transpose = 0;
-int midi_octave = 0;
+int8_t midi_transpose = 0;
+int8_t midi_octave = 0;
 
 
 
@@ -144,7 +144,7 @@ int midi_octave = 0;
 /******* STATE **************/
 /****************************/
 bool delta_mode = true;
-int global_mode = MODE_NORMAL;
+byte global_mode = MODE_NORMAL;
 bool played = false;
 bool pitchbend_enable = false;
 bool dynamic_velocity = true;
@@ -176,7 +176,7 @@ tap_tempo tap;
 /******** ARPS **********/
 /************************/
 arpegio_mono arp[3];
-int selected_arp[3] = {0, 1, 2};
+uint8_t selected_arp[3] = {0, 1, 2};
 
 
 
@@ -184,11 +184,11 @@ int selected_arp[3] = {0, 1, 2};
 /****** CHORD ***********/
 /************************/
 chord chords[3];
-int selected_chord[3] = {0, 1, 2};
+uint8_t selected_chord[3] = {0, 1, 2};
 
 
 /************************/
-/****** pITCHBEND *******/
+/****** PITCHBEND *******/
 /************************/
 pitchbend PB;
 
@@ -197,9 +197,9 @@ pitchbend PB;
 /****************************/
 /** NORMAL MODE MODIFIERS ***/
 /****************************/
-int normal_up_modifier = +1;
-int normal_mid_modifier = -1;
-int normal_down_modifier = +7;
+int8_t normal_up_modifier = +1;
+int8_t normal_mid_modifier = -1;
+int8_t normal_down_modifier = +7;
 
 
 
@@ -258,7 +258,7 @@ void setup() {
 
   batt.update();
   batt.display_percentage();
-  eeprom_init();
+  //eeprom_init();
   preset_recall(0);
   delay(500);
   joy_X.calibrate();

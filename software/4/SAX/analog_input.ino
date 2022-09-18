@@ -125,13 +125,13 @@ void analog_input::calibrate_min_max()
   set_input_range(min(-biased_min, biased_max));
 }
 
-void analog_input::set_input_range(int ir)
+void analog_input::set_input_range(uint16_t ir)
 {
   input_range = ir;
   if (input_range < 1000) input_range = 1000;
 }
 
-int analog_input::get_input_range()
+uint16_t analog_input::get_input_range()
 {
   return input_range;
 }

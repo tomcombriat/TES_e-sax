@@ -33,8 +33,8 @@ class analog_input
     int up_down();
     void calibrate_min_max();
     void precalibrate_min_max();
-    void set_input_range(int ir);
-    int get_input_range();
+    void set_input_range(uint16_t ir);
+    uint16_t get_input_range();
 
   private:
     int pin;
@@ -48,8 +48,9 @@ class analog_input
     unsigned long last_read_time = 0;
     int up = 0;
     bool inverted = false;
-    int biased_min = 0, biased_max = 0,input_range = 0;
+    int biased_min = 0, biased_max = 0;
     int target_output = 0;
+    uint16_t input_range = 0;
     
     
 

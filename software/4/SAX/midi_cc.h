@@ -16,11 +16,11 @@ class midi_cc
 {
   public:
     midi_cc();
-    midi_cc(byte control, int _biais=0);
-    int get_value();
-    void set_value(int _value);
-    int get_biais();
-    void set_biais(int _biais);
+    midi_cc(byte control, byte _biais=0);
+    byte get_value();
+    void set_value(byte _value);
+    byte get_biais();
+    void set_biais(byte _biais);
     void increment_biais(int increment);
     void set_control(byte _control);
     byte get_control();
@@ -28,8 +28,8 @@ class midi_cc
     bool has_changed();
 
   private:
-    int value, previous_value;
-    int biais;
+    byte value, previous_value;
+    byte biais;
     byte control;
     bool changed;
     float max_accessible_range = 127;
@@ -39,4 +39,3 @@ class midi_cc
 
 
 #endif
-

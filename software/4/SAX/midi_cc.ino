@@ -15,7 +15,7 @@
 
 midi_cc::midi_cc() {};
 
-midi_cc::midi_cc(byte _control, int _biais) {
+midi_cc::midi_cc(byte _control, byte _biais) {
   value = 0;
   control = _control;
   previous_value = -1;
@@ -24,22 +24,22 @@ midi_cc::midi_cc(byte _control, int _biais) {
   last_event_time = 0;
 }
 
-int midi_cc::get_value()
+byte midi_cc::get_value()
 {
   return previous_value;
 }
 
-void midi_cc::set_value(int _value)
+void midi_cc::set_value(byte _value)
 {
   value = _value;
 }
 
-int midi_cc::get_biais()
+byte midi_cc::get_biais()
 {
   return biais;
 }
 
-void midi_cc::set_biais(int _biais)
+void midi_cc::set_biais(byte _biais)
 {
   biais = _biais;
 }
@@ -48,9 +48,10 @@ void midi_cc::increment_biais(int increment)
 {
   if (millis() - last_biais_time > CC_DELTA_TIME)  // just to limit increase in delta mode (not limited by analog_input timer)
   {
-    biais += increment;
-    if (biais > 127) biais = 127;
-    if (biais < 0) biais = 0;
+    int tamp_biais = biais + increment;
+    if (tamp_biais > 127) tamp_biais = 127;
+    if (tamp_biais < 0) tamp_biais = 0;
+    biais = tamp_biais;
     last_biais_time = millis();
   }
 }
@@ -71,7 +72,7 @@ void midi_cc::update()
   if (millis() - last_event_time > CC_MIN_TIME)
   {
 
-    max_accessible_range = max(127 - biais, biais);
+    max_accessible_range = max((int) 127 - biais,(int) biais);
     int return_value = value * max_accessible_range / 127. + biais;
     if (return_value > 127) return_value = 127;
     if (return_value < 0) return_value = 0;
@@ -92,4 +93,3 @@ bool midi_cc::has_changed()
 {
   return changed;
 }
-

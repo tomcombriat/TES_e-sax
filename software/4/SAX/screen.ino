@@ -201,7 +201,7 @@ void screen::draw_single_value(String _value)
   }
 }
 
-void screen::draw_standby_screen(int& _octave, int& _transpose, byte _global_mode, bool _delta_mode, byte _joystick, byte _joystick_bis, unsigned int  _tempo)
+void screen::draw_standby_screen(int8_t & _octave, int8_t& _transpose, byte _global_mode, bool _delta_mode, byte _joystick, byte _joystick_bis, unsigned int  _tempo)
 {
   //Serial.print(_octave);
   //Serial.print(" ");
@@ -360,4 +360,3 @@ void screen::force_update()
   changed = true;
   update();
 }
-
