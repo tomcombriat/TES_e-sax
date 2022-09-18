@@ -266,7 +266,7 @@ void setup() {
   breath.calibrate();
   //MIDI.sendRealTime(midi::Clock);
 
-  for (int i=0; i<NUM_LEDS;i++) strip.setPixelColor(i,strip.ColorHSV(45000));
+  for (int i=0; i<NUM_LEDS;i++) strip.setPixelColor(i,strip.ColorHSV(47000));
   strip.show();
 
 

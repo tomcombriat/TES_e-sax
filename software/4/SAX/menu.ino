@@ -46,8 +46,6 @@ void menu()
     right_menu.update();
     octave.update();
 
-
-
     int up = 0;
 
     if (!joy_SW.is_pressed()) up = joy_Y.up_down() + up_menu.has_been_pressed() - down_menu.has_been_pressed();
