@@ -19,7 +19,7 @@
 #define N_presets 20
 #define N_presets_parameters 23
 #define EEPROM_SIZE 2048
-int current_preset = 0;
+uint8_t current_preset = 0;
 
 void eeprom_init();
 void preset_save(byte i);
