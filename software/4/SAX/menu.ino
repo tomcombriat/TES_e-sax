@@ -156,15 +156,15 @@ void menu()
       case 12:
         ssd.draw_title_value("Global Mode", global_modes[global_mode]);
         global_mode += up;
-        if (global_mode > 4) global_mode = 0;
-        if (global_mode < 0) global_mode = 4;
+        if (global_mode == 5) global_mode = 0;
+        if (global_mode > 5) global_mode = 4;
         break;
 
       case 13:
         ssd.draw_title_value("Save Pt", current_preset);
         current_preset += up;
-        if (current_preset >= N_presets) current_preset = 0;
-        if (current_preset < 0) current_preset = N_presets - 1;
+        if (current_preset == N_presets) current_preset = 0;
+        if (current_preset > N_presets) current_preset = N_presets - 1;
 
         if (joy_SW.has_been_released())
         {
@@ -178,8 +178,8 @@ void menu()
       case 14:
         ssd.draw_title_value("Recall Pt", current_preset);
         current_preset += up;
-        if (current_preset >= N_presets) current_preset = 0;
-        if (current_preset < 0) current_preset = N_presets - 1;
+        if (current_preset == N_presets) current_preset = 0;
+        if (current_preset > N_presets) current_preset = N_presets - 1;
 
         if (joy_SW.has_been_released())
         {
@@ -254,15 +254,15 @@ void menu()
           case MODE_ARPEGIO:
             ssd.draw_title_value("ARP 0", arp[0].get_long_name(), arp[0].get_N_notes(), arp[0].get_notes(), arp[0].get_duration_scaling());
             selected_arp[0] += up;
-            if (selected_arp[0] >= N_ARP) selected_arp[0] = 0;
-            if (selected_arp[0] < 0) selected_arp[0] = N_ARP - 1;
+            if (selected_arp[0] == N_ARP) selected_arp[0] = 0;
+            if (selected_arp[0]  > N_ARP) selected_arp[0] = N_ARP - 1;
             arp[0].set_notes(arp_N[selected_arp[0]], arp_times[selected_arp[0]], arp_notes[selected_arp[0]], arp_name[selected_arp[0]], arp_long_names[selected_arp[0]]);
             break;
           case MODE_ARPEGIO_RAND:
             ssd.draw_title_value("ARP 0", arp[0].get_long_name(), arp[0].get_N_notes(), arp[0].get_notes(), arp[0].get_duration_scaling());
             selected_arp[0] += up;
-            if (selected_arp[0] >= N_ARP) selected_arp[0] = 0;
-            if (selected_arp[0] < 0) selected_arp[0] = N_ARP - 1;
+            if (selected_arp[0] == N_ARP) selected_arp[0] = 0;
+            if (selected_arp[0] > N_ARP) selected_arp[0] = N_ARP - 1;
             arp[0].set_notes(arp_N[selected_arp[0]], arp_times[selected_arp[0]], arp_notes[selected_arp[0]], arp_name[selected_arp[0]], arp_long_names[selected_arp[0]]);
             break;
           case MODE_EWI:
@@ -273,8 +273,8 @@ void menu()
             //ssd.draw_title_value("CHORD 0", chords[0].get_name());
             ssd.draw_title_value("CHORD 0", chords[0].get_long_name(), chords[0].get_N_notes(), chords[0].get_notes());
             selected_chord[0] += up;
-            if (selected_chord[0] >= N_CHORD) selected_chord[0] = 0;
-            if (selected_chord[0] < 0) selected_chord[0] = N_CHORD - 1;
+            if (selected_chord[0] == N_CHORD) selected_chord[0] = 0;
+            if (selected_chord[0] > N_CHORD) selected_chord[0] = N_CHORD - 1;
             chords[0].set_notes(chord_N[selected_chord[0]],  chord_notes[selected_chord[0]], chord_name[selected_chord[0]], chord_long_names[selected_chord[0]]);
             break;
         }
@@ -286,15 +286,15 @@ void menu()
           case MODE_ARPEGIO:
             ssd.draw_title_value("ARP 1", arp[1].get_long_name(), arp[1].get_N_notes(), arp[1].get_notes(), arp[1].get_duration_scaling());
             selected_arp[1] += up;
-            if (selected_arp[1] >= N_ARP) selected_arp[1] = 0;
-            if (selected_arp[1] < 0) selected_arp[1] = N_ARP - 1;
+            if (selected_arp[1] == N_ARP) selected_arp[1] = 0;
+            if (selected_arp[1] > N_ARP) selected_arp[1] = N_ARP - 1;
             arp[1].set_notes(arp_N[selected_arp[1]], arp_times[selected_arp[1]], arp_notes[selected_arp[1]], arp_name[selected_arp[1]], arp_long_names[selected_arp[1]]);
             break;
           case MODE_ARPEGIO_RAND:
             ssd.draw_title_value("ARP 1", arp[1].get_long_name(), arp[1].get_N_notes(), arp[1].get_notes(), arp[1].get_duration_scaling());
             selected_arp[1] += up;
-            if (selected_arp[1] >= N_ARP) selected_arp[1] = 0;
-            if (selected_arp[1] < 0) selected_arp[1] = N_ARP - 1;
+            if (selected_arp[1] == N_ARP) selected_arp[1] = 0;
+            if (selected_arp[1] > N_ARP) selected_arp[1] = N_ARP - 1;
             arp[1].set_notes(arp_N[selected_arp[1]], arp_times[selected_arp[1]], arp_notes[selected_arp[1]], arp_name[selected_arp[1]], arp_long_names[selected_arp[1]]);
             break;
           case MODE_EWI:
@@ -304,8 +304,8 @@ void menu()
           case MODE_CHORD:
             ssd.draw_title_value("CHORD 1", chords[1].get_long_name(), chords[1].get_N_notes(), chords[1].get_notes());
             selected_chord[1] += up;
-            if (selected_chord[1] >= N_CHORD) selected_chord[1] = 0;
-            if (selected_chord[1] < 0) selected_chord[1] = N_CHORD - 1;
+            if (selected_chord[1] == N_CHORD) selected_chord[1] = 0;
+            if (selected_chord[1] > N_CHORD) selected_chord[1] = N_CHORD - 1;
             chords[1].set_notes(chord_N[selected_chord[1]],  chord_notes[selected_chord[1]], chord_name[selected_chord[1]], chord_long_names[selected_chord[1]]);
             break;
         }
@@ -317,15 +317,15 @@ void menu()
           case MODE_ARPEGIO:
             ssd.draw_title_value("ARP 2", arp[2].get_long_name(), arp[2].get_N_notes(), arp[2].get_notes(), arp[2].get_duration_scaling());
             selected_arp[2] += up;
-            if (selected_arp[2] >= N_ARP) selected_arp[2] = 0;
-            if (selected_arp[2] < 0) selected_arp[2] = N_ARP - 1;
+            if (selected_arp[2] == N_ARP) selected_arp[2] = 0;
+            if (selected_arp[2] > N_ARP) selected_arp[2] = N_ARP - 1;
             arp[2].set_notes(arp_N[selected_arp[2]], arp_times[selected_arp[2]], arp_notes[selected_arp[2]], arp_name[selected_arp[2]], arp_long_names[selected_arp[2]]);
             break;
           case MODE_ARPEGIO_RAND:
             ssd.draw_title_value("ARP 2", arp[2].get_long_name(), arp[2].get_N_notes(), arp[2].get_notes(), arp[2].get_duration_scaling());
             selected_arp[2] += up;
-            if (selected_arp[2] >= N_ARP) selected_arp[2] = 0;
-            if (selected_arp[2] < 0) selected_arp[2] = N_ARP - 1;
+            if (selected_arp[2] == N_ARP) selected_arp[2] = 0;
+            if (selected_arp[2] > N_ARP) selected_arp[2] = N_ARP - 1;
             arp[2].set_notes(arp_N[selected_arp[2]], arp_times[selected_arp[2]], arp_notes[selected_arp[2]], arp_name[selected_arp[2]], arp_long_names[selected_arp[2]]);
             break;
           case MODE_EWI:
@@ -335,8 +335,8 @@ void menu()
           case MODE_CHORD:
             ssd.draw_title_value("CHORD 2", chords[2].get_long_name(), chords[2].get_N_notes(), chords[2].get_notes());
             selected_chord[2] += up;
-            if (selected_chord[2] >= N_CHORD) selected_chord[2] = 0;
-            if (selected_chord[2] < 0) selected_chord[2] = N_CHORD - 1;
+            if (selected_chord[2] == N_CHORD) selected_chord[2] = 0;
+            if (selected_chord[2] >N_CHORD) selected_chord[2] = N_CHORD - 1;
             chords[2].set_notes(chord_N[selected_chord[2]],  chord_notes[selected_chord[2]], chord_name[selected_chord[2]], chord_long_names[selected_chord[2]]);
             break;
         }

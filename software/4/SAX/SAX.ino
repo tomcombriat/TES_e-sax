@@ -211,18 +211,16 @@ int8_t normal_down_modifier = +7;
 battery batt(BATT_PIN, 2110, 2360, BATTERY_RESPONSE_TIME);
 
 /*****************************
- * STRAND
- */
+   STRAND
+*/
 LEDstrand strand;
 
 void setup() {
-
+  display.begin(SSD1306_SWITCHCAPVCC);
 
   analogReadResolution(12);
-  Serial.begin(115200);
-  display.begin(SSD1306_SWITCHCAPVCC);
-  strip.begin();  // initialize strip (required!)
-  strip.setBrightness(255);
+  //Serial.begin(115200);
+
 
   pinMode(BATT_PIN, INPUT);
 
@@ -235,7 +233,10 @@ void setup() {
   display.setTextSize(2);
   display.print("e-Sax");
   display.display();
-
+  strip.begin();  // initialize strip (required!)
+  strip.setBrightness(255);
+  strip.rainbow(0, 1);
+  strip.show();
   delay(500);
   for (int i = 0; i < 3; i++) arp[i].set_notes(arp_N[i], arp_times[i], arp_notes[i], arp_name[i], arp_long_names[i]);
   for (int i = 0; i < 3; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i], chord_long_names[i]);
@@ -268,8 +269,8 @@ void setup() {
   breath.calibrate();
   //MIDI.sendRealTime(midi::Clock);
 
-  for (int i=0; i<NUM_LEDS;i++) strip.setPixelColor(i,strip.ColorHSV(47000));
-  strip.show();
+  //for (int i=0; i<NUM_LEDS;i++) strip.setPixelColor(i,strip.ColorHSV(47000));
+  // strip.show();
 
 
 }
@@ -467,14 +468,14 @@ void loop() {
 
   if (global_mode != MODE_NORMAL)
   {
-   /* if (modifier_sub_up.has_been_released())
-    {
-      midi_octave += 1;
-    }*/
+    /* if (modifier_sub_up.has_been_released())
+      {
+       midi_octave += 1;
+      }*/
     if (modifier_sub_down.has_been_released())
     {
-     if (octave.is_pressed()) midi_octave += 1;
-     else midi_octave -=1;
+      if (octave.is_pressed()) midi_octave += 1;
+      else midi_octave -= 1;
     }
   }
 
