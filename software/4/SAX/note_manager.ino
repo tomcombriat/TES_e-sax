@@ -377,8 +377,8 @@ bool note_manager::update()
                                                              0b000000000000000000100000
     */
     unsigned int current_touch_no_mod = current_touch & (0b111110100111111001011111);  //haha (removing modifiers)
-    /*
-        Serial.println(current_touch_no_mod);
+    
+     /*   Serial.println(current_touch_no_mod);
         delay(100);
     */
 

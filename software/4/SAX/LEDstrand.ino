@@ -7,8 +7,8 @@ void LEDstrand::update()
 {
   if (millis() - last_update > STRAND_RESPONSE_TIME)
   {
-    
-    for (int i=0; i<NUM_LEDS;i++) strip.setPixelColor(i,strip.gamma32(strip.ColorHSV(manager.get_note()[0]<<10)));
+    int32_t color = strip.gamma32(strip.ColorHSV(((manager.get_note()[0])<<10) + ((PB.get_value()*pitchbend_amp_CC.get_value())>>3)));
+    for (int i=0; i<NUM_LEDS;i++) strip.setPixelColor(i,color);
     if (manager.get_note()[0] != 0) strip.setBrightness((byte) breath.MSB()<<1);
     else strip.setBrightness(0);
     strip.show();

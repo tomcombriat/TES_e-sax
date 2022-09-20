@@ -29,6 +29,7 @@ void pitchbend::update()
       changed = true;
       previous_value = value;
       MIDI.sendPitchBend(value, midi_channel);
+
     }
   }
 }
@@ -51,5 +52,3 @@ int pitchbend::get_value()
 {
   return value;
 }
-
-
