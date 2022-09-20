@@ -17,6 +17,7 @@ class LEDstrand
 {
   public:
   LEDstrand();
+  void splash();
   void update();
 
 

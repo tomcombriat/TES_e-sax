@@ -215,6 +215,7 @@ battery batt(BATT_PIN, 2110, 2360, BATTERY_RESPONSE_TIME);
 */
 LEDstrand strand;
 
+
 void setup() {
   display.begin(SSD1306_SWITCHCAPVCC);
 
@@ -234,10 +235,8 @@ void setup() {
   display.print("e-Sax");
   display.display();
   strip.begin();  // initialize strip (required!)
-  strip.setBrightness(255);
-  strip.rainbow(0, 1);
-  strip.show();
-  delay(500);
+strand.splash();
+  //delay(200);
   for (int i = 0; i < 3; i++) arp[i].set_notes(arp_N[i], arp_times[i], arp_notes[i], arp_name[i], arp_long_names[i]);
   for (int i = 0; i < 3; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i], chord_long_names[i]);
 

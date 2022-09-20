@@ -15,3 +15,17 @@ void LEDstrand::update()
     last_update = millis();
   }
 }
+
+void LEDstrand::splash()
+{
+    //strip.setBrightness(255);
+  strip.rainbow(0, 1);
+
+  for (int i=255;i>0; i--)
+  {
+    strip.setBrightness(strip.gamma8(i));
+      strip.show();
+      delay(3);
+
+  }
+}
