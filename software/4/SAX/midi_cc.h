@@ -17,8 +17,8 @@ class midi_cc
   public:
     midi_cc();
     midi_cc(byte control, byte _biais=0);
-    byte get_value();
-    void set_value(byte _value);
+    int get_value();
+    void set_value(int _value);
     byte get_biais();
     void set_biais(byte _biais);
     void increment_biais(int increment);
@@ -28,7 +28,7 @@ class midi_cc
     bool has_changed();
 
   private:
-    byte value, previous_value;
+    int value, previous_value;
     byte biais;
     byte control;
     bool changed;

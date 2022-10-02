@@ -24,12 +24,12 @@ midi_cc::midi_cc(byte _control, byte _biais) {
   last_event_time = 0;
 }
 
-byte midi_cc::get_value()
+int midi_cc::get_value()
 {
   return previous_value;
 }
 
-void midi_cc::set_value(byte _value)
+void midi_cc::set_value(int _value)
 {
   value = _value;
 }
