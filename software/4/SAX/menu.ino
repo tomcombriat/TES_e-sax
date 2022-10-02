@@ -238,17 +238,22 @@ void menu()
         break;
 
       case 17:
+        ssd.draw_title_value("LED",  LED_mode);
+        LED_mode += up;
+        break;
+        
+      case 18:
         ssd.draw_title_value("Tempo", (int) tap.get_tempo());
         tap.set_tempo(tap.get_tempo() + up);
         break;
 
-      case 18:
+      case 19:
         ssd.draw_title_value("Crazy tempo", "?!");
         if (up != 0) tap.set_tempo(400);
         break;
 
 
-      case 19:
+      case 20:
         switch (global_mode)
         {
           case MODE_ARPEGIO:
@@ -280,7 +285,7 @@ void menu()
         }
         break;
 
-      case 20:
+      case 21:
         switch (global_mode)
         {
           case MODE_ARPEGIO:
@@ -311,7 +316,7 @@ void menu()
         }
         break;
 
-      case 21:
+      case 22:
         switch (global_mode)
         {
           case MODE_ARPEGIO:
@@ -356,8 +361,8 @@ void menu()
     }
 
 
-    if (global_mode == MODE_NORMAL) N_entry = 17;
-    else N_entry = 22;
+    if (global_mode == MODE_NORMAL) N_entry = 18;
+    else N_entry = 23;
 
     if (current_entry < 0) current_entry = N_entry - 1;
     if (current_entry >= N_entry) current_entry = 0;
@@ -367,9 +372,9 @@ void menu()
     if (octave.is_pressed()) current_entry = 0;
     if (global_mode != MODE_NORMAL)
     {
-      if (modifier_up.has_been_released()) current_entry = 19;
-      if (modifier_mid.has_been_released()) current_entry = 20;
-      if (modifier_down.has_been_released()) current_entry = 21;
+      if (modifier_up.has_been_released()) current_entry = 20;
+      if (modifier_mid.has_been_released()) current_entry = 21;
+      if (modifier_down.has_been_released()) current_entry = 22;
 
     }
     else if (modifier_up.has_been_released() || modifier_mid.has_been_released() || modifier_down.has_been_released()) current_entry = 12;

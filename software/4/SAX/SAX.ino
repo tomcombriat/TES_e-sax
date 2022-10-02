@@ -150,6 +150,7 @@ bool pitchbend_enable = false;
 bool dynamic_velocity = true;
 bool HQ_breath = false;
 byte chord_mode = STACK;
+bool LED_mode = true;
 
 
 
@@ -220,7 +221,7 @@ void setup() {
   display.begin(SSD1306_SWITCHCAPVCC);
 
   analogReadResolution(12);
-  Serial.begin(115200);
+  //Serial.begin(115200);
 
 
   pinMode(BATT_PIN, INPUT);
@@ -294,7 +295,7 @@ void loop() {
   joy_X.update();
   joy_Y.update();
   breath_CC.update();
-  strand.update();
+  if(LED_mode)  strand.update();
 
   /*
     Serial.print(analogRead(A4));

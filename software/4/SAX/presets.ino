@@ -95,7 +95,7 @@ void preset_save(byte i)
   EEPROM.write(i * N_presets_parameters + 3, static_cast<byte> (global_mode));
   EEPROM.write(i * N_presets_parameters + 4, static_cast<byte> (breath.get_sensitivity()));
   EEPROM.write(i * N_presets_parameters + 5, static_cast<byte> (breath.get_curvature()));
-  EEPROM.write(i * N_presets_parameters + 6, static_cast<byte> (pitchbend_enable + (dynamic_velocity << 1) + (delta_mode << 2) + (HQ_breath << 3)));
+  EEPROM.write(i * N_presets_parameters + 6, static_cast<byte> (pitchbend_enable + (dynamic_velocity << 1) + (delta_mode << 2) + (HQ_breath << 3) + (LED_mode<<4)));
   EEPROM.write(i * N_presets_parameters + 7, static_cast<byte> (normal_up_modifier));
   EEPROM.write(i * N_presets_parameters + 8, static_cast<byte> (normal_mid_modifier));
   EEPROM.write(i * N_presets_parameters + 9, static_cast<byte> (normal_down_modifier));
@@ -137,6 +137,7 @@ void preset_recall(byte i)
   dynamic_velocity = bool(data & 0b10);
   delta_mode = bool(data & 0b100);
   HQ_breath = bool (data & 0b1000);
+  LED_mode = bool (data & 0b10000);
 
   if (!pitchbend_enable)
   {
