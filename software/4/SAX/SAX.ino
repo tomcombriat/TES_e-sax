@@ -236,7 +236,7 @@ void setup() {
   display.print("e-Sax");
   display.display();
   strip.begin();  // initialize strip (required!)
-strand.splash();
+  strand.splash();
   //delay(200);
   for (int i = 0; i < 3; i++) arp[i].set_notes(arp_N[i], arp_times[i], arp_notes[i], arp_name[i], arp_long_names[i]);
   for (int i = 0; i < 3; i++) chords[i].set_notes(chord_N[i], chord_notes[i], chord_name[i], chord_long_names[i]);
@@ -295,7 +295,7 @@ void loop() {
   joy_X.update();
   joy_Y.update();
   breath_CC.update();
-  if(LED_mode)  strand.update();
+  if (LED_mode)  strand.update();
 
   /*
     Serial.print(analogRead(A4));
@@ -389,7 +389,12 @@ void loop() {
     }
     played = false;
     stop_played_time = millis();
-    if (global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND)
+  }
+
+
+  if (global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND) // NEW: to catch that, sometimes, arp stops on a silent note (arp 1, 2, 3, 4)
+  {
+    if (breath.MSB() == 0)
     {
       for (byte i = 0; i < 3; i++) arp[i].stop();
     }
@@ -461,9 +466,12 @@ void loop() {
     if (modifier_mid.has_been_released()) arp[1].stop();
     if (modifier_down.has_been_released()) arp[2].stop();
 
-    if (modifier_up.has_been_pressed() && !arp[0].is_started()) arp[0].start();
-    if (modifier_mid.has_been_pressed() && !arp[1].is_started()) arp[1].start();
-    if (modifier_down.has_been_pressed() && !arp[2].is_started()) arp[2].start();
+    if (played)  // Just been pressed
+    {
+      if (modifier_up.has_been_pressed() && !arp[0].is_started()) arp[0].start();
+      if (modifier_mid.has_been_pressed() && !arp[1].is_started()) arp[1].start();
+      if (modifier_down.has_been_pressed() && !arp[2].is_started()) arp[2].start();
+    }
   }
 
   if (global_mode != MODE_NORMAL)

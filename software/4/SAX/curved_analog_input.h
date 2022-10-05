@@ -32,17 +32,18 @@ class curved_analog_input
 
   private:
     int pin;
-    int previous_raw_value=0;
+    int previous_raw_value = 0;
     int output_value = 0 ;
     float scaling_factor, curvature;
-    short min_output=0, max_output=127;
+    short min_output = 0, max_output = 127;
     short biais, current_max, global_max;
-    int8_t sensitivity = 0, curvature_index=0;
+    int8_t sensitivity = 0, curvature_index = 0;
     bool changed = false;
     unsigned long response_time;
     unsigned long last_read_time = 0;
     void compute_coef();
     short N_bits_low, N_bits_high;
+    int mask;
 
 
 

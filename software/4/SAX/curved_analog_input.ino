@@ -15,6 +15,8 @@ curved_analog_input::curved_analog_input(int _pin, short _global_max , int _biai
   N_bits_high = _N_bits_high;
   min_output = 0;
   max_output = 1 << (N_bits_low + N_bits_high);
+  mask = 0;
+  for (unsigned short i = 0; i < N_bits_low; i++) mask += 1 << i;
   calibrate();
 }
 
@@ -56,8 +58,6 @@ int curved_analog_input::MSB()
 
 int curved_analog_input::LSB()
 {
-  int mask = 0;
-  for (unsigned short i = 0; i < N_bits_low; i++) mask += 1 << i;
   return (output_value & mask);
 }
 
