@@ -376,11 +376,8 @@ void loop() {
   }
 
 
-<<<<<<< HEAD
-  if (breath.MSB() == 0 && played)    // breath is low enough to stop note  // REDUCE IN HQ
-=======
+
   if (breath.value() == 0 && played)    // breath is low enough to stop note
->>>>>>> testing
   {
     for (byte i = 0; i < POLYPHONY; i++)
     {
