@@ -395,7 +395,7 @@ void loop() {
 
   if (global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND) // NEW: to catch that, sometimes, arp stops on a silent note (arp 1, 2, 3, 4)
   {
-    if (breath.MSB() == 0)
+    if (breath.value() == 0)
     {
       for (byte i = 0; i < 3; i++) arp[i].stop();
     }

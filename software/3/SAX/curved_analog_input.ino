@@ -15,6 +15,9 @@ curved_analog_input::curved_analog_input(int _pin, short _global_max , int _biai
   N_bits_high = _N_bits_high;
   min_output = 0;
   max_output = 1 << (N_bits_low + N_bits_high);
+
+     LSB_mask = 0;
+  for (unsigned short i = 0; i < N_bits_low; i++) LSB_mask += 1 << i;
   calibrate();
 }
 
@@ -51,24 +54,34 @@ bool curved_analog_input::update()
 
 int curved_analog_input::MSB()
 {
-  return output_value >> N_bits_low;
+  if (output_value > threshold) return output_value >> N_bits_low;
+  else return 0;
 }
 
 int curved_analog_input::LSB()
 {
-  int mask = 0;
-  for (unsigned short i = 0; i < N_bits_low; i++) mask += 1 << i;
-  return (output_value & mask);
+
+
+ if (output_value > threshold) return (output_value & LSB_mask);
+ else return 0;
+}
+
+int curved_analog_input::value()
+{
+
+ if (output_value > threshold) return (output_value);
+ else return 0;
 }
 
 void curved_analog_input::calibrate()
 {
   biais = analogRead(pin);
+  threshold = 1.5*biais;
   compute_coef();
 }
 
 
-void curved_analog_input::set_sensitivity(short _sensitivity)
+void curved_analog_input::set_sensitivity(int8_t _sensitivity)
 {
   sensitivity = _sensitivity;
   if (sensitivity > 10) sensitivity = 10;
@@ -76,11 +89,11 @@ void curved_analog_input::set_sensitivity(short _sensitivity)
   compute_coef();
 }
 
-short curved_analog_input::get_sensitivity() {
+int8_t curved_analog_input::get_sensitivity() {
   return sensitivity;
 }
 
-void curved_analog_input::set_curvature(short _curvature_index)
+void curved_analog_input::set_curvature(int8_t _curvature_index)
 {
   curvature_index = _curvature_index;
   if (curvature_index > 10) curvature_index = 10;
@@ -89,7 +102,7 @@ void curved_analog_input::set_curvature(short _curvature_index)
   compute_coef();
 }
 
-short curved_analog_input::get_curvature() {
+int8_t curved_analog_input::get_curvature() {
   return curvature_index;
 }
 
@@ -110,6 +123,3 @@ void curved_analog_input::compute_coef()
   scaling_factor = 1.*max_output / current_max;
   curvature = 1.*curvature_index / (10 * current_max);
 }
-
-
-
