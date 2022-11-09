@@ -29,8 +29,8 @@ class chord
 #define N_CHORD 12
 
 
-const unsigned int chord0_N = 3;
-int chord0_notes[chord0_N] = {0, 7, 12};
+const unsigned int chord0_N = 2;
+int chord0_notes[chord0_N] = {0, 7};
 char chord0_name = 'P';
 String chord0_long_name = "Power";
 
