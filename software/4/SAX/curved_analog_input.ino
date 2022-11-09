@@ -15,6 +15,8 @@ curved_analog_input::curved_analog_input(int _pin, short _global_max , int _biai
   N_bits_high = _N_bits_high;
   min_output = 0;
   max_output = 1 << (N_bits_low + N_bits_high);
+     LSB_mask = 0;
+  for (unsigned short i = 0; i < N_bits_low; i++) LSB_mask += 1 << i;
   calibrate();
 }
 
@@ -51,19 +53,28 @@ bool curved_analog_input::update()
 
 int curved_analog_input::MSB()
 {
-  return output_value >> N_bits_low;
+  if (output_value > threshold) return output_value >> N_bits_low;
+  else return 0;
 }
 
 int curved_analog_input::LSB()
 {
-  int mask = 0;
-  for (unsigned short i = 0; i < N_bits_low; i++) mask += 1 << i;
-  return (output_value & mask);
+
+ if (output_value > threshold) return (output_value & LSB_mask);
+ else return 0;
+}
+
+int curved_analog_input::value()
+{
+
+ if (output_value > threshold) return (output_value);
+ else return 0;
 }
 
 void curved_analog_input::calibrate()
 {
   biais = analogRead(pin);
+  threshold = 1.5*biais;
   compute_coef();
 }
 

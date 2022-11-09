@@ -20,7 +20,7 @@ class curved_analog_input
     curved_analog_input(int _pin, short _global_max , int _biais  , unsigned long _response_time, short _N_bits_low, short _N_bits_high);
 
     bool update();
-    int MSB(), LSB();
+    int MSB(), LSB(),value();
     void calibrate();
     void set_sensitivity(int8_t _sensitivity);
     int8_t get_sensitivity();
@@ -34,6 +34,7 @@ class curved_analog_input
     int pin;
     int previous_raw_value=0;
     int output_value = 0 ;
+    int threshold = 0,LSB_mask;
     float scaling_factor, curvature;
     short min_output=0, max_output=127;
     short biais, current_max, global_max;

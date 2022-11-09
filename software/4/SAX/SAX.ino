@@ -376,7 +376,7 @@ void loop() {
   }
 
 
-  if (breath.MSB() == 0 && played)    // breath is low enough to stop note
+  if (breath.value() == 0 && played)    // breath is low enough to stop note
   {
     for (byte i = 0; i < POLYPHONY; i++)
     {
@@ -438,11 +438,11 @@ void loop() {
     breath_CC.set_value(breath.MSB());
     if (HQ_breath) breath_LSB_CC.set_value(breath.LSB());
   }
-  if (played)
-  {
+  /*if (played)
+  {*/
     breath_CC.update();  // update to see if there is a change
     if (HQ_breath)  breath_LSB_CC.update();
-  }
+  //}
 
   // if (breath_CC.has_changed() && played) MIDI.sendControlChange(breath_CC.get_control(), breath_CC.get_value(), midi_channel);
 
