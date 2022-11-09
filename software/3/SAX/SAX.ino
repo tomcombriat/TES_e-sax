@@ -53,7 +53,7 @@ Adafruit_SSD1306 display(OLED_RESET);
 #define SCREEN_UPDATE_TIME 20
 #define SCREEN_IDLE_WAITING_TIME 400
 #define BATT_PIN PA0
-
+#define BREATH_THRESHOLD 1.1
 
 
 
@@ -307,7 +307,7 @@ void loop() {
       stop_played_time = millis();
     }
 
-    if (manager.get_note()[0] != 0 && breath.MSB() > 0)   // new note is playable  -> play it
+    if (manager.get_note()[0] != 0 && breath.value() > 0)   // new note is playable  -> play it
     {
       byte vel = 127;
       if (dynamic_velocity) vel = breath.MSB();
@@ -328,7 +328,7 @@ void loop() {
 
 
 
-  if (breath.MSB() > 1 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note
+  if (breath.value() > 1 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note
   {
     byte vel = 127;
     if (dynamic_velocity) vel = breath.MSB();

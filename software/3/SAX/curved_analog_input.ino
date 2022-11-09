@@ -76,7 +76,7 @@ int curved_analog_input::value()
 void curved_analog_input::calibrate()
 {
   biais = analogRead(pin);
-  threshold = 1.5*biais;
+  threshold = BREATH_THRESHOLD*biais;
   compute_coef();
 }
 
