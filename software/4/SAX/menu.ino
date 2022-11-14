@@ -241,7 +241,7 @@ void menu()
         ssd.draw_title_value("LED",  LED_mode);
         LED_mode += up;
         break;
-        
+
       case 18:
         ssd.draw_title_value("Tempo", (int) tap.get_tempo());
         tap.set_tempo(tap.get_tempo() + up);
@@ -341,15 +341,19 @@ void menu()
             ssd.draw_title_value("CHORD 2", chords[2].get_long_name(), chords[2].get_N_notes(), chords[2].get_notes());
             selected_chord[2] += up;
             if (selected_chord[2] == N_CHORD) selected_chord[2] = 0;
-            if (selected_chord[2] >N_CHORD) selected_chord[2] = N_CHORD - 1;
+            if (selected_chord[2] > N_CHORD) selected_chord[2] = N_CHORD - 1;
             chords[2].set_notes(chord_N[selected_chord[2]],  chord_notes[selected_chord[2]], chord_name[selected_chord[2]], chord_long_names[selected_chord[2]]);
             break;
         }
         break;
+      case 23:
+        ssd.draw_title_value("Replac. ch.",  replacing_chord);
+        replacing_chord += up;
+        break;
     }
 
 
-   int inc_current_entry = joy_X.up_down() + right_menu.has_been_pressed() - left_menu.has_been_pressed();
+    int inc_current_entry = joy_X.up_down() + right_menu.has_been_pressed() - left_menu.has_been_pressed();
 
 
 
@@ -362,7 +366,8 @@ void menu()
 
 
     if (global_mode == MODE_NORMAL) N_entry = 18;
-    else N_entry = 23;
+    else if (global_mode != MODE_CHORD) N_entry = 23;
+    else N_entry = 24;
 
     if (current_entry < 0) current_entry = N_entry - 1;
     if (current_entry >= N_entry) current_entry = 0;

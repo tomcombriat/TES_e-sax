@@ -343,6 +343,10 @@ void menu()
             break;
         }
         break;
+      case 22:
+        ssd.draw_title_value("Replac. ch.",  replacing_chord);
+        replacing_chord += up;
+        break;
     }
 
 
@@ -357,7 +361,8 @@ void menu()
 
 
     if (global_mode == MODE_NORMAL) N_entry = 17;
-    else N_entry = 22;
+    else if (global_mode != MODE_CHORD) N_entry = 22;
+    else N_entry = 23;
 
     if (current_entry < 0) current_entry = N_entry - 1;
     if (current_entry >= N_entry) current_entry = 0;
