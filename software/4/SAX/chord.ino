@@ -33,37 +33,27 @@ void chord::set_notes(unsigned int N, int * _notes, char _name, String * _long_n
 
 void chord::apply(byte * note)
 {
-  if (chord_mode == REPLACE)
+  for (unsigned int i = 1; i < N_notes; i++)
   {
-    for (unsigned int i = 1; i < N_notes; i++)
+    bool common = false;
+    for (byte j = 1; j < POLYPHONY; j++) // search for a common note
     {
-      note[i] = note[0] + notes[i];
-    }
-  }
-  else if (chord_mode == STACK)
-  {
-    for (unsigned int i = 1; i < N_notes; i++)
-    {
-      bool common = false;
-      for (byte j = 1; j < POLYPHONY; j++) // search for a common note
+      if (previous_note[j] == note[0] + notes[i])
       {
-        if (previous_note[j] == note[0] + notes[i])
-        {
 
-          common = true;
+        common = true;
+        note[j] = note[0] + notes[i];
+        break;
+      }
+    }
+    if (!common) // no common note for chord found, take the first slot available
+    {
+      for (byte j = 1; j < POLYPHONY; j++)
+      {
+        if (previous_note[j] == 0 && note[j] == 0)
+        {
           note[j] = note[0] + notes[i];
           break;
-        }
-      }
-      if (!common) // no common note for chord found, take the first slot available
-      {
-        for (byte j = 1; j < POLYPHONY; j++)
-        {
-          if (previous_note[j] == 0 && note[j] == 0)
-          {
-            note[j] = note[0] + notes[i];
-            break;
-          }
         }
       }
     }

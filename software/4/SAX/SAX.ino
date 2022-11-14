@@ -78,7 +78,7 @@ Adafruit_NeoPixel strip(NUM_LEDS, DATA_PIN, NEO_GRBW + NEO_KHZ800);
   #define MODE_ARPEGIO_RAND 3*/
 
 enum modes {MODE_NORMAL, MODE_EWI, MODE_ARPEGIO, MODE_CHORD, MODE_ARPEGIO_RAND};
-enum chord_modes {REPLACE, STACK};
+//enum chord_modes {REPLACE, STACK};
 char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 
 
@@ -110,7 +110,7 @@ button up_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
 button down_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
 button right_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
 button left_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
-
+button *modifiers[3] = {&modifier_up, &modifier_mid, &modifier_down};
 
 //mettre up down et right left
 
@@ -150,7 +150,7 @@ bool played = false;
 bool pitchbend_enable = false;
 bool dynamic_velocity = true;
 bool HQ_breath = false;
-byte chord_mode = STACK;
+bool replacing_chord = true;
 bool LED_mode = true;
 
 
@@ -370,9 +370,17 @@ void loop() {
     played = true;
     if (global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND)
     {
-      if (modifier_up.is_pressed()) arp[0].start();
-      if (modifier_mid.is_pressed()) arp[1].start();
-      if (modifier_down.is_pressed()) arp[2].start();
+      int last_in_arp = -1;
+      unsigned long last_time = 0;
+      for (byte i = 0; i < 3; i++)
+      {
+        if (modifiers[i]->is_pressed() && modifiers[i]->get_last_press_time() > last_time)
+        {
+          last_time = modifiers[i]->get_last_press_time();
+          last_in_arp = i;
+        }
+      }
+      if (last_in_arp != -1) arp[last_in_arp].start();
     }
   }
 
@@ -446,9 +454,9 @@ void loop() {
     if (HQ_breath) breath_LSB_CC.set_value(breath.LSB());
   }
   /*if (played)
-  {*/
-    breath_CC.update();  // update to see if there is a change
-    if (HQ_breath)  breath_LSB_CC.update();
+    {*/
+  breath_CC.update();  // update to see if there is a change
+  if (HQ_breath)  breath_LSB_CC.update();
   //}
 
   // if (breath_CC.has_changed() && played) MIDI.sendControlChange(breath_CC.get_control(), breath_CC.get_value(), midi_channel);
@@ -464,15 +472,45 @@ void loop() {
   */
   if (global_mode == MODE_ARPEGIO || global_mode == MODE_ARPEGIO_RAND)
   {
-    if (modifier_up.has_been_released()) arp[0].stop();
-    if (modifier_mid.has_been_released()) arp[1].stop();
-    if (modifier_down.has_been_released()) arp[2].stop();
+    if (modifier_up.has_been_released())
+    {
+      arp[0].stop();
+      if (modifier_mid.is_pressed() && !arp[1].is_started()) arp[1].start();
+      if (modifier_down.is_pressed() && !arp[2].is_started()) arp[2].start();
+    }
+    if (modifier_mid.has_been_released())
+    {
+      arp[1].stop();
+      if (modifier_up.is_pressed() && !arp[0].is_started()) arp[0].start();
+      if (modifier_down.is_pressed() && !arp[2].is_started()) arp[2].start();
+    }
+    if (modifier_down.has_been_released())
+    {
+      arp[2].stop();
+      if (modifier_up.is_pressed() && !arp[0].is_started()) arp[0].start();
+      if (modifier_mid.is_pressed() && !arp[1].is_started()) arp[1].start();
+    }
 
     if (played)  // Just been pressed
     {
-      if (modifier_up.has_been_pressed() && !arp[0].is_started()) arp[0].start();
-      if (modifier_mid.has_been_pressed() && !arp[1].is_started()) arp[1].start();
-      if (modifier_down.has_been_pressed() && !arp[2].is_started()) arp[2].start();
+      if (modifier_up.has_been_pressed() && !arp[0].is_started())
+      {
+        arp[0].start();
+        arp[1].stop();
+        arp[2].stop();
+      }
+      if (modifier_mid.has_been_pressed() && !arp[1].is_started())
+      {
+        arp[1].start();
+        arp[0].stop();
+        arp[2].stop();
+      }
+      if (modifier_down.has_been_pressed() && !arp[2].is_started())
+      {
+        arp[2].start();
+        arp[0].stop();
+        arp[1].stop();
+      }
     }
   }
 

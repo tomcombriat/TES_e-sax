@@ -588,9 +588,26 @@ bool note_manager::update()
       /********* CHORDS **/
       if (global_mode == MODE_CHORD)
       {
-        if (modifier_up.is_pressed()) chords[0].apply(note);
-        if (modifier_mid.is_pressed()) chords[1].apply(note);
-        if (modifier_down.is_pressed()) chords[2].apply(note);
+        if (replacing_chord==true)
+        {
+          int last_in_chord = -1;
+          unsigned long last_time = 0;
+          for (byte i = 0; i < 3; i++)
+          {
+            if (modifiers[i]->is_pressed() && modifiers[i]->get_last_press_time() > last_time)
+            {
+              last_time = modifiers[i]->get_last_press_time();
+              last_in_chord = i;
+            }
+          }
+          if (last_in_chord != -1) chords[last_in_chord].apply(note);
+        }
+        else
+        {
+          if (modifier_up.is_pressed()) chords[0].apply(note);
+          if (modifier_mid.is_pressed()) chords[1].apply(note);
+          if (modifier_down.is_pressed()) chords[2].apply(note);
+        }
 
 
         if (modifier_up.has_been_pressed() || modifier_mid.has_been_pressed() || modifier_down.has_been_pressed())         return true;

@@ -77,8 +77,8 @@ bool note_manager::update()
 
     unsigned int current_touch_no_mod = current_touch & (0b111110101111111111111111);  //haha (removing modifiers)
 
- /*   Serial.println(current_touch_no_mod);
-    delay(100);*/
+    /*   Serial.println(current_touch_no_mod);
+       delay(100);*/
 
     switch (current_touch_no_mod)
     {
@@ -405,8 +405,8 @@ bool note_manager::update()
     */
     unsigned int current_touch_no_mod = current_touch & (0b111110100111111001011111);  //haha (removing modifiers)
 
-   /* Serial.println(current_touch_no_mod);
-    delay(100);*/
+    /* Serial.println(current_touch_no_mod);
+      delay(100);*/
 
 
     switch (current_touch_no_mod)
@@ -655,9 +655,26 @@ bool note_manager::update()
       /********* CHORDS **/
       if (global_mode == MODE_CHORD)
       {
-        if (modifier_up.is_pressed()) chords[0].apply(note);
-        if (modifier_mid.is_pressed()) chords[1].apply(note);
-        if (modifier_down.is_pressed()) chords[2].apply(note);
+        if (replacing_chord==true)
+        {
+          int last_in_chord = -1;
+          unsigned long last_time = 0;
+          for (byte i = 0; i < 3; i++)
+          {
+            if (modifiers[i]->is_pressed() && modifiers[i]->get_last_press_time() > last_time)
+            {
+              last_time = modifiers[i]->get_last_press_time();
+              last_in_chord = i;
+            }
+          }
+          if (last_in_chord != -1) chords[last_in_chord].apply(note);
+        }
+        else
+        {
+          if (modifier_up.is_pressed()) chords[0].apply(note);
+          if (modifier_mid.is_pressed()) chords[1].apply(note);
+          if (modifier_down.is_pressed()) chords[2].apply(note);
+        }
 
 
         if (modifier_up.has_been_pressed() || modifier_mid.has_been_pressed() || modifier_down.has_been_pressed())         return true;

@@ -161,3 +161,7 @@ bool button::has_been_released_after_long_press()
   return been_released_after_long_press;
 }
 
+unsigned long button::get_last_press_time()
+{
+  return last_press_time;
+}

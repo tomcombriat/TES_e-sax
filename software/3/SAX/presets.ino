@@ -73,7 +73,7 @@ void preset_save(byte i)
     EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 2, static_cast<uint16> (midi_octave));
     EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 3, static_cast<uint16> (global_mode));
     EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 4, static_cast<uint16> (breath.get_sensitivity()));
-    EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 5, static_cast<uint16> (pitchbend_enable + (dynamic_velocity << 1) + (delta_mode << 2) + (HQ_breath << 3)));
+    EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 5, static_cast<uint16> (pitchbend_enable + (dynamic_velocity << 1) + (delta_mode << 2) + (HQ_breath << 3) + (replacing_chord << 4)));
     EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 6, static_cast<uint16> (normal_up_modifier));
     EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 7, static_cast<uint16> (normal_mid_modifier));
     EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 8, static_cast<uint16> (normal_down_modifier));
@@ -99,7 +99,7 @@ void preset_save(byte i)
     EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 2, static_cast<uint16> (midi_octave));
     EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 3, static_cast<uint16> (global_mode));
     EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 4, static_cast<uint16> (breath.get_sensitivity()));
-    EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 5, static_cast<uint16> (pitchbend_enable + (dynamic_velocity << 1) + (delta_mode << 2)+ (HQ_breath << 3)));
+    EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 5, static_cast<uint16> (pitchbend_enable + (dynamic_velocity << 1) + (delta_mode << 2) + (HQ_breath << 3) + (replacing_chord << 4)));
     EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 6, static_cast<uint16> (normal_up_modifier));
     EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 7, static_cast<uint16> (normal_mid_modifier));
     EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 8, static_cast<uint16> (normal_down_modifier));
@@ -143,6 +143,7 @@ void preset_recall(byte i)
     dynamic_velocity = bool(data & 0b10);
     delta_mode = bool(data & 0b100);
     HQ_breath = bool (data & 0b1000);
+    replacing_chord = bool (data & 0b10000);
 
     if (!pitchbend_enable)
     {
@@ -223,7 +224,7 @@ void preset_recall(byte i)
     dynamic_velocity = bool(data & 0b10);
     delta_mode = bool(data & 0b100);
     HQ_breath = bool (data & 0b1000);
-
+    replacing_chord = bool (data & 0b10000);
     if (!pitchbend_enable)
     {
       joy_Y.compute_scaling_factor(JOY_BASE_TARGET_RANGE);
@@ -310,5 +311,3 @@ int save_joy_input_ranges()
   EEPROM.write(EEPROM.PageBase1 + (N_presets) * N_presets_parameters + 23, static_cast<uint16> (joy_X.get_input_range()));
   EEPROM.write(EEPROM.PageBase1 + (N_presets) * N_presets_parameters + 24, static_cast<uint16> (joy_Y.get_input_range()));
 }
-
-
