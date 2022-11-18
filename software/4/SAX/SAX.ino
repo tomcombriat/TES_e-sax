@@ -210,7 +210,7 @@ int8_t normal_down_modifier = +7;
 /*****************************/
 /**** BATTERY ****************/
 /*****************************/
-battery batt(BATT_PIN, 2110, 2360, BATTERY_RESPONSE_TIME);
+battery batt(BATT_PIN, 2360, 3200, BATTERY_RESPONSE_TIME);
 
 /*****************************
    STRAND
@@ -261,8 +261,14 @@ void setup() {
 
 
   batt.update();
-  batt.display_percentage();
+  //batt.display_percentage();
   //eeprom_init();
+  // TESTING
+  display.clearDisplay();
+     display.setCursor(30, 15);
+  display.print(analogRead(BATT_PIN));
+  display.display();
+  
   preset_recall(0);
   delay(500);
   joy_X.calibrate();
@@ -296,6 +302,7 @@ void loop() {
   joy_X.update();
   joy_Y.update();
   breath_CC.update();
+  batt.update();
   if (LED_mode)  strand.update();
 
   /*

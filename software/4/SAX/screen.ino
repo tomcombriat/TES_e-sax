@@ -241,6 +241,11 @@ void screen::draw_standby_screen(int8_t & _octave, int8_t& _transpose, byte _glo
     changed = true;
     tempo = _tempo;
   }
+    if (batt.get_value() != batterie)
+  {
+    changed = true;
+    batterie = batt.get_value();
+  }
   if (changed)
   {
     previous_keyprint = 666;
@@ -312,11 +317,16 @@ void screen::draw_standby_screen(int8_t & _octave, int8_t& _transpose, byte _glo
       display.setCursor(60, 36);
       display.print(chords[2].get_name());
     }
-
-
     display.setTextSize(3);
     display.setCursor(40, 25);
     display.print(global_modes[global_mode]);
+
+    // Battery
+    display.drawFastHLine(70,0, 18,1);
+    display.drawFastHLine(70,8, 19,1);
+    display.drawFastVLine(70,0,8,1);
+    display.drawFastVLine(88,0,8,1);
+    display.fillRect(72,2,batterie>>4,5,1);
   }
 }
 

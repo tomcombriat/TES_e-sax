@@ -15,14 +15,14 @@ class battery
 {
   public:
     battery(int _pin, int _min_val, int _max_val, unsigned long _response_time);
-    bool update();
-    int display_percentage();
+    void update();
+    int get_value();
     
 
   private:
     int pin, min_val, max_val;
     unsigned long response_time, last_read_time;
-    int current_percentage;
+    int value;
 
 };
 
