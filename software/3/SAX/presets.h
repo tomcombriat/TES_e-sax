@@ -24,5 +24,10 @@ void eeprom_init();
 void preset_save(byte i);
 void preset_recall(byte i);
 
+void increment_current_preset(int inc) {
+  current_preset+= inc;
+  if (current_preset<0) current_preset=N_presets-1;
+  if (current_preset == N_presets) current_preset=0;
+}
 
 #endif
