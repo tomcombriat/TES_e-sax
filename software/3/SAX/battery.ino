@@ -17,39 +17,23 @@ battery::battery(int _pin, int _min_val, int _max_val, unsigned long _response_t
   max_val = _max_val;
   response_time = _response_time;
   last_read_time = millis();
-  current_percentage = (analogRead(pin) - min_val) / (max_val - min_val) * 100;
-  if (current_percentage > 100) current_percentage = 100;
-  if (current_percentage < 0) current_percentage = 0;
+  
 }
 
-bool battery::update()
+void battery::update()
 {
   if (millis() - last_read_time > response_time)
   {
     last_read_time = millis();
-    current_percentage = (analogRead(pin) - min_val) / (max_val - min_val) * 100;
-    if (current_percentage > 100) current_percentage = 100;
-    if (current_percentage < 0) current_percentage = 0;
-    if (current_percentage < 10)
-    {
-      ssd.draw_low_batt();
-      return true;
-    }
+    value = ((analogRead(pin)-min_val)<<8)/(max_val-min_val);
+    if (value >255) value = 255;
+    else if (value <0) value = 0;
   }
-  return false;
+
 }
 
 
-int battery::display_percentage()
+int battery::get_value()
 {
-  display.clearDisplay();
-  display.setCursor(30, 05);
-  display.setTextSize(3);
-  display.print("BATT");
-  display.setCursor(30, 40);
-  display.setTextSize(2);
-  display.print(analogRead(pin));
-  //display.print(current_percentage);
-  //display.print("%");
-  display.display();
+return value;
 }

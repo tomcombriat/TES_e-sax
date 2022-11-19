@@ -38,7 +38,7 @@ class screen
     String previous_title = "aaaa";
     bool changed = false;
 
-    int octave = 0;
+  int octave = 0,batterie=255;
     int transpose = 0;
     byte global_mode = 0;
     bool delta_mode = 0;
