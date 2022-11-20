@@ -246,6 +246,11 @@ void screen::draw_standby_screen(int8_t & _octave, int8_t& _transpose, byte _glo
     changed = true;
     batterie = batt.get_value();
   }
+  if (current_preset_loaded != loaded_preset)
+  {
+    loaded_preset = current_preset_loaded;
+    changed = true;
+  }
   if (changed)
   {
     previous_keyprint = 666;
@@ -331,7 +336,7 @@ void screen::draw_standby_screen(int8_t & _octave, int8_t& _transpose, byte _glo
     // Loaded preset
     display.setTextSize(1);
       display.setCursor(27, 40);
-      display.print(current_preset_loaded);  // getting out of my logic… bah.
+      display.print(loaded_preset);  // getting out of my logic… bah.
   }
 }
 

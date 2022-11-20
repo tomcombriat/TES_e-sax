@@ -545,13 +545,11 @@ void loop() {
   */
   if (up_preset.has_been_pressed())
   {
-    up_preset.manual_input(0);
     increment_preset(current_preset_loaded, 1);
     preset_recall(current_preset_loaded);
   }
   if (down_preset.has_been_pressed())
   {
-    down_preset.manual_input(0);
     increment_preset(current_preset_loaded, -1);
     preset_recall(current_preset_loaded);
   }

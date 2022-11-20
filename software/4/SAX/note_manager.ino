@@ -55,6 +55,9 @@ bool note_manager::update()
   right_menu.manual_input(0);
   left_menu.manual_input(0);
   up_menu.manual_input(0);
+  up_preset.manual_input(0);
+  down_preset.manual_input(0);
+  
 
 
 

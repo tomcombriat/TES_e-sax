@@ -45,6 +45,7 @@ class screen
     byte joystick = 0;
     byte joystick_bis = 0;
     unsigned int tempo = 0;
+    int loaded_preset = 0;
 };
 
 //char global_modes[5] = {'N','E', 'A', 'C','R'};
