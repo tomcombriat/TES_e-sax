@@ -134,7 +134,7 @@ int8_t midi_octave = 0;
 /******* STATE **************/
 /****************************/
 bool delta_mode = true;
-int global_mode = MODE_NORMAL;
+byte global_mode = MODE_NORMAL;
 bool played = false;
 bool pitchbend_enable = false;
 bool dynamic_velocity = true;
@@ -166,7 +166,7 @@ tap_tempo tap;
 /******** ARPS **********/
 /************************/
 arpegio_mono arp[3];
-int selected_arp[3] = {0, 1, 2};
+uint8_t selected_arp[3] = {0, 1, 2};
 
 
 
@@ -174,7 +174,7 @@ int selected_arp[3] = {0, 1, 2};
 /****** CHORD ***********/
 /************************/
 chord chords[3];
-int selected_chord[3] = {0, 1, 2};
+uint8_t selected_chord[3] = {0, 1, 2};
 
 
 /************************/
