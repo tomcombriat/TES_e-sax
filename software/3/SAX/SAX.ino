@@ -65,7 +65,7 @@ Adafruit_SSD1306 display(OLED_RESET);
   #define MODE_ARPEGIO_RAND 3*/
 
 enum modes {MODE_NORMAL, MODE_EWI, MODE_ARPEGIO, MODE_CHORD, MODE_ARPEGIO_RAND};
-enum chord_modes {REPLACE, STACK}; 
+enum chord_modes {REPLACE, STACK};
 char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 
 
@@ -80,7 +80,7 @@ char global_modes[5] = {'N', 'E', 'A', 'C', 'R'};
 analog_input joy_Y(PB0, 0, JOYSTICK_RESPONSE_TIME);
 analog_input joy_X(PA7, 0, JOYSTICK_RESPONSE_TIME);
 //analog_input breath(PA1, 0, BREATH_RESPONSE_TIME, 20);
-curved_analog_input breath(PA1, 4055*2, 0, BREATH_RESPONSE_TIME, 7, 7);
+curved_analog_input breath(PA1, 4055 * 2, 0, BREATH_RESPONSE_TIME, 7, 7);
 
 
 /***************************/
@@ -97,7 +97,9 @@ button up_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
 button down_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
 button right_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
 button left_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
-button *modifiers[3] = {&modifier_up,&modifier_mid,&modifier_down};
+button *modifiers[3] = {&modifier_up, &modifier_mid, &modifier_down};
+button up_preset (-1, true, SUB_MODIFIER_RESPONSE_TIME);
+button down_preset (-1, true, SUB_MODIFIER_RESPONSE_TIME);
 
 //mettre up down et right left
 
@@ -122,8 +124,8 @@ unsigned long stop_played_time = 0;
 /****************************/
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial2, MIDI);
 byte midi_channel = 2;
-int midi_transpose = 0;
-int midi_octave = 0;
+int8_t midi_transpose = 0;
+int8_t midi_octave = 0;
 
 
 
@@ -207,7 +209,7 @@ void setup() {
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
   pinMode(BATT_PIN, INPUT);
-  
+
   display.clearDisplay();
   display.setCursor(30, 15);
   display.setTextColor(1, 0);
@@ -240,18 +242,22 @@ void setup() {
   pitchbend_amp_CC.update();
 
 
+  // TESTING
   batt.update();
-  batt.display_percentage();
-  
+  display.clearDisplay();
+  display.setCursor(30, 15);
+  display.print(analogRead(BATT_PIN));
+  display.display();
+
 
 
   eeprom_init();
   preset_recall(0);
   delay(500);
-    joy_X.calibrate();
+  joy_X.calibrate();
   joy_Y.calibrate();
   breath.calibrate();
-//MIDI.sendRealTime(midi::Clock);
+  //MIDI.sendRealTime(midi::Clock);
 
 
 }
@@ -278,7 +284,9 @@ void loop() {
   joy_X.update();
   joy_Y.update();
   breath_CC.update();
-
+  batt.update();
+  up_preset.update();
+  down_preset.update();
 
 
 
@@ -328,7 +336,7 @@ void loop() {
 
 
 
-  if (breath.value() > 1 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note
+  if (breath.value() > 0 && !played && manager.get_note()[0] != 0)    // breath is loud enough to play note
   {
     byte vel = 127;
     if (dynamic_velocity) vel = breath.MSB();
@@ -428,9 +436,9 @@ void loop() {
     if (HQ_breath) breath_LSB_CC.set_value(breath.LSB());
   }
   /*if (played)
-  {*/
-    breath_CC.update();  // update to see if there is a change
-    if (HQ_breath)  breath_LSB_CC.update();
+    {*/
+  breath_CC.update();  // update to see if there is a change
+  if (HQ_breath)  breath_LSB_CC.update();
   //}
 
   // if (breath_CC.has_changed() && played) MIDI.sendControlChange(breath_CC.get_control(), breath_CC.get_value(), midi_channel);
@@ -498,6 +506,21 @@ void loop() {
     {
       midi_octave -= 1;
     }
+  }
+
+
+  /*******************************
+      QUICK CHANGE OF PRESET
+  */
+  if (up_preset.has_been_pressed())
+  {
+    increment_preset(current_preset_loaded, 1);
+    preset_recall(current_preset_loaded);
+  }
+  if (down_preset.has_been_pressed())
+  {
+    increment_preset(current_preset_loaded, -1);
+    preset_recall(current_preset_loaded);
   }
 
 

@@ -55,6 +55,8 @@ bool note_manager::update()
   right_menu.manual_input(0);
   left_menu.manual_input(0);
   up_menu.manual_input(0);
+  up_preset.manual_input(0);
+  down_preset.manual_input(0);
 
 
 
@@ -77,8 +79,8 @@ bool note_manager::update()
 
     unsigned int current_touch_no_mod = current_touch & (0b111111101111111111111111);  //haha (removing modifiers)
 
-    //Serial.println(current_touch_no_mod);
-    //delay(100);
+   /* Serial.println(current_touch_no_mod);
+   delay(100);*/
 
     switch (current_touch_no_mod)
     {
@@ -338,6 +340,14 @@ bool note_manager::update()
         note[0] = 66;
         break;
 
+        
+      case 8828448:
+        up_preset.manual_input(1);
+        break;
+      case 8697392:
+        down_preset.manual_input(1);
+        break;
+
 
 
     }
@@ -367,10 +377,10 @@ bool note_manager::update()
   {
 
     unsigned int current_touch_no_mod = current_touch & (0b101101101111011111110011);  //haha (removing modifiers)
-
-    //Serial.println(current_touch_no_mod);
-    //delay(100);
-
+/*
+    Serial.println(current_touch_no_mod);
+    delay(100);
+*/
 
     switch (current_touch_no_mod)
     {
@@ -536,6 +546,12 @@ bool note_manager::update()
         note[0] = 46;
         break;
 
+      case 8828448:
+        up_preset.manual_input(1);
+        break;
+      case 8697392:
+        down_preset.manual_input(1);
+        break;
 
       case 8820272:  // TAP
         if (previous_touch_no_mod != 8820272) tap.add_tap();
