@@ -39,7 +39,7 @@ bool note_manager::update()
 {
   unsigned int current_touch = read_shift_regs();
 
-  /* Serial.println(current_touch, BIN);
+ /*Serial.println(current_touch, BIN);
      delay(100);*/
 
   // Getting modifying touches
@@ -80,7 +80,7 @@ bool note_manager::update()
 
     unsigned int current_touch_no_mod = current_touch & (0b111110101111111111111111);  //haha (removing modifiers)
 
-  /*  Serial.println(current_touch_no_mod);
+   /* Serial.println(current_touch_no_mod);
     delay(100);*/
 
     switch (current_touch_no_mod)
@@ -210,7 +210,7 @@ bool note_manager::update()
         note[0] = 57;
         break;
 
-      case 16389720: //A# (std)
+      case 12064344: //A# (std)
         note[0] = 58;
         break;
 
@@ -364,7 +364,7 @@ bool note_manager::update()
              note[0] = 64;
              break;
       */
-      case 16400346:  //F
+      case 16400218:  //F
         note[0] = 65;
         break;
 
@@ -374,10 +374,10 @@ bool note_manager::update()
 
 
 
-      case 15210072:
+      case 7894616:
         up_preset.manual_input(1);
         break;
-      case 11023448:
+      case 7878224:
         down_preset.manual_input(1);
         break;
 
@@ -417,7 +417,7 @@ bool note_manager::update()
     */
     unsigned int current_touch_no_mod = current_touch & (0b111110100111111001011111);  //haha (removing modifiers)
 
-  /*  Serial.println(current_touch_no_mod);
+    /*Serial.println(current_touch_no_mod);
     delay(100);*/
 
 
@@ -615,10 +615,10 @@ bool note_manager::update()
         note[0] = 46;
         break;
 
-      case 15210072:
+      case 7894616:
         up_preset.manual_input(1);
         break;
-      case 11023448:
+      case 7878224:
         down_preset.manual_input(1);
         break;
 

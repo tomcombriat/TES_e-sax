@@ -224,7 +224,7 @@ void setup() {
   display.begin(SSD1306_SWITCHCAPVCC);
 
   analogReadResolution(12);
-  //Serial.begin(115200);
+ //Serial.begin(115200);
 
 
   pinMode(BATT_PIN, INPUT);
