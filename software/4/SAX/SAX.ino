@@ -111,6 +111,8 @@ button down_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
 button right_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
 button left_menu(-1, true, SUB_MODIFIER_RESPONSE_TIME);
 button *modifiers[3] = {&modifier_up, &modifier_mid, &modifier_down};
+button up_preset (-1, true, SUB_MODIFIER_RESPONSE_TIME);
+button down_preset (-1, true, SUB_MODIFIER_RESPONSE_TIME);
 
 //mettre up down et right left
 
@@ -265,10 +267,10 @@ void setup() {
   //eeprom_init();
   // TESTING
   display.clearDisplay();
-     display.setCursor(30, 15);
+  display.setCursor(30, 15);
   display.print(analogRead(BATT_PIN));
   display.display();
-  
+
   preset_recall(0);
   delay(500);
   joy_X.calibrate();
@@ -303,6 +305,8 @@ void loop() {
   joy_Y.update();
   breath_CC.update();
   batt.update();
+  up_preset.update();
+  down_preset.update();
   if (LED_mode)  strand.update();
 
   /*
@@ -534,6 +538,23 @@ void loop() {
     }
   }
 
+
+
+  /*******************************
+      QUICK CHANGE OF PRESET
+  */
+  if (up_preset.has_been_pressed())
+  {
+    up_preset.manual_input(0);
+    increment_preset(current_preset_loaded, 1);
+    preset_recall(current_preset_loaded);
+  }
+  if (down_preset.has_been_pressed())
+  {
+    down_preset.manual_input(0);
+    increment_preset(current_preset_loaded, -1);
+    preset_recall(current_preset_loaded);
+  }
 
   /*****************************
         MENU

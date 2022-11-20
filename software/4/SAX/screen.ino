@@ -272,7 +272,7 @@ void screen::draw_standby_screen(int8_t & _octave, int8_t& _transpose, byte _glo
 
     if (global_mode == MODE_ARPEGIO)
     {
-      display.setCursor(50, 0);
+      display.setCursor(35, 0);
       display.print(tempo);
       display.setTextSize(2);
       display.setCursor(60, 20);
@@ -285,7 +285,7 @@ void screen::draw_standby_screen(int8_t & _octave, int8_t& _transpose, byte _glo
 
     if (global_mode == MODE_ARPEGIO_RAND)
     {
-      display.setCursor(50, 0);
+      display.setCursor(35, 0);
       display.print(tempo);
       display.setTextSize(2);
       display.setCursor(60, 20);
@@ -322,11 +322,16 @@ void screen::draw_standby_screen(int8_t & _octave, int8_t& _transpose, byte _glo
     display.print(global_modes[global_mode]);
 
     // Battery
-    display.drawFastHLine(70,0, 18,1);
-    display.drawFastHLine(70,8, 19,1);
-    display.drawFastVLine(70,0,8,1);
-    display.drawFastVLine(88,0,8,1);
-    display.fillRect(72,2,batterie>>4,5,1);
+    display.drawFastHLine(78,0, 18,1);
+    display.drawFastHLine(78,8, 19,1);
+    display.drawFastVLine(78,0,8,1);
+    display.drawFastVLine(96,0,8,1);
+    display.fillRect(80,2,batterie>>4,5,1);
+
+    // Loaded preset
+    display.setTextSize(1);
+      display.setCursor(27, 40);
+      display.print(current_preset_loaded);  // getting out of my logic… bah.
   }
 }
 

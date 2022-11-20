@@ -38,9 +38,9 @@ byte * note_manager::get_previous_note()
 bool note_manager::update()
 {
   unsigned int current_touch = read_shift_regs();
-  /*
-    Serial.println(current_touch, BIN);
-      delay(100);*/
+
+  /* Serial.println(current_touch, BIN);
+     delay(100);*/
 
   // Getting modifying touches
   octave.manual_input( bool(current_touch & 0b000000010000000000000000)); //mouhahahah
@@ -69,7 +69,7 @@ bool note_manager::update()
 
 
   /*****************************
-      MODE NORMAL: like a real sax, no more, no less
+    MODE NORMAL: like a real sax, no more, no less
   */
 
   if (global_mode == MODE_NORMAL)
@@ -77,8 +77,8 @@ bool note_manager::update()
 
     unsigned int current_touch_no_mod = current_touch & (0b111110101111111111111111);  //haha (removing modifiers)
 
-    /*   Serial.println(current_touch_no_mod);
-       delay(100);*/
+  /*  Serial.println(current_touch_no_mod);
+    delay(100);*/
 
     switch (current_touch_no_mod)
     {
@@ -365,9 +365,18 @@ bool note_manager::update()
         note[0] = 65;
         break;
 
-        /*  case 14088184:  //F#
-            note[0] = 66;
-            break;*/
+      /*  case 14088184:  //F#
+          note[0] = 66;
+          break;*/
+
+
+
+      case 15210072:
+        up_preset.manual_input(1);
+        break;
+      case 11023448:
+        down_preset.manual_input(1);
+        break;
 
 
 
@@ -405,8 +414,8 @@ bool note_manager::update()
     */
     unsigned int current_touch_no_mod = current_touch & (0b111110100111111001011111);  //haha (removing modifiers)
 
-    /* Serial.println(current_touch_no_mod);
-      delay(100);*/
+  /*  Serial.println(current_touch_no_mod);
+    delay(100);*/
 
 
     switch (current_touch_no_mod)
@@ -603,6 +612,14 @@ bool note_manager::update()
         note[0] = 46;
         break;
 
+      case 15210072:
+        up_preset.manual_input(1);
+        break;
+      case 11023448:
+        down_preset.manual_input(1);
+        break;
+
+
 
       case 6829656:  // TAP
         if (previous_touch_no_mod != 6829656) tap.add_tap();
@@ -655,7 +672,7 @@ bool note_manager::update()
       /********* CHORDS **/
       if (global_mode == MODE_CHORD)
       {
-        if (replacing_chord==true)
+        if (replacing_chord == true)
         {
           int last_in_chord = -1;
           unsigned long last_time = 0;

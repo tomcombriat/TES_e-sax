@@ -165,7 +165,7 @@ void menu()
        /* current_preset += up;
         if (current_preset == N_presets) current_preset = 0;
         if (current_preset > N_presets) current_preset = N_presets - 1;*/
-        increment_current_preset(up);
+        increment_preset(current_preset, up);
 
         if (joy_SW.has_been_released())
         {
@@ -181,11 +181,12 @@ void menu()
        /* current_preset += up;
         if (current_preset == N_presets) current_preset = 0;
         if (current_preset > N_presets) current_preset = N_presets - 1;*/
-        increment_current_preset(up);
+        increment_preset(current_preset, up);
 
         if (joy_SW.has_been_released())
         {
           preset_recall(current_preset);
+          current_preset_loaded = current_preset;
           ssd.draw_single_value("OK");
           ssd.force_update();
           delay(500);
