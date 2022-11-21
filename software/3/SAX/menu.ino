@@ -162,9 +162,9 @@ void menu()
 
       case 13:
         ssd.draw_title_value("Save Pt", current_preset);
-       /* current_preset += up;
-        if (current_preset == N_presets) current_preset = 0;
-        if (current_preset > N_presets) current_preset = N_presets - 1;*/
+        /* current_preset += up;
+          if (current_preset == N_presets) current_preset = 0;
+          if (current_preset > N_presets) current_preset = N_presets - 1;*/
         increment_preset(current_preset, up);
 
         if (joy_SW.has_been_released())
@@ -178,9 +178,9 @@ void menu()
 
       case 14:
         ssd.draw_title_value("Recall Pt", current_preset);
-       /* current_preset += up;
-        if (current_preset == N_presets) current_preset = 0;
-        if (current_preset > N_presets) current_preset = N_presets - 1;*/
+        /* current_preset += up;
+          if (current_preset == N_presets) current_preset = 0;
+          if (current_preset > N_presets) current_preset = N_presets - 1;*/
         increment_preset(current_preset, up);
 
         if (joy_SW.has_been_released())
@@ -240,7 +240,7 @@ void menu()
         HQ_breath += up;
         break;
 
-       case 17:
+      case 17:
         ssd.draw_title_value("Tempo", (int) tap.get_tempo());
         tap.set_tempo(tap.get_tempo() + up);
         break;
@@ -348,6 +348,13 @@ void menu()
         ssd.draw_title_value("Replac. ch.",  replacing_chord);
         replacing_chord += up;
         break;
+
+      case 23:
+        ssd.draw_title_value("MIDI ch. chrd", midi_channel_chords);
+        midi_channel_chords += up;
+        if (midi_channel_chords > 16) midi_channel_chords = 0;
+        if (midi_channel_chords == 0) midi_channel_chords = 16;
+        break;
     }
 
 
@@ -365,7 +372,7 @@ void menu()
 
     if (global_mode == MODE_NORMAL) N_entry = 17;
     else if (global_mode != MODE_CHORD) N_entry = 22;
-    else N_entry = 23;
+    else N_entry = 24;
 
     if (current_entry < 0) current_entry = N_entry - 1;
     if (current_entry >= N_entry) current_entry = 0;

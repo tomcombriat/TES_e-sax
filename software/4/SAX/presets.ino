@@ -112,6 +112,7 @@ void preset_save(byte i)
   EEPROM.write(i * N_presets_parameters + 20, static_cast<byte> (X_CC.get_biais()));
   EEPROM.write(i * N_presets_parameters + 21, static_cast<byte> (Y_CC.get_biais()));
   EEPROM.write(i * N_presets_parameters + 22, static_cast<byte> (pitchbend_amp_CC.get_value()));
+  EEPROM.write(i * N_presets_parameters + 23, static_cast<byte> (midi_channel_chords));
 
 }
 
@@ -188,7 +189,8 @@ void preset_recall(byte i)
   data = EEPROM.read( i * N_presets_parameters + 22);
   pitchbend_amp_CC.set_value(static_cast<byte>(data));
   pitchbend_amp_CC.update();
-
+  data = EEPROM.read( i * N_presets_parameters + 23);
+  midi_channel_chords=static_cast<byte>(data);
 
 
 

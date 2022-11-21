@@ -17,7 +17,7 @@
 
 
 #define N_presets 20
-#define N_presets_parameters 23
+#define N_presets_parameters 24
 #define EEPROM_SIZE 2048
 int current_preset = 0,current_preset_loaded = 0;
 

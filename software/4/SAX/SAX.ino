@@ -136,7 +136,7 @@ unsigned long stop_played_time = 0;
 /******* MIDI ***************/
 /****************************/
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, MIDI);
-byte midi_channel = 2;
+byte midi_channel = 2, midi_channel_chords = 3;
 int8_t midi_transpose = 0;
 int8_t midi_octave = 0;
 
@@ -335,7 +335,7 @@ void loop() {
       {
         if (manager.get_previous_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i])
         {
-          if (i) MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel + 1);
+          if (i) MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel_chords);
           else MIDI.sendNoteOff(manager.get_previous_note()[i], 0, midi_channel);
         }
       }
@@ -352,7 +352,7 @@ void loop() {
       {
         if (manager.get_note()[i] != 0 && manager.get_previous_note()[i] != manager.get_note()[i])
         {
-          if (i) MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel + 1);
+          if (i) MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel_chords);
           else MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel);
         }
 
@@ -373,7 +373,7 @@ void loop() {
     {
       if (manager.get_note()[i] != 0)
       {
-        if (i) MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel + 1);
+        if (i) MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel_chords);
         else MIDI.sendNoteOn(manager.get_note()[i], vel, midi_channel);
       }
       //else break;
@@ -403,7 +403,7 @@ void loop() {
     {
       if (manager.get_note()[i] != 0)
       {
-        if (i) MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel + 1);
+        if (i) MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel_chords);
         else MIDI.sendNoteOff(manager.get_note()[i], 0, midi_channel);
       }
       //else break;

@@ -68,7 +68,7 @@ void preset_save(byte i)
 {
   if (i < 5)
   {
-    EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters, static_cast<uint16> (midi_channel));
+    EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters, static_cast<uint16> ((midi_channel) + (midi_channel_chords <<8)));
     EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 1, static_cast<uint16> (midi_transpose));
     EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 2, static_cast<uint16> (midi_octave));
     EEPROM.write(EEPROM.PageBase0 + i * N_presets_parameters + 3, static_cast<uint16> (global_mode));
@@ -94,7 +94,7 @@ void preset_save(byte i)
   }
   else
   {
-    EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters, static_cast<uint16> (midi_channel));
+    EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters, static_cast<uint16> ((midi_channel) + (midi_channel_chords <<8)));
     EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 1, static_cast<uint16> (midi_transpose));
     EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 2, static_cast<uint16> (midi_octave));
     EEPROM.write(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 3, static_cast<uint16> (global_mode));
@@ -129,7 +129,8 @@ void preset_recall(byte i)
   {
     uint16 data;
     EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters, &data);
-    midi_channel = static_cast<byte>(data);
+    midi_channel = static_cast<byte>(data & 0b11111111);
+    midi_channel_chords = static_cast<byte>(data>>8);
     EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 1, &data);
     midi_transpose = static_cast<int16>(data);
     EEPROM.read(EEPROM.PageBase0 + i * N_presets_parameters + 2, &data);
@@ -210,7 +211,8 @@ void preset_recall(byte i)
   {
     uint16 data;
     EEPROM.read(EEPROM.PageBase1 + (i - 5) * N_presets_parameters, &data);
-    midi_channel = static_cast<byte>(data);
+    midi_channel = static_cast<byte>(data & 0b11111111);
+    midi_channel_chords = static_cast<byte>(data>>8);
     EEPROM.read(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 1, &data);
     midi_transpose = static_cast<int16>(data);
     EEPROM.read(EEPROM.PageBase1 + (i - 5) * N_presets_parameters + 2, &data);
