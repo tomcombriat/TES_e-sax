@@ -25,6 +25,7 @@ class arpegio_mono
     void set_notes(unsigned int N, float * times, int * notes, char _name);
     void set_notes(unsigned int N, float * times, int * notes, char _name, String * l_name);
     void set_tempo(unsigned long _tempo);
+    void set_sustain_scaling(int _sustain_scaling);
     int next();
     int previous();
     void start();
@@ -41,18 +42,19 @@ class arpegio_mono
 
 
   private:
-    int duration_scaling = 1;
+    int duration_scaling = 1;  // for arp last more than one measure for instance
     unsigned int  N_note_arp;
     float *  times_arp;
     int * notes_arp;
     unsigned int  next_index = 0;
     bool started  = false;
-    unsigned long start_time = 0, duration = 500, next_event_time = 0;
+    unsigned long start_time = 0, duration = 500, next_event_time = 0, next_silent_time = 0;
     char arp_name;
     String * long_name;
     short next_note;
     short previous_note;
     bool paused;
+    int sustain_scaling = 127; // for shutting down the note before its real end (very electro): 127: full length, 0: no length.
 };
 
 
@@ -154,4 +156,3 @@ String * arp_long_names[N_ARP] = {&arp0_long_name, &arp1_long_name, &arp2_long_n
 
 
 #endif
-

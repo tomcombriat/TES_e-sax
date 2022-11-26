@@ -418,7 +418,11 @@ void loop() {
 
   X_CC.update();
   if (pitchbend_enable) PB.update();
-  else Y_CC.update();
+  else if (Y_CC.update())  
+  {
+    if (Y_CC.get_control() == 72)  // ARP smaller duration time binded to this midi CC
+    for (byte i=0;i<3;i++) arp[i].set_sustain_scaling(Y_CC.get_value());
+  }
 
 
 

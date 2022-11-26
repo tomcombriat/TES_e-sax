@@ -24,7 +24,7 @@ class midi_cc
     void increment_biais(int increment);
     void set_control(byte _control);
     byte get_control();
-    void update();
+    bool update();
     bool has_changed();
 
   private:

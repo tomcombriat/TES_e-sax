@@ -66,7 +66,7 @@ byte midi_cc::get_control()
   return control;
 }
 
-void midi_cc::update()
+bool midi_cc::update()
 {
   changed = false;
   if (millis() - last_event_time > CC_MIN_TIME)
@@ -85,6 +85,7 @@ void midi_cc::update()
       changed = true;
       previous_value = return_value;
       MIDI.sendControlChange(control, return_value, midi_channel);
+      return true;
     }
   }
 }

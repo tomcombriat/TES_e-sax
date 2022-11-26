@@ -85,10 +85,10 @@ bool arpegio_mono::change(byte current_note) //Now 2micros!
 
 
       /*
-      // Calculating the duration of the next note
-      if (next_index + 1 == N_note_arp) next_duration = duration_scaling  + times_arp[0] - times_arp[next_index]; //rollback
-      else next_duration = times_arp[next_index + 1] - times_arp[next_index];
-*/
+        // Calculating the duration of the next note
+        if (next_index + 1 == N_note_arp) next_duration = duration_scaling  + times_arp[0] - times_arp[next_index]; //rollback
+        else next_duration = times_arp[next_index + 1] - times_arp[next_index];
+      */
 
       // Updating the next note
       if (notes_arp[next_index] != -255)   next_note = notes_arp[next_index] + current_note;
@@ -97,26 +97,32 @@ bool arpegio_mono::change(byte current_note) //Now 2micros!
 
       // Calculation the time for next note
       //next_event_time += duration * next_duration ;
-      
+
       if (global_mode == MODE_ARPEGIO) next_index += 1;
       else if (global_mode == MODE_ARPEGIO_RAND)
       {
         unsigned int next_index_tamp = next_index;
-        while (next_index_tamp == next_index || notes_arp[next_index_tamp] == notes_arp[next_index])    next_index_tamp = random(0,N_note_arp);
+        while (next_index_tamp == next_index || notes_arp[next_index_tamp] == notes_arp[next_index])    next_index_tamp = random(0, N_note_arp);
         next_index = next_index_tamp;
       }
-      
-      
+
+
       if (next_index == N_note_arp) next_index = 0; //rollback
 
-      if (next_index == 0) next_duration = duration_scaling  + times_arp[0] - times_arp[N_note_arp-1]; //rollback
-      else next_duration = times_arp[next_index] - times_arp[next_index-1];
+      if (next_index == 0) next_duration = duration_scaling  + times_arp[0] - times_arp[N_note_arp - 1]; //rollback
+      else next_duration = times_arp[next_index] - times_arp[next_index - 1];
 
+
+      next_silent_time = next_event_time + (( (unsigned long) (duration * next_duration * sustain_scaling)) >> 7);
       next_event_time += duration * next_duration ;
-      
+
+
       return true;
     }
+    if (millis() >= next_silent_time) next_note = 0;  // if needed to shut down the note before the end
+    
   }  // if (current_note !=0)
+
   else {
     previous_note = 0;
     next_note = 0;
@@ -192,3 +198,7 @@ int * arpegio_mono::get_notes()
   return notes_arp;
 }
 
+void arpegio_mono::set_sustain_scaling(int _sustain_scaling)
+{
+  sustain_scaling = _sustain_scaling;
+}
