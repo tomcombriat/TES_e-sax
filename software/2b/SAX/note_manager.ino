@@ -80,7 +80,7 @@ bool note_manager::update()
 
     unsigned int current_touch_no_mod = current_touch & (0b111111101101111111111111);  //haha (removing modifiers) and dead valves (first right hand)
 
-   /* Serial.println(current_touch_no_mod);
+  /*  Serial.println(current_touch_no_mod);
     delay(100);*/
 
     switch (current_touch_no_mod)
@@ -334,7 +334,7 @@ bool note_manager::update()
          note[0] = 61;
          break;*/
 
-      case 3443079: //C# (F#)
+      case 3442823: //C# (F#)
         down_menu.manual_input(1);
         note[0] = 61;
         break;
@@ -438,7 +438,7 @@ bool note_manager::update()
     */
     unsigned int current_touch_no_mod = current_touch & (0b101111001001100111111111);  //haha (removing modifiers)
 
-   /* Serial.println(current_touch_no_mod);
+  /*  Serial.println(current_touch_no_mod);
     delay(100);*/
 
 
@@ -470,7 +470,7 @@ bool note_manager::update()
            note[0] = 61;
            break;*/
 
-      case 3443079:  // C# (F#)
+      case 3442823:  // C# (F#)
         note[0] = 61;
         down_menu.manual_input(1);
         break;
