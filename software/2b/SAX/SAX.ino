@@ -224,11 +224,11 @@ void setup() {
   display.begin(SSD1306_SWITCHCAPVCC);
 
   analogReadResolution(12);
- //Serial.begin(115200);
+  //Serial.begin(115200);
 
 
   pinMode(BATT_PIN, INPUT);
-delay(20);
+  delay(20);
   display.clearDisplay();
   display.setCursor(30, 15);
   display.setTextColor(1, 0);
@@ -278,7 +278,7 @@ delay(20);
   breath.calibrate();
   //MIDI.sendRealTime(midi::Clock);
 
-  for (int i=0; i<NUM_LEDS;i++) strip.setPixelColor(i,strip.ColorHSV(47000));
+  for (int i = 0; i < NUM_LEDS; i++) strip.setPixelColor(i, strip.ColorHSV(47000));
   strip.show();
 
 
@@ -447,10 +447,10 @@ void loop() {
 
   X_CC.update();
   if (pitchbend_enable) PB.update();
-  else if (Y_CC.update())  
+  else if (Y_CC.update())
   {
     if (Y_CC.get_control() == 72)  // ARP smaller duration time binded to this midi CC
-    for (byte i=0;i<3;i++) arp[i].set_sustain_scaling(Y_CC.get_value());
+      for (byte i = 0; i < 3; i++) arp[i].set_sustain_scaling(Y_CC.get_value());
   }
 
 
@@ -531,14 +531,14 @@ void loop() {
 
   if (global_mode != MODE_NORMAL)
   {
-    /* if (modifier_sub_up.has_been_released())
-      {
-       midi_octave += 1;
-      }*/
+    if (modifier_sub_up.has_been_released())
+    {
+      midi_octave += 1;
+    }
     if (modifier_sub_down.has_been_released())
     {
-      if (octave.is_pressed()) midi_octave += 1;
-      else midi_octave -= 1;
+      /* if (octave.is_pressed()) midi_octave += 1;
+        else*/ midi_octave -= 1;
     }
   }
 
