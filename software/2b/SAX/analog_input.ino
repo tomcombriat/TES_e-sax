@@ -15,13 +15,12 @@
 analog_input::analog_input() {};
 
 
-analog_input::analog_input(int _pin, int _biais, unsigned long _response_time, int _biais_offset , float _scaling_factor)
+analog_input::analog_input(int _pin, int _biais, unsigned long _response_time, float _scaling_factor)
 {
   pin = _pin;
   biais = _biais;
   response_time = _response_time;
   pinMode(pin, INPUT);
-  biais_offset = _biais_offset;
   scaling_factor = _scaling_factor;
   min_value = -10000;
   max_value = 10000;
@@ -41,7 +40,14 @@ bool analog_input::update()
     last_read_time = millis();
     int value = analogRead(pin);
     if (inverted) value = MAX_ADC - value;
-    value = (value - (biais + biais_offset)) * scaling_factor;
+
+    value -= biais;
+    if (value > JOYSTICK_DEAD_ZONE) value -= JOYSTICK_DEAD_ZONE;
+    else if (value < JOYSTICK_DEAD_ZONE) value += JOYSTICK_DEAD_ZONE;
+    else value = 0;
+
+
+    value *= scaling_factor;
     if (value > max_value) value = max_value;
     else if (value < min_value) value = min_value;
 
@@ -65,7 +71,7 @@ int analog_input::value()
 void analog_input::calibrate()
 {
   int calib = 0;
-  for (int i=0;i<16;i++) calib += analogRead(pin);
+  for (int i = 0; i < 16; i++) calib += analogRead(pin);
   calib = calib >> 4;
   if (inverted) biais = MAX_ADC - calib;
   else  biais = calib;
@@ -116,12 +122,12 @@ void analog_input::calibrate_min_max()
 {
   int value = analogRead(pin);
   if (inverted) value = MAX_ADC - value;
-  value = (value - biais)-JOYSTICK_SAFETY;
+  value = (value - biais) - JOYSTICK_SAFETY - JOYSTICK_DEAD_ZONE;
   if (value > biased_max) biased_max = value;
   if (value < biased_min) biased_min = value;
   /*
-  input_range = min(-biased_min, biased_max);
-  if (input_range < 1000) input_range=1000;*/
+    input_range = min(-biased_min, biased_max);
+    if (input_range < 1000) input_range=1000;*/
   set_input_range(min(-biased_min, biased_max));
 }
 
