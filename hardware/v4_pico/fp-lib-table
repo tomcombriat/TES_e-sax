@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name "FJ08K")(type "KiCad")(uri "${KIPRJMOD}/FJ08K.pretty")(options "")(descr ""))
+  (lib (name "Multi_switch")(type "KiCad")(uri "${KIPRJMOD}/Multi_switch.pretty")(options "")(descr ""))
+)
