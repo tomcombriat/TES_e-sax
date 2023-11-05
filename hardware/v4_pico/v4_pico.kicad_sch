@@ -4890,7 +4890,7 @@
     (uuid 00000000-0000-0000-0000-000061b1bb58)
     (property "Reference" "U1" (id 0) (at 85.09 18.2626 0))
     (property "Value" "74HC165" (id 1) (at 85.09 20.574 0))
-    (property "Footprint" "Package_DIP:DIP-16_W7.62mm_Socket" (id 2) (at 85.09 45.72 0)
+    (property "Footprint" "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm" (id 2) (at 85.09 45.72 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74HC_HCT165.pdf" (id 3) (at 85.09 45.72 0)
@@ -4919,7 +4919,7 @@
     (uuid 00000000-0000-0000-0000-000061b1cfb1)
     (property "Reference" "U2" (id 0) (at 85.09 79.2226 0))
     (property "Value" "74HC165" (id 1) (at 85.09 81.534 0))
-    (property "Footprint" "Package_DIP:DIP-16_W7.62mm_Socket" (id 2) (at 85.09 106.68 0)
+    (property "Footprint" "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm" (id 2) (at 85.09 106.68 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74HC_HCT165.pdf" (id 3) (at 85.09 106.68 0)
@@ -4948,7 +4948,7 @@
     (uuid 00000000-0000-0000-0000-000061b1d538)
     (property "Reference" "U3" (id 0) (at 85.09 142.7226 0))
     (property "Value" "74HC165" (id 1) (at 85.09 145.034 0))
-    (property "Footprint" "Package_DIP:DIP-16_W7.62mm_Socket" (id 2) (at 85.09 170.18 0)
+    (property "Footprint" "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm" (id 2) (at 85.09 170.18 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74HC_HCT165.pdf" (id 3) (at 85.09 170.18 0)
@@ -7633,13 +7633,13 @@
       (reference "TP37") (unit 1) (value "GND") (footprint "TestPoint:TestPoint_THTPad_2.5x2.5mm_Drill1.2mm")
     )
     (path "/00000000-0000-0000-0000-000061b1bb58"
-      (reference "U1") (unit 1) (value "74HC165") (footprint "Package_DIP:DIP-16_W7.62mm_Socket")
+      (reference "U1") (unit 1) (value "74HC165") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/00000000-0000-0000-0000-000061b1cfb1"
-      (reference "U2") (unit 1) (value "74HC165") (footprint "Package_DIP:DIP-16_W7.62mm_Socket")
+      (reference "U2") (unit 1) (value "74HC165") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/00000000-0000-0000-0000-000061b1d538"
-      (reference "U3") (unit 1) (value "74HC165") (footprint "Package_DIP:DIP-16_W7.62mm_Socket")
+      (reference "U3") (unit 1) (value "74HC165") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/548a6b39-284d-44c8-9c5c-d9af1c8c3533"
       (reference "U4") (unit 1) (value "Pico") (footprint "RPi_Pico:RPi_Pico_SMD_TH")
