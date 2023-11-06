@@ -4742,7 +4742,7 @@
     (uuid 00000000-0000-0000-0000-000061afd10c)
     (property "Reference" "J3" (id 0) (at 157.988 30.099 90))
     (property "Value" "SSD1306 SPI" (id 1) (at 157.988 32.4104 90))
-    (property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x07_P2.54mm_Vertical" (id 2) (at 157.48 34.29 0)
+    (property "Footprint" "Connector_JST:JST_PH_S7B-PH-K_1x07_P2.00mm_Horizontal" (id 2) (at 157.48 34.29 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 157.48 34.29 0)
@@ -6939,7 +6939,7 @@
     (property "Value" "100u" (id 1) (at 177.419 74.7272 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "Capacitor_THT:CP_Radial_D7.5mm_P2.50mm" (id 2) (at 173.5328 68.326 0)
+    (property "Footprint" "Capacitor_THT:CP_Radial_D6.3mm_P2.50mm" (id 2) (at 173.5328 68.326 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 174.498 72.136 0)
@@ -7375,7 +7375,7 @@
       (reference "C6") (unit 1) (value "470p") (footprint "Capacitor_THT:C_Disc_D3.4mm_W2.1mm_P2.50mm")
     )
     (path "/7645b832-44a0-4178-932a-e01c230c6392"
-      (reference "C7") (unit 1) (value "100u") (footprint "Capacitor_THT:CP_Radial_D7.5mm_P2.50mm")
+      (reference "C7") (unit 1) (value "100u") (footprint "Capacitor_THT:CP_Radial_D6.3mm_P2.50mm")
     )
     (path "/6ea2bc83-6e60-44b0-9fd6-b93a1503a50c"
       (reference "C8") (unit 1) (value "100n") (footprint "Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P7.50mm_Horizontal")
@@ -7405,7 +7405,7 @@
       (reference "J2") (unit 1) (value "LED strip") (footprint "Connector_JST:JST_PH_S3B-PH-K_1x03_P2.00mm_Horizontal")
     )
     (path "/00000000-0000-0000-0000-000061afd10c"
-      (reference "J3") (unit 1) (value "SSD1306 SPI") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x07_P2.54mm_Vertical")
+      (reference "J3") (unit 1) (value "SSD1306 SPI") (footprint "Connector_JST:JST_PH_S7B-PH-K_1x07_P2.00mm_Horizontal")
     )
     (path "/00000000-0000-0000-0000-000061c4a21d"
       (reference "J4") (unit 1) (value "MIDI OUT Y:M5 - R:M4") (footprint "Connector_JST:JST_PH_S3B-PH-K_1x03_P2.00mm_Horizontal")
