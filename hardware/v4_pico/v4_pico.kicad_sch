@@ -4742,7 +4742,7 @@
     (uuid 00000000-0000-0000-0000-000061afd10c)
     (property "Reference" "J3" (id 0) (at 157.988 30.099 90))
     (property "Value" "SSD1306 SPI" (id 1) (at 157.988 32.4104 90))
-    (property "Footprint" "Connector_JST:JST_PH_S7B-PH-K_1x07_P2.00mm_Horizontal" (id 2) (at 157.48 34.29 0)
+    (property "Footprint" "Connector_JST:JST_PH_B7B-PH-K_1x07_P2.00mm_Vertical" (id 2) (at 157.48 34.29 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 157.48 34.29 0)
@@ -6791,7 +6791,7 @@
     (uuid 51855148-c4cd-4659-9355-2a7b71541229)
     (property "Reference" "J10" (id 0) (at 264.033 33.435 0))
     (property "Value" "ON/OFF" (id 1) (at 264.033 35.9719 0))
-    (property "Footprint" "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" (id 2) (at 263.398 40.132 0)
+    (property "Footprint" "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal" (id 2) (at 263.398 40.132 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 263.398 40.132 0)
@@ -7405,7 +7405,7 @@
       (reference "J2") (unit 1) (value "LED strip") (footprint "Connector_JST:JST_PH_S3B-PH-K_1x03_P2.00mm_Horizontal")
     )
     (path "/00000000-0000-0000-0000-000061afd10c"
-      (reference "J3") (unit 1) (value "SSD1306 SPI") (footprint "Connector_JST:JST_PH_S7B-PH-K_1x07_P2.00mm_Horizontal")
+      (reference "J3") (unit 1) (value "SSD1306 SPI") (footprint "Connector_JST:JST_PH_B7B-PH-K_1x07_P2.00mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-000061c4a21d"
       (reference "J4") (unit 1) (value "MIDI OUT Y:M5 - R:M4") (footprint "Connector_JST:JST_PH_S3B-PH-K_1x03_P2.00mm_Horizontal")
@@ -7426,7 +7426,7 @@
       (reference "J9") (unit 1) (value "Thumb") (footprint "Connector_JST:JST_PH_B5B-PH-K_1x05_P2.00mm_Vertical")
     )
     (path "/51855148-c4cd-4659-9355-2a7b71541229"
-      (reference "J10") (unit 1) (value "ON/OFF") (footprint "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
+      (reference "J10") (unit 1) (value "ON/OFF") (footprint "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal")
     )
     (path "/521fec83-782b-47eb-b1d7-f5cb6fa7f991"
       (reference "J11") (unit 1) (value "MIDI IN bk: 5 R: 4") (footprint "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal")
