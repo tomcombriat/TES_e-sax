@@ -3221,6 +3221,7 @@
     )
   )
 
+
   (junction (at 48.26 106.68) (diameter 0) (color 0 0 0 0)
     (uuid 0520f61d-4522-4301-a3fa-8ed0bf060f69)
   )
@@ -5878,7 +5879,7 @@
     (property "Value" "Batt" (id 1) (at 280.3652 43.053 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" (id 2) (at 279.654 40.132 0)
+    (property "Footprint" "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal" (id 2) (at 279.654 40.132 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 279.654 40.132 0)
@@ -5937,7 +5938,7 @@
     (property "Value" "MIDI OUT Y:M5 - R:M4" (id 1) (at 204.1652 41.9862 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical" (id 2) (at 199.39 38.1 0)
+    (property "Footprint" "Connector_JST:JST_PH_S3B-PH-K_1x03_P2.00mm_Horizontal" (id 2) (at 199.39 38.1 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 199.39 38.1 0)
@@ -6025,7 +6026,7 @@
     (property "Value" "LED strip" (id 1) (at 176.3268 153.5938 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical" (id 2) (at 181.102 157.48 0)
+    (property "Footprint" "Connector_JST:JST_PH_S3B-PH-K_1x03_P2.00mm_Horizontal" (id 2) (at 181.102 157.48 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 181.102 157.48 0)
@@ -6254,7 +6255,7 @@
     (property "Value" "Neck - Y:O BK:B R:3.3" (id 1) (at 146.558 20.574 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical" (id 2) (at 138.43 19.05 0)
+    (property "Footprint" "Connector_JST:JST_PH_S3B-PH-K_1x03_P2.00mm_Horizontal" (id 2) (at 138.43 19.05 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 138.43 19.05 0)
@@ -6809,7 +6810,7 @@
     (property "Value" "MIDI IN bk: 5 R: 4" (id 1) (at 227.5332 73.0762 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" (id 2) (at 226.822 70.104 0)
+    (property "Footprint" "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal" (id 2) (at 226.822 70.104 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 226.822 70.104 0)
@@ -6828,7 +6829,7 @@
     (property "Value" "Pico" (id 1) (at 170.815 92.6342 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "RPi_Pico:RPi_Pico_SMD_TH" (id 2) (at 143.51 90.932 90)
+    (property "Footprint" "Raspberry Pico:RPi_Pico_SMD_TH" (id 2) (at 143.51 90.932 90)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 143.51 90.932 0)
@@ -7170,7 +7171,7 @@
   (symbol (lib_id "power:GND") (at 43.18 66.04 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid f60386b2-e051-4667-933b-1c1ceeda3b7c)
-    (property "Reference" "#PWR?" (id 0) (at 43.18 72.39 0)
+    (property "Reference" "#PWR07" (id 0) (at 43.18 72.39 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (id 1) (at 43.18 70.4834 0))
@@ -7268,6 +7269,9 @@
     (path "/f9e4392c-22de-4339-8c8d-d11c4b09e8c1"
       (reference "#PWR06") (unit 1) (value "GND") (footprint "")
     )
+    (path "/f60386b2-e051-4667-933b-1c1ceeda3b7c"
+      (reference "#PWR07") (unit 1) (value "GND") (footprint "")
+    )
     (path "/c74a8e6d-ad6b-4b8f-b981-28df0ace3a1f"
       (reference "#PWR08") (unit 1) (value "GNDA") (footprint "")
     )
@@ -7352,9 +7356,6 @@
     (path "/00000000-0000-0000-0000-000061ebb2b3"
       (reference "#PWR0129") (unit 1) (value "GND") (footprint "")
     )
-    (path "/f60386b2-e051-4667-933b-1c1ceeda3b7c"
-      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
-    )
     (path "/00000000-0000-0000-0000-000061cbc345"
       (reference "C1") (unit 1) (value "1000u Ch") (footprint "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm")
     )
@@ -7401,19 +7402,19 @@
       (reference "J1") (unit 1) (value "joystick") (footprint "Connector_JST:JST_PH_B5B-PH-K_1x05_P2.00mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-000061c7df83"
-      (reference "J2") (unit 1) (value "LED strip") (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical")
+      (reference "J2") (unit 1) (value "LED strip") (footprint "Connector_JST:JST_PH_S3B-PH-K_1x03_P2.00mm_Horizontal")
     )
     (path "/00000000-0000-0000-0000-000061afd10c"
       (reference "J3") (unit 1) (value "SSD1306 SPI") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x07_P2.54mm_Vertical")
     )
     (path "/00000000-0000-0000-0000-000061c4a21d"
-      (reference "J4") (unit 1) (value "MIDI OUT Y:M5 - R:M4") (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical")
+      (reference "J4") (unit 1) (value "MIDI OUT Y:M5 - R:M4") (footprint "Connector_JST:JST_PH_S3B-PH-K_1x03_P2.00mm_Horizontal")
     )
     (path "/00000000-0000-0000-0000-000061bf481a"
-      (reference "J5") (unit 1) (value "Batt") (footprint "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
+      (reference "J5") (unit 1) (value "Batt") (footprint "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal")
     )
     (path "/00000000-0000-0000-0000-000061e7f82b"
-      (reference "J6") (unit 1) (value "Neck - Y:O BK:B R:3.3") (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical")
+      (reference "J6") (unit 1) (value "Neck - Y:O BK:B R:3.3") (footprint "Connector_JST:JST_PH_S3B-PH-K_1x03_P2.00mm_Horizontal")
     )
     (path "/00000000-0000-0000-0000-000061edf687"
       (reference "J7") (unit 1) (value "01x03") (footprint "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical")
@@ -7428,7 +7429,7 @@
       (reference "J10") (unit 1) (value "ON/OFF") (footprint "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
     )
     (path "/521fec83-782b-47eb-b1d7-f5cb6fa7f991"
-      (reference "J11") (unit 1) (value "MIDI IN bk: 5 R: 4") (footprint "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical")
+      (reference "J11") (unit 1) (value "MIDI IN bk: 5 R: 4") (footprint "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal")
     )
     (path "/d6a7f71a-4da6-4997-9a3d-af77c0308253"
       (reference "Q1") (unit 1) (value "2N7000") (footprint "Package_TO_SOT_THT:TO-92_Inline")
@@ -7650,7 +7651,7 @@
       (reference "U3") (unit 1) (value "74HC165") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/548a6b39-284d-44c8-9c5c-d9af1c8c3533"
-      (reference "U4") (unit 1) (value "Pico") (footprint "RPi_Pico:RPi_Pico_SMD_TH")
+      (reference "U4") (unit 1) (value "Pico") (footprint "Raspberry Pico:RPi_Pico_SMD_TH")
     )
     (path "/497d404a-5f3e-42dc-8f03-00c98c45a389"
       (reference "U5") (unit 1) (value "FJ08K") (footprint "FJ08K:FJ08K")
