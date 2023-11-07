@@ -3864,10 +3864,6 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 62904812-fb8d-4bcb-824b-ba0c19446254)
   )
-  (wire (pts (xy 177.8 21.59) (xy 184.15 21.59))
-    (stroke (width 0) (type default) (color 0 0 0 0))
-    (uuid 62a1f3d4-027d-4ecf-a37a-6fcf4263e9d2)
-  )
   (wire (pts (xy 113.03 15.24) (xy 67.31 15.24))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 62e8c4d4-266c-4e53-8981-1028251d724c)
@@ -6266,24 +6262,6 @@
     (pin "3" (uuid 3d833438-5456-40bc-87f2-f51ae11028ad))
   )
 
-  (symbol (lib_id "Connector:TestPoint") (at 177.8 21.59 0) (unit 1)
-    (in_bom yes) (on_board yes)
-    (uuid 00000000-0000-0000-0000-000061e93fa3)
-    (property "Reference" "TP13" (id 0) (at 179.2732 18.5928 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "3.3" (id 1) (at 179.2732 20.9042 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "TestPoint:TestPoint_THTPad_2.5x2.5mm_Drill1.2mm" (id 2) (at 182.88 21.59 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (id 3) (at 182.88 21.59 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 5c423f33-51fe-47db-acf6-218ca2d32d18))
-  )
-
   (symbol (lib_id "Connector:TestPoint") (at 184.15 21.59 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-000061e96566)
@@ -7123,7 +7101,7 @@
     (property "Value" "2N7000" (id 1) (at 165.1 137.668 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Package_TO_SOT_THT:TO-92_Inline" (id 2) (at 165.1 131.953 0)
+    (property "Footprint" "Package_TO_SOT_THT:TO-92L_HandSolder" (id 2) (at 165.1 131.953 0)
       (effects (font (size 1.27 1.27) italic) (justify left) hide)
     )
     (property "Datasheet" "https://www.vishay.com/docs/70226/70226.pdf" (id 3) (at 170.18 133.858 0)
@@ -7432,7 +7410,7 @@
       (reference "J11") (unit 1) (value "MIDI IN bk: 5 R: 4") (footprint "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal")
     )
     (path "/d6a7f71a-4da6-4997-9a3d-af77c0308253"
-      (reference "Q1") (unit 1) (value "2N7000") (footprint "Package_TO_SOT_THT:TO-92_Inline")
+      (reference "Q1") (unit 1) (value "2N7000") (footprint "Package_TO_SOT_THT:TO-92L_HandSolder")
     )
     (path "/00000000-0000-0000-0000-000061b28de3"
       (reference "R1") (unit 1) (value "10k") (footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder")
@@ -7571,9 +7549,6 @@
     )
     (path "/00000000-0000-0000-0000-000061b90f7f"
       (reference "TP12") (unit 1) (value "T24") (footprint "TestPoint:TestPoint_THTPad_2.5x2.5mm_Drill1.2mm")
-    )
-    (path "/00000000-0000-0000-0000-000061e93fa3"
-      (reference "TP13") (unit 1) (value "3.3") (footprint "TestPoint:TestPoint_THTPad_2.5x2.5mm_Drill1.2mm")
     )
     (path "/00000000-0000-0000-0000-000061b86a37"
       (reference "TP14") (unit 1) (value "T5") (footprint "TestPoint:TestPoint_THTPad_2.5x2.5mm_Drill1.2mm")
