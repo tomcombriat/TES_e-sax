@@ -3221,7 +3221,6 @@
     )
   )
 
-
   (junction (at 48.26 106.68) (diameter 0) (color 0 0 0 0)
     (uuid 0520f61d-4522-4301-a3fa-8ed0bf060f69)
   )
@@ -6619,6 +6618,23 @@
     (pin "1" (uuid 8648cffe-48cf-4497-b402-64e3a82c404d))
   )
 
+  (symbol (lib_id "Mechanical:MountingHole") (at 163.068 187.198 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid 2d002a73-5516-4c7c-a5de-f495a513c854)
+    (property "Reference" "H6" (id 0) (at 165.608 186.0296 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "M3" (id 1) (at 165.608 188.341 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "MountingHole:MountingHole_3.2mm_M3" (id 2) (at 163.068 187.198 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (id 3) (at 163.068 187.198 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+  )
+
   (symbol (lib_id "Switch:SW_DIP_x01") (at 221.234 139.954 90) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 349c202f-e359-43d6-af6e-260f96f2a3a0)
@@ -6807,7 +6823,7 @@
     (property "Value" "Pico" (id 1) (at 170.815 92.6342 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Raspberry Pico:RPi_Pico_SMD_TH" (id 2) (at 143.51 90.932 90)
+    (property "Footprint" "Raspberry Pico:RPi_Pico_TH" (id 2) (at 143.51 90.932 90)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 143.51 90.932 0)
@@ -7037,6 +7053,23 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 1a30b4ab-f245-4c3e-af1a-8a887017a65a))
+  )
+
+  (symbol (lib_id "Mechanical:MountingHole") (at 163.068 194.818 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid c3c77499-0c99-48fd-98c8-a98114e8d5ad)
+    (property "Reference" "H7" (id 0) (at 165.608 193.6496 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "M3" (id 1) (at 165.608 195.961 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "MountingHole:MountingHole_3.2mm_M3" (id 2) (at 163.068 194.818 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (id 3) (at 163.068 194.818 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
   )
 
   (symbol (lib_id "power:GNDA") (at 232.918 88.138 180) (unit 1)
@@ -7376,6 +7409,12 @@
     (path "/00000000-0000-0000-0000-000061cc6588"
       (reference "H5") (unit 1) (value "M3") (footprint "MountingHole:MountingHole_3.2mm_M3")
     )
+    (path "/2d002a73-5516-4c7c-a5de-f495a513c854"
+      (reference "H6") (unit 1) (value "M3") (footprint "MountingHole:MountingHole_3.2mm_M3")
+    )
+    (path "/c3c77499-0c99-48fd-98c8-a98114e8d5ad"
+      (reference "H7") (unit 1) (value "M3") (footprint "MountingHole:MountingHole_3.2mm_M3")
+    )
     (path "/00000000-0000-0000-0000-000061c0fcb8"
       (reference "J1") (unit 1) (value "joystick") (footprint "Connector_JST:JST_PH_B5B-PH-K_1x05_P2.00mm_Vertical")
     )
@@ -7626,7 +7665,7 @@
       (reference "U3") (unit 1) (value "74HC165") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/548a6b39-284d-44c8-9c5c-d9af1c8c3533"
-      (reference "U4") (unit 1) (value "Pico") (footprint "Raspberry Pico:RPi_Pico_SMD_TH")
+      (reference "U4") (unit 1) (value "Pico") (footprint "Raspberry Pico:RPi_Pico_TH")
     )
     (path "/497d404a-5f3e-42dc-8f03-00c98c45a389"
       (reference "U5") (unit 1) (value "FJ08K") (footprint "FJ08K:FJ08K")
