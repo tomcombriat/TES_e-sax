@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name "SAX_3-rescue")(type "Legacy")(uri "${KIPRJMOD}/v4_pico-rescue.lib")(options "")(descr ""))
+  (lib (name "FJ08K_flat_joystick")(type "KiCad")(uri "${KIPRJMOD}/FJ08K_flat_joystick.kicad_sym")(options "")(descr ""))
+  (lib (name "MCU_RaspberryPi_and_Boards")(type "KiCad")(uri "${KIPRJMOD}/RP-Pico Libraries/MCU_RaspberryPi_and_Boards.kicad_sym")(options "")(descr ""))
+)
