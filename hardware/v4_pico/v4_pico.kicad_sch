@@ -4545,6 +4545,11 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid ae738ced-9552-407c-8214-fa03ae68e4a6)
   )
+  (text "Joy - Sax\n1(bk)   - 2(rd)\n2(rd)   - 3(wh)\n3(wh)   - 1(bk)\n4   - 4\n5   - 5\n"
+    (at 197.358 142.24 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid b571d49f-dbc2-4ef3-adc7-2de6cff21b9c)
+  )
 
   (label "SR_CLK" (at 134.62 55.626 90)
     (effects (font (size 1.27 1.27)) (justify left bottom))
