@@ -31585,7 +31585,7 @@
 		(layer "F.Fab")
 		(uuid "ef75f29a-6447-47b0-ba02-772738feb091")
 	)
-	(gr_text "TES sax v4.2\nSPI SSD1306\nNeoPixel\nRP2040"
+	(gr_text "TES sax v4.3\nSPI SSD1306\nNeoPixel\nRP2040"
 		(at 215.519 27.178 0)
 		(layer "F.SilkS")
 		(uuid "33e40dd5-556d-4de0-ab08-235c61b7ba9f")
@@ -31674,7 +31674,7 @@
 			(justify mirror)
 		)
 	)
-	(gr_text "TES\ne-SAX\nv4.2"
+	(gr_text "TES\ne-SAX\nv4.3"
 		(at 185.293 27.178 0)
 		(layer "B.SilkS")
 		(uuid "168dce6f-ae61-4ac9-9049-3ce93412b3fe")
@@ -31734,7 +31734,7 @@
 			(justify mirror)
 		)
 	)
-	(gr_text "TES\ne-SAX\nv4.2"
+	(gr_text "TES\ne-SAX\nv4.3"
 		(at 182.245 69.723 0)
 		(layer "B.SilkS")
 		(uuid "dfa3b978-3cc2-4fbf-b416-b76304e7c41f")
